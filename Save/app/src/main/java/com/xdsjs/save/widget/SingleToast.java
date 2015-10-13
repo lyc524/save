@@ -8,7 +8,7 @@ import com.xdsjs.save.R;
 
 
 /**
- * 控制吐司显示位置
+ * 鏄剧ず鍚愬徃
  * Created by xdsjs on 15/8/13.
  */
 public class SingleToast {
