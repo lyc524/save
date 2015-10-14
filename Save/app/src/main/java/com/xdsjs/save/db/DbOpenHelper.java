@@ -11,11 +11,14 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 4;
     private static DbOpenHelper instance;
 
-//    private static final String USERNAME_TABLE_CREATE = "CREATE TABLE "
-//            + UserDao.TABLE_NAME + " ("
-//            + UserDao.COLUMN_NAME_NICK + " TEXT, "
-//            + UserDao.COLUMN_NAME_AVATAR + " TEXT, "
-//            + UserDao.COLUMN_NAME_ID + " TEXT PRIMARY KEY);";
+    private static final String BILL_TABLE_CREATE = "CREATE TABLE "
+            + BillTableDao.TABLE_NAME + " ("
+            + BillTableDao.COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + BillTableDao.COLUMN_NAME_TYPE + " TEXT, "
+            + BillTableDao.COLUMN_NAME_MONEY + " TEXT, "
+            + BillTableDao.COLUMN_NAME_REMARK + " TEXT, "
+            + BillTableDao.COLUMN_NAME_UPLOAD + " INTEGER, "
+            + BillTableDao.COLUMN_NAME_TIME + " TEXT); ";
 
     private DbOpenHelper(Context context) {
         super(context, getUserDatabaseName(), null, DATABASE_VERSION);
@@ -29,12 +32,12 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     }
 
     private static String getUserDatabaseName() {
-        return "_demo.db";
+        return "_bill.db";
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-//        db.execSQL(USERNAME_TABLE_CREATE);
+        db.execSQL(BILL_TABLE_CREATE);
     }
 
     @Override
