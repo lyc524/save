@@ -12,7 +12,11 @@ import com.xdsjs.save.utils.SPUtils;
  */
 public class DefaultModel extends BaseModel {
 
-    Context context = MyApplication.getInstance();
+    Context context;
+
+    public DefaultModel(Context context) {
+        this.context = context;
+    }
 
     /**
      * 对配置信息的一些缓存
@@ -52,40 +56,47 @@ public class DefaultModel extends BaseModel {
         SPUtils.put(context, Global.SHARE_PERSONAL_ACCOUNT, account);
     }
 
-    public void getPersonalAccount() {
-        SPUtils.get(context, Global.SHARE_PERSONAL_ACCOUNT, "");
+    public String getPersonalAccount() {
+        return (String) SPUtils.get(context, Global.SHARE_PERSONAL_ACCOUNT, "");
     }
 
     public void setPersonalPwd(String pwd) {
         SPUtils.put(context, Global.SHARE_PERSONAL_PWD, pwd);
     }
 
-    public void getPersonalPwd() {
-        SPUtils.get(context, Global.SHARE_PERSONAL_PWD, "");
+    public String getPersonalPwd() {
+        return (String) SPUtils.get(context, Global.SHARE_PERSONAL_PWD, "");
     }
 
     public void setPersonalBillPwd(String billPwd) {
         SPUtils.put(context, Global.SHARE_PERSONAL_BILL_PWD, billPwd);
     }
 
-    public void getPersonalBillPwd() {
-        SPUtils.get(context, Global.SHARE_PERSONAL_BILL_PWD, "");
+    public String getPersonalBillPwd() {
+        return (String) SPUtils.get(context, Global.SHARE_PERSONAL_BILL_PWD, "");
     }
 
     public void setPersonalTotalIn(String totalIn) {
         SPUtils.put(context, Global.SHARE_PERSONAL_TOTAL_IN, totalIn);
     }
 
-    public void getPersonalTotalIn() {
-        SPUtils.get(context, Global.SHARE_PERSONAL_TOTAL_IN, "");
+    public String getPersonalTotalIn() {
+        return (String) SPUtils.get(context, Global.SHARE_PERSONAL_TOTAL_IN, "");
     }
 
     public void setPersonalTotalOut(String totalOut) {
         SPUtils.get(context, Global.SHARE_PERSONAL_TOTAL_OUT, totalOut);
     }
 
-    public void getPersonalTotalOut() {
-        SPUtils.get(context, Global.SHARE_PERSONAL_TOTAL_OUT, "");
+    public String getPersonalTotalOut() {
+        return (String) SPUtils.get(context, Global.SHARE_PERSONAL_TOTAL_OUT, "");
     }
 
+    public void setPersonalAutoLogin(boolean autoLogin) {
+        SPUtils.put(context, Global.SHARE_PERSONAL_AUTO_LOGIN, autoLogin);
+    }
+
+    public boolean getPersonalAutoLogin() {
+        return (boolean) SPUtils.get(context, Global.SHARE_PERSONAL_AUTO_LOGIN, false);
+    }
 }

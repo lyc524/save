@@ -2,6 +2,10 @@ package com.xdsjs.save.db;
 
 import android.content.Context;
 
+import com.xdsjs.save.bean.Bill;
+
+import java.util.List;
+
 /**
  * Created by xdsjs on 2015/10/14.
  */
@@ -18,6 +22,19 @@ public class BillTableDao {
         DBManager.getInstance().onInit(context);
     }
 
-    //
+    //保存账单list
+    public void saveBillList(List<Bill> bills) {
+        DBManager.getInstance().saveBillList(bills);
+    }
+
+    //保存单个记录
+    public void saveBill(Bill bill) {
+        DBManager.getInstance().saveBill(bill);
+    }
+
+    //根据日期获取账单List
+    public List<Bill> getBillList(long time){
+        return DBManager.getInstance().getBill(time);
+    }
 
 }

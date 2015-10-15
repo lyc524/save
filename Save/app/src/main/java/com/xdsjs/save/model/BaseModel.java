@@ -19,4 +19,5 @@ public abstract class BaseModel {
     public abstract void setSettingBudget(float budget);
 
     public abstract float getSettingBudget();
+
 }

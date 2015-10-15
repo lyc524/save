@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.xdsjs.save.bean.Bill;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DBManager {
@@ -59,12 +60,21 @@ public class DBManager {
         }
     }
 
-    //根据日期获取单个账单
-    synchronized void getBill(long time) {
+    //根据日期获取账单
+    synchronized List<Bill> getBill(long time) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+        List<Bill> bills = new ArrayList<>();
         if (db.isOpen()) {
             Cursor cursor = db.rawQuery("select * from " + BillTableDao.TABLE_NAME + " where " + BillTableDao.COLUMN_NAME_TIME + " < " + time, null);
+            Bill bill = new Bill();
+            bill.setType(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_MONEY)));
+            bill.setMoney(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_MONEY)));
+            bill.setRemark(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_REMARK)));
+            bill.setTime(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_TIME)));
+            bill.setUpload(cursor.getInt(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_UPLOAD)));
+            bills.add(bill);
         }
+        return bills;
     }
 
 
