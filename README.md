@@ -38,16 +38,6 @@
 
 [libs/universal-image-loader-1.9.4.jar](https://github.com/nostra13/Android-Universal-Image-Loader)
 
-> 图片加载框架
 
-
-> 图片加载框架
-
-> 图片加载框架
-
-
-> 图片加载框架
-
-> 图片加载框架
 
 
