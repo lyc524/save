@@ -1,7 +1,9 @@
 package com.xdsjs.save.activity;
 
 import android.os.Bundle;
+
 import com.xdsjs.save.R;
+import com.xdsjs.save.utils.ActivityManager;
 
 
 public class MainActivity extends BaseActivity {
@@ -13,8 +15,13 @@ public class MainActivity extends BaseActivity {
         initView();
     }
 
-    private void initView(){
+    private void initView() {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        ActivityManager.getInstance().killAllActivity();
+    }
 }

@@ -2,6 +2,7 @@ package com.xdsjs.save.activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -82,5 +83,28 @@ public class BaseActivity extends AppCompatActivity {
             pDialog.dismiss();
             pDialog = null;
         }
+    }
+
+    /**
+     * 通过类名启动Activity
+     *
+     * @param pClass
+     */
+    protected void openActivity(Class<?> pClass) {
+        openActivity(pClass, null);
+    }
+
+    /**
+     * 通过类名启动Activity，并且含有Bundle数据
+     *
+     * @param pClass
+     * @param pBundle
+     */
+    protected void openActivity(Class<?> pClass, Bundle pBundle) {
+        Intent intent = new Intent(this, pClass);
+        if (pBundle != null) {
+            intent.putExtras(pBundle);
+        }
+        startActivity(intent);
     }
 }

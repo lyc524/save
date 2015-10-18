@@ -24,13 +24,13 @@ public class Global {
     /**
      * 接口信息
      */
-    public static final String NETWORK_URL = "";//接口地址前缀
+    public static final String NETWORK_URL = "http://192.168.0.0:8080/save/";//接口地址前缀
 
-    public static final String NETWORK_ACTION_LOGIN = "";//登陆
-    public static final String NETWORK_ACTION_REGIST = "";//注册
-    public static final String NETWORK_ACTION_GET_USER_PERSONAL_INFO = "";//获取用户个人信息
-    public static final String NETWORK_ACTION_UPLOAD_USER_INFO = "";//获取用户信息
-    public static final String NETWORK_ACTION_GET_USER_BILL_INFO = "";//获取用户账单信息
-    public static final String NETWORK_ACTION_GET_FORECAST_TYPE = "";//获取预判的种类
+    public static final String NETWORK_ACTION_LOGIN = NETWORK_URL + "login";//登陆
+    public static final String NETWORK_ACTION_REGIST = NETWORK_URL + "insert";//注册
+    public static final String NETWORK_ACTION_GET_USER_PERSONAL_INFO = NETWORK_URL + "getUserMessage";//获取用户个人信息
+    public static final String NETWORK_ACTION_UPLOAD_USER_INFO = NETWORK_URL + "updateUserMessage";//上传用户信息
+    public static final String NETWORK_ACTION_GET_USER_BILL_INFO = NETWORK_URL + "getBillsMessage";//获取用户账单信息
+    public static final String NETWORK_ACTION_GET_FORECAST_TYPE = NETWORK_URL + "getMaxType";//获取预判的种类
 
 }
