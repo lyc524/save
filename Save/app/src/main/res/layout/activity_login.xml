@@ -17,6 +17,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/back"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -26,6 +34,16 @@
                 android:textColor="@color/whitesmoke"
                 android:textSize="24sp"/>
 
+            <TextView
+                android:id="@+id/tv_regist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="15dp"
+                android:text="注册"
+                android:textColor="@color/whitesmoke"
+                android:textSize="12sp"/>
+
         </FrameLayout>
     </LinearLayout>
 
@@ -34,28 +52,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:hint="请输入账号"
-        android:focusable="true"/>
+        android:focusable="true"
+        android:hint="请输入账号"/>
 
     <EditText
         android:id="@+id/et_pwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="请输入密码"
-        android:layout_marginTop="15dp"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="confirm"
-        android:onClick="confirm"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
         android:layout_marginTop="15dp"
-        android:text="regist"
-        android:onClick="regist"/>
+        android:hint="请输入密码"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:onClick="confirm"
+        android:text="confirm"/>
 
 </LinearLayout>

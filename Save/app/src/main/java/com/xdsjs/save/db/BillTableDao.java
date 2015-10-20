@@ -7,6 +7,7 @@ import com.xdsjs.save.bean.Bill;
 import java.util.List;
 
 /**
+ * 账单表
  * Created by xdsjs on 2015/10/14.
  */
 public class BillTableDao {

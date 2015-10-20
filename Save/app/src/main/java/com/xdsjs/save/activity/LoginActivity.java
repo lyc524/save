@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -16,10 +18,13 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     private EditText etAccount, etPwd;
     private String account, pwd;
+
+    private ImageView ivBack;
+    private TextView tvRegist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +37,14 @@ public class LoginActivity extends BaseActivity {
     private void initView() {
         etAccount = (EditText) findViewById(R.id.et_account);
         etPwd = (EditText) findViewById(R.id.et_pwd);
+        ivBack = (ImageView) findViewById(R.id.iv_back);
+        tvRegist = (TextView) findViewById(R.id.tv_regist);
+        ivBack.setOnClickListener(this);
+        tvRegist.setOnClickListener(this);
     }
 
-    private void checkAutoLogin(){
-        if ((boolean)SPUtils.get(this,Global.SHARE_PERSONAL_AUTO_LOGIN,false)){
+    private void checkAutoLogin() {
+        if ((boolean) SPUtils.get(this, Global.SHARE_PERSONAL_AUTO_LOGIN, false)) {
             openActivity(MainActivity.class);
             this.finish();
         }
@@ -55,10 +64,6 @@ public class LoginActivity extends BaseActivity {
         } else {
             return;
         }
-    }
-
-    public void regist(View view) {
-        openActivity(RegistActivity.class);
     }
 
     private boolean checkLogin() {
@@ -95,7 +100,6 @@ public class LoginActivity extends BaseActivity {
                             SPUtils.put(LoginActivity.this, Global.SHARE_PERSONAL_ACCOUNT, account);
                             SPUtils.put(LoginActivity.this, Global.SHARE_PERSONAL_PWD, pwd);
                             SPUtils.put(LoginActivity.this, Global.SHARE_PERSONAL_AUTO_LOGIN, true);
-                            openActivity(MainActivity.class);
                             LoginActivity.this.finish();
                         } else if (responseCode.equals("0")) {
                             showBottomToast("登陆失败");
@@ -112,5 +116,17 @@ public class LoginActivity extends BaseActivity {
                 error.printStackTrace();
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_back:
+                LoginActivity.this.finish();
+                break;
+            case R.id.tv_regist:
+                openActivity(RegistActivity.class);
+                break;
+        }
     }
 }

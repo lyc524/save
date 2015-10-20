@@ -77,5 +77,9 @@ public class DBManager {
         return bills;
     }
 
+    //根据时间更新次数表
+
+
+    //获取排好序的预判list
 
 }

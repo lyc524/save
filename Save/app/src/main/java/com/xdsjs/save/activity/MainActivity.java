@@ -19,6 +19,7 @@ import com.xdsjs.save.model.MyModel;
 import com.xdsjs.save.utils.ActivityManager;
 import com.xdsjs.save.utils.DensityUtil;
 import com.xdsjs.save.utils.KeyBoardUtils;
+import com.xdsjs.save.utils.TimeUtils;
 import com.xdsjs.save.widget.PasswordEditText;
 
 
@@ -31,11 +32,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private boolean isPopupWindowShowing = false;//标记popupWindow是否显示
 
+    private TextView tv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        tv = (TextView) findViewById(R.id.tv);
+        tv.setText(TimeUtils.getCurrentTime());
     }
 
     private void initView() {
@@ -123,6 +128,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.title_bar_left_menu:
+                if (((MyController) BaseController.getInstance()).getMyModel().getPersonalAutoLogin()) {
+                    openActivity(PersonalInfoActivity.class);
+                } else {
+                    openActivity(LoginActivity.class);
+                }
                 break;
             case R.id.title_bar_right_menu:
                 if (!isPopupWindowShowing)
