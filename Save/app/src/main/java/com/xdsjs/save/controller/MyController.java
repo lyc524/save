@@ -24,12 +24,12 @@ public class MyController extends BaseController {
         return new MyModel(context);
     }
 
-    public MyModel getMyModel(){
-        return (MyModel)baseModel;
+    public MyModel getMyModel() {
+        return (MyModel) baseModel;
     }
 
 
-    public void logOut(){
+    public void logOut() {
         getMyModel().closeDB();
         getMyModel().logOut();
     }

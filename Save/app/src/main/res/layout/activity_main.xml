@@ -57,7 +57,8 @@
             android:layout_marginLeft="20dp"
             android:text="￥"
             android:textColor="@color/red"
-            android:textSize="24sp"/>
+            android:textSize="24sp"
+            android:focusable="false"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,7 +66,8 @@
             android:layout_centerInParent="true"
             android:text="6.00"
             android:textColor="@color/green"
-            android:textSize="24sp"/>
+            android:textSize="24sp"
+            android:focusable="false"/>
     </RelativeLayout>
 
     <FrameLayout
@@ -95,12 +97,6 @@
         android:layout_weight="2"
         android:orientation="vertical">
 
-        <com.xdsjs.save.widget.PasswordEditText
-            android:id="@+id/et_pwd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:cursorVisible="false"/>
     </LinearLayout>
 
 </LinearLayout>

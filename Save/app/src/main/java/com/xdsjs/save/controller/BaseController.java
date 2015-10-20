@@ -13,6 +13,12 @@ public abstract class BaseController {
 
     protected BaseModel baseModel;
 
+    private static BaseController baseController = null;
+
+    protected BaseController(){
+        baseController = this;
+    }
+
     public synchronized boolean onInit(Context context) {
         this.context = context;
         baseModel = createModel();
@@ -21,4 +27,7 @@ public abstract class BaseController {
 
     abstract protected BaseModel createModel();
 
+    public static BaseController getInstance(){
+        return baseController;
+    }
 }
