@@ -3,8 +3,10 @@ package com.xdsjs.save.model;
 import android.content.Context;
 
 import com.xdsjs.save.bean.Bill;
+import com.xdsjs.save.bean.BillType;
 import com.xdsjs.save.db.BillTableDao;
 import com.xdsjs.save.db.DBManager;
+import com.xdsjs.save.db.TimeDao;
 
 import java.util.List;
 
@@ -35,6 +37,18 @@ public class MyModel extends DefaultModel {
     public List<Bill> getBillList(long time) {
         BillTableDao billTableDao = new BillTableDao(context);
         return billTableDao.getBillList(time);
+    }
+
+    //根据当前时间段更新次数表
+    public void updateTime(BillType billType) {
+        TimeDao timeDao = new TimeDao(context);
+        timeDao.updateTime(billType);
+    }
+
+    //根据当前时间段获取排好序的次数表
+    public List<BillType> getBillTypeList(){
+        TimeDao timeDao = new TimeDao(context);
+        return timeDao.getBillTypeList();
     }
 
     public void closeDB() {

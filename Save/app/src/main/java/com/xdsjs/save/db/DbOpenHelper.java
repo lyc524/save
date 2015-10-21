@@ -23,6 +23,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     //创建次数表
     private static final String TIME_TABLE_CREAT = "CREATE TABLE " +
             TimeDao.TABLE_NAME + " (" +
+            "time varchar(10) NOT NULL," +
             "type_0 integer default 0" +
             "type_1 integer default 0" +
             "type_2 integer default 0" +
@@ -43,6 +44,21 @@ public class DbOpenHelper extends SQLiteOpenHelper {
             "type_17 integer default 0" +
             "type_18 integer default 0" +
             "type_19 integer default 0);";
+    //为次数表添加数据
+    private static final String TIME_TABLE_DEFAULT =
+            "insert into s_time (time) values(\"0\");" +
+                    "insert into s_time (time) values(\"1\");" +
+                    "insert into s_time (time) values(\"2\");" +
+                    "insert into s_time (time) values(\"3\");" +
+                    "insert into s_time (time) values(\"4\");" +
+                    "insert into s_time (time) values(\"5\");" +
+                    "insert into s_time (time) values(\"6\");" +
+                    "insert into s_time (time) values(\"7\");" +
+                    "insert into s_time (time) values(\"8\");" +
+                    "insert into s_time (time) values(\"9\");" +
+                    "insert into s_time (time) values(\"10\");" +
+                    "insert into s_time (time) values(\"11\");" +
+                    "insert into s_time (time) values(\"12\");";
 
     private DbOpenHelper(Context context) {
         super(context, getUserDatabaseName(), null, DATABASE_VERSION);
@@ -63,6 +79,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(BILL_TABLE_CREATE);
         db.execSQL(TIME_TABLE_CREAT);
+        db.execSQL(TIME_TABLE_DEFAULT);
     }
 
     @Override

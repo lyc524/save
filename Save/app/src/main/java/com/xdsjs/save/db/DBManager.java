@@ -6,8 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.xdsjs.save.bean.Bill;
+import com.xdsjs.save.bean.BillType;
+import com.xdsjs.save.utils.TimeUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class DBManager {
@@ -77,9 +81,45 @@ public class DBManager {
         return bills;
     }
 
-    //根据时间更新次数表
-
+    //更新次数表
+    synchronized void updateTime(BillType billType) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            ContentValues cv = new ContentValues();
+            cv.put(billType.getType(), billType.getTime());
+            db.update(TimeDao.TABLE_NAME, cv, "time = ?", new String[]{TimeUtils.getCurrentTime() + ""});
+        }
+    }
 
     //获取排好序的预判list
-
+    synchronized List<BillType> getBillTypeList() {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        List<BillType> billTypes = new ArrayList<>();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from " + TimeDao.TABLE_NAME + " where time=" + TimeUtils.getCurrentTime(), null);
+            BillType billType = new BillType();
+            for (int i = 0; i < 20; i++) {
+                billType.setTime(cursor.getInt(cursor.getColumnIndex("type_" + i)));
+                billType.setType("type_" + i);
+                billTypes.add(billType);
+            }
+        }
+        Collections.sort(billTypes, new Comparator<BillType>() {
+            @Override
+            public int compare(BillType lhs, BillType rhs) {
+                return rhs.getTime() - lhs.getTime();
+            }
+        });
+        //计算权重
+        if (!(billTypes.get(0).getTime() == 0)) {
+            int totalTime = 0;
+            for (BillType billType : billTypes) {
+                totalTime += billType.getTime();
+            }
+            for (BillType billType : billTypes) {
+                billType.setWeight(billType.getTime() / (float) totalTime);
+            }
+        }
+        return billTypes;
+    }
 }

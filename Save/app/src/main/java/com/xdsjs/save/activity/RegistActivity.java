@@ -67,9 +67,15 @@ public class RegistActivity extends BaseActivity {
     private void doLogin(final String account, final String pwd, String pwdAgain) {
         showLodingDialog(this);
         RequestParams params = new RequestParams();
-        params.put("username", account);
-        params.put("password", pwd);
-        params.put("password_sec", pwdAgain);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username", account);
+            jsonObject.put("password", pwd);
+            jsonObject.put("password_sec", pwdAgain);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        params.put("json", jsonObject);
         HttpUtils.post(Global.NETWORK_ACTION_REGIST, params, new AsyncHttpResponseHandler() {
 
             @Override

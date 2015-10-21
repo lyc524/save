@@ -14,51 +14,51 @@ public class TimeUtils {
     /**
      * 获取当天的开始时间
      */
-    public static String getTimeOfDay() {
+    public static long getTimeOfDay() {
         Calendar currentDate = new GregorianCalendar();
         currentDate.set(Calendar.HOUR_OF_DAY, 0);
         currentDate.set(Calendar.MINUTE, 0);
         currentDate.set(Calendar.SECOND, 0);
-        return String.valueOf(currentDate.getTime().getTime());
+        return currentDate.getTime().getTime();
     }
 
     /**
      * 获取当前周的第一天的开始时间
      */
-    public static String getFirstDayTimeOfWeek() {
+    public static long getFirstDayTimeOfWeek() {
         Calendar currentDate = new GregorianCalendar();
         currentDate.setFirstDayOfWeek(Calendar.MONDAY);
         currentDate.set(Calendar.HOUR_OF_DAY, 0);
         currentDate.set(Calendar.MINUTE, 0);
         currentDate.set(Calendar.SECOND, 0);
         currentDate.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        return String.valueOf(currentDate.getTime().getTime());
+        return currentDate.getTime().getTime();
     }
 
     /**
      * 获取当前月的第一天的开始时间
      */
-    public static String getFirstDayTimeOfMonth() {
+    public static long getFirstDayTimeOfMonth() {
         Calendar currentDate = new GregorianCalendar();
         currentDate.setFirstDayOfWeek(Calendar.MONDAY);
         currentDate.set(Calendar.HOUR_OF_DAY, 0);
         currentDate.set(Calendar.MINUTE, 0);
         currentDate.set(Calendar.SECOND, 0);
         currentDate.set(Calendar.DAY_OF_MONTH, 0);
-        return String.valueOf(currentDate.getTime().getTime());
+        return currentDate.getTime().getTime();
     }
 
     /**
      * 获取当前年的第一天的开始时间
      */
-    public static String getFirstDayTimeOfYear() {
+    public static long getFirstDayTimeOfYear() {
         Calendar currentDate = new GregorianCalendar();
         currentDate.setFirstDayOfWeek(Calendar.MONDAY);
         currentDate.set(Calendar.HOUR_OF_DAY, 0);
         currentDate.set(Calendar.MINUTE, 0);
         currentDate.set(Calendar.SECOND, 0);
         currentDate.set(Calendar.DAY_OF_YEAR, 0);
-        return String.valueOf(currentDate.getTime().getTime());
+        return currentDate.getTime().getTime();
     }
 
     /**
@@ -79,18 +79,20 @@ public class TimeUtils {
             return 4;
         if (hour >= 11 && hour < 13)
             return 5;
-        if (hour >= 14 && hour < 16)
+        if (hour >= 13 && hour < 14)
             return 6;
-        if (hour >= 16 && hour < 17)
+        if (hour >= 14 && hour < 16)
             return 7;
-        if (hour >= 17 && hour < 19)
+        if (hour >= 16 && hour < 17)
             return 8;
-        if (hour >= 19 && hour < 21)
+        if (hour >= 17 && hour < 19)
             return 9;
-        if (hour >= 21 && hour < 23)
+        if (hour >= 19 && hour < 21)
             return 10;
-        if (hour >= 23 && hour < 2)
+        if (hour >= 21 && hour < 23)
             return 11;
+        if (hour >= 23 && hour < 2)
+            return 12;
         return 0;
     }
 

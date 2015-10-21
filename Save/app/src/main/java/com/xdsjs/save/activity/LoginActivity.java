@@ -83,8 +83,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void doLogin(final String account, final String pwd) {
         showLodingDialog(this);
         RequestParams params = new RequestParams();
-        params.put("username", account);
-        params.put("password", pwd);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username", account);
+            jsonObject.put("password", pwd);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        params.put("json", jsonObject);
         HttpUtils.post(Global.NETWORK_ACTION_LOGIN, params, new AsyncHttpResponseHandler() {
 
             @Override
