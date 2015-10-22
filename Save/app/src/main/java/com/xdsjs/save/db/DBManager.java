@@ -4,9 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.xdsjs.save.bean.Bill;
 import com.xdsjs.save.bean.BillType;
+import com.xdsjs.save.config.Global;
 import com.xdsjs.save.utils.TimeUtils;
 
 import java.util.ArrayList;
@@ -69,14 +71,17 @@ public class DBManager {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Bill> bills = new ArrayList<>();
         if (db.isOpen()) {
-            Cursor cursor = db.rawQuery("select * from " + BillTableDao.TABLE_NAME + " where " + BillTableDao.COLUMN_NAME_TIME + " < " + time, null);
-            Bill bill = new Bill();
-            bill.setType(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_MONEY)));
-            bill.setMoney(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_MONEY)));
-            bill.setRemark(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_REMARK)));
-            bill.setTime(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_TIME)));
-            bill.setUpload(cursor.getInt(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_UPLOAD)));
-            bills.add(bill);
+            Cursor cursor = db.rawQuery("select * from " + BillTableDao.TABLE_NAME + " where " + BillTableDao.COLUMN_NAME_TIME + " < ?", new String[]{time + ""});
+            Bill bill;
+            while (cursor.moveToNext()) {
+                bill = new Bill();
+                bill.setType(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_MONEY)));
+                bill.setMoney(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_MONEY)));
+                bill.setRemark(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_REMARK)));
+                bill.setTime(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_TIME)));
+                bill.setUpload(cursor.getInt(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_UPLOAD)));
+                bills.add(bill);
+            }
         }
         return bills;
     }
@@ -96,12 +101,16 @@ public class DBManager {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<BillType> billTypes = new ArrayList<>();
         if (db.isOpen()) {
-            Cursor cursor = db.rawQuery("select * from " + TimeDao.TABLE_NAME + " where time=" + TimeUtils.getCurrentTime(), null);
-            BillType billType = new BillType();
-            for (int i = 0; i < 20; i++) {
-                billType.setTime(cursor.getInt(cursor.getColumnIndex("type_" + i)));
-                billType.setType("type_" + i);
-                billTypes.add(billType);
+            Cursor cursor = db.rawQuery("select * from " + TimeDao.TABLE_NAME + " where time = ?", new String[]{TimeUtils.getCurrentTime() + ""});
+            BillType billType;
+            while (cursor.moveToNext()) {
+                for (int i = 0; i < 20; i++) {
+                    billType = new BillType();
+                    billType.setTime(cursor.getInt(cursor.getColumnIndex("type_" + i)));
+                    billType.setType("type_" + i);
+                    billType.setName(Global.types[i]);
+                    billTypes.add(billType);
+                }
             }
         }
         Collections.sort(billTypes, new Comparator<BillType>() {
@@ -110,7 +119,7 @@ public class DBManager {
                 return rhs.getTime() - lhs.getTime();
             }
         });
-        //计算权重
+        // 计算权重
         if (!(billTypes.get(0).getTime() == 0)) {
             int totalTime = 0;
             for (BillType billType : billTypes) {
@@ -120,6 +129,7 @@ public class DBManager {
                 billType.setWeight(billType.getTime() / (float) totalTime);
             }
         }
+        Log.e("DBManager 获取数据库预判记账list", billTypes.toString());
         return billTypes;
     }
 }

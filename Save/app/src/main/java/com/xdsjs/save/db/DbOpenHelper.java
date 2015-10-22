@@ -24,25 +24,25 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     private static final String TIME_TABLE_CREAT = "CREATE TABLE " +
             TimeDao.TABLE_NAME + " (" +
             "time varchar(10) NOT NULL," +
-            "type_0 integer default 0" +
-            "type_1 integer default 0" +
-            "type_2 integer default 0" +
-            "type_3 integer default 0" +
-            "type_4 integer default 0" +
-            "type_5 integer default 0" +
-            "type_6 integer default 0" +
-            "type_7 integer default 0" +
-            "type_8 integer default 0" +
-            "type_9 integer default 0" +
-            "type_10 integer default 0" +
-            "type_11 integer default 0" +
-            "type_12 integer default 0" +
-            "type_13 integer default 0" +
-            "type_14 integer default 0" +
-            "type_15 integer default 0" +
-            "type_16 integer default 0" +
-            "type_17 integer default 0" +
-            "type_18 integer default 0" +
+            "type_0 integer default 0," +
+            "type_1 integer default 0," +
+            "type_2 integer default 0," +
+            "type_3 integer default 0," +
+            "type_4 integer default 0," +
+            "type_5 integer default 0," +
+            "type_6 integer default 0," +
+            "type_7 integer default 0," +
+            "type_8 integer default 0," +
+            "type_9 integer default 0," +
+            "type_10 integer default 0," +
+            "type_11 integer default 0," +
+            "type_12 integer default 0," +
+            "type_13 integer default 0," +
+            "type_14 integer default 0," +
+            "type_15 integer default 0," +
+            "type_16 integer default 0," +
+            "type_17 integer default 0," +
+            "type_18 integer default 0," +
             "type_19 integer default 0);";
     //为次数表添加数据
     private static final String TIME_TABLE_DEFAULT =
@@ -79,7 +79,19 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(BILL_TABLE_CREATE);
         db.execSQL(TIME_TABLE_CREAT);
-        db.execSQL(TIME_TABLE_DEFAULT);
+        db.execSQL("insert into s_time (time) values(\"0\")");
+        db.execSQL("insert into s_time (time) values(\"1\")");
+        db.execSQL("insert into s_time (time) values(\"2\")");
+        db.execSQL("insert into s_time (time) values(\"3\")");
+        db.execSQL("insert into s_time (time) values(\"4\")");
+        db.execSQL("insert into s_time (time) values(\"5\")");
+        db.execSQL("insert into s_time (time) values(\"6\")");
+        db.execSQL("insert into s_time (time) values(\"7\")");
+        db.execSQL("insert into s_time (time) values(\"8\")");
+        db.execSQL("insert into s_time (time) values(\"9\")");
+        db.execSQL("insert into s_time (time) values(\"10\")");
+        db.execSQL("insert into s_time (time) values(\"11\")");
+        db.execSQL("insert into s_time (time) values(\"12\")");
     }
 
     @Override

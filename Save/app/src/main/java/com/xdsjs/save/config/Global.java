@@ -6,6 +6,16 @@ package com.xdsjs.save.config;
  */
 public class Global {
     /**
+     * 记账类型的数组
+     */
+    public static final String[] types = new String[]{
+            "个人收入", "早午晚餐", "公共交通", "水果零食",
+            "衣服鞋帽", "日常用品", "休闲聚餐", "运动健身",
+            "网上购物", "打车租车", "交流通讯", "旅游度假",
+            "化妆饰品", "数码设备", "通讯上网", "邮寄快递",
+            "宠物宝贝", "水电煤气", "学习培训", "其他杂项"
+    };
+    /**
      * 要缓存的设置信息
      */
     public static final String SHARE_SETTING_UPLOAD = "setting_upload";//设置是否上传
@@ -24,7 +34,7 @@ public class Global {
     /**
      * 接口信息
      */
-    public static final String NETWORK_URL = "http://192.168.0.0:8080/save/";//接口地址前缀
+    public static final String NETWORK_URL = "http://saveapp.cn-hangzhou.aliapp.com/save/";//接口地址前缀
 
     public static final String NETWORK_ACTION_LOGIN = NETWORK_URL + "login";//登陆
     public static final String NETWORK_ACTION_REGIST = NETWORK_URL + "insert";//注册

@@ -75,7 +75,7 @@ public class RegistActivity extends BaseActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        params.put("json", jsonObject);
+        params.put("json", jsonObject.toString());
         HttpUtils.post(Global.NETWORK_ACTION_REGIST, params, new AsyncHttpResponseHandler() {
 
             @Override

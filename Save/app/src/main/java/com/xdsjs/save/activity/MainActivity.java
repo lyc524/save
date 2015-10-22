@@ -7,12 +7,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.xdsjs.save.R;
+import com.xdsjs.save.adapter.ExpressionAdapter;
+import com.xdsjs.save.adapter.ExpressionPagerAdapter;
+import com.xdsjs.save.bean.BillType;
 import com.xdsjs.save.controller.BaseController;
 import com.xdsjs.save.controller.MyController;
 import com.xdsjs.save.model.MyModel;
@@ -20,7 +24,11 @@ import com.xdsjs.save.utils.ActivityManager;
 import com.xdsjs.save.utils.DensityUtil;
 import com.xdsjs.save.utils.KeyBoardUtils;
 import com.xdsjs.save.utils.TimeUtils;
+import com.xdsjs.save.widget.ExpandGridView;
 import com.xdsjs.save.widget.PasswordEditText;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
@@ -30,17 +38,46 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private Button btnPersonal;
     private Button btnBillInfo;
 
+    private List<BillType> billTypes;
+
+    private ExpressionPagerAdapter expressionPagerAdapter;//pager adapter
+    private ExpressionAdapter expressionAdapter; //gridview adapter
+
     private boolean isPopupWindowShowing = false;//标记popupWindow是否显示
 
-    private TextView tv;
+    private RemarkSyncListener remarkSyncListener;
+
+    //键盘相关控件
+    private Button btnOne, btnTwo, btnThree, btnFour, btnFive,
+            btnSix, btnSeven, btnEight, btnNine, btnZero,
+            btnDelete, btnClear, btnDial, btnEqual, btnPlus;
+
+    //键盘显示
+    private TextView tvBigNum,tvSmallNum;
+
+
+    /**
+     * 监听后台获取预判账单，成功后刷新页面
+     */
+    class RemarkSyncListener implements BaseController.SyncListener {
+
+        @Override
+        public void onSyncSuccess(final List<BillType> billTypes) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    MainActivity.this.billTypes = billTypes;
+                    initTypeShow();
+                }
+            });
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        tv = (TextView) findViewById(R.id.tv);
-        tv.setText(TimeUtils.getCurrentTime());
     }
 
     private void initView() {
@@ -50,7 +87,60 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnBillInfo = (Button) findViewById(R.id.title_bar_right_menu);
         btnPersonal.setOnClickListener(this);
         btnBillInfo.setOnClickListener(this);
+        remarkSyncListener = new RemarkSyncListener();
+        //添加监听后台获取预判list的listener
+        BaseController.getInstance().addSyncRemarkListener(remarkSyncListener);
+        //获取预判的记账类型
+        getBillTypes();
+        initTypeShow();
 
+        //键盘相关控件的绑定和获取
+        btnOne = (Button) findViewById(R.id.btn_one);
+        btnTwo = (Button) findViewById(R.id.btn_two);
+        btnThree = (Button) findViewById(R.id.btn_three);
+        btnFour = (Button) findViewById(R.id.btn_four);
+        btnFive = (Button) findViewById(R.id.btn_five);
+        btnSix = (Button) findViewById(R.id.btn_six);
+        btnSeven = (Button) findViewById(R.id.btn_seven);
+        btnEight = (Button) findViewById(R.id.btn_eight);
+        btnNine = (Button) findViewById(R.id.btn_nine);
+        btnZero = (Button) findViewById(R.id.btn_zero);
+        btnDial = (Button) findViewById(R.id.btn_dial);
+        btnDelete = (Button) findViewById(R.id.btn_delete);
+        btnClear = (Button) findViewById(R.id.btn_clear);
+        btnPlus = (Button) findViewById(R.id.btn_plus);
+        btnEqual = (Button) findViewById(R.id.btn_equal);
+        tvBigNum = (TextView) findViewById(R.id.tv_bigNum);
+        tvSmallNum = (TextView) findViewById(R.id.tv_smallNum);
+
+        btnOne.setOnClickListener(this);
+        btnTwo.setOnClickListener(this);
+        btnThree.setOnClickListener(this);
+        btnFour.setOnClickListener(this);
+        btnFive.setOnClickListener(this);
+        btnSix.setOnClickListener(this);
+        btnSeven.setOnClickListener(this);
+        btnEight.setOnClickListener(this);
+        btnNine.setOnClickListener(this);
+        btnZero.setOnClickListener(this);
+        btnDial.setOnClickListener(this);
+        btnDelete.setOnClickListener(this);
+        btnClear.setOnClickListener(this);
+        btnPlus.setOnClickListener(this);
+        btnEqual.setOnClickListener(this);
+    }
+
+    private void initTypeShow() {
+        List<View> views = new ArrayList<>();
+        View view1 = getGridChildView(1);
+        View view2 = getGridChildView(2);
+        View view3 = getGridChildView(3);
+        views.add(view1);
+        views.add(view2);
+        views.add(view3);
+
+        expressionPagerAdapter = new ExpressionPagerAdapter(views);
+        viewPager.setAdapter(expressionPagerAdapter);
     }
 
     /**
@@ -138,6 +228,84 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 if (!isPopupWindowShowing)
                     showPopupWindow(layoutTop);
                 break;
+            case R.id.btn_one:
+                break;
+            case R.id.btn_two:
+                break;
+            case R.id.btn_three:
+                break;
+            case R.id.btn_four:
+                break;
+            case R.id.btn_five:
+                break;
+            case R.id.btn_six:
+                break;
+            case R.id.btn_seven:
+                break;
+            case R.id.btn_eight:
+                break;
+            case R.id.btn_nine:
+                break;
+            case R.id.btn_zero:
+                break;
+            case R.id.btn_delete:
+                break;
+            case R.id.btn_dial:
+                break;
+            case R.id.btn_clear:
+                break;
+            case R.id.btn_plus:
+                break;
+            case R.id.btn_equal:
+                break;
         }
+    }
+
+    //获取预判的账单list
+    private List<BillType> getBillTypes() {
+        billTypes = ((MyController) BaseController.getInstance()).getBillTypeList(this);
+        if (billTypes == null) {
+            billTypes = new ArrayList<>();
+        }
+        Log.e("MainAct 最终的预判记账list", billTypes.toString());
+        return billTypes;
+    }
+
+    /**
+     * 获取表情的gridview的子view
+     */
+    private View getGridChildView(int i) {
+        View view = View.inflate(this, R.layout.viewpager_item, null);
+        ExpandGridView gv = (ExpandGridView) view.findViewById(R.id.gridview);
+
+        List<BillType> list = new ArrayList<BillType>();
+        if (i == 1) {
+            List<BillType> list1 = billTypes.subList(0, 8);
+            list.addAll(list1);
+        } else if (i == 2) {
+            list.addAll(billTypes.subList(8, 16));
+        } else if (i == 3) {
+            list.addAll(billTypes.subList(16, billTypes.size()));
+        }
+        final ExpressionAdapter expressionAdapter = new ExpressionAdapter(this,
+                1, list);
+        gv.setAdapter(expressionAdapter);
+        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+        return view;
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (remarkSyncListener != null) {
+            BaseController.getInstance()
+                    .removeSyncRemarkListener(remarkSyncListener);
+            remarkSyncListener = null;
+        }
+        super.onDestroy();
     }
 }

@@ -9,6 +9,7 @@ public class BillType {
     private int time;//对应次数
 
     private float weight = 0;//对应权重
+    private String name;
 
     public String getType() {
         return type;
@@ -32,5 +33,18 @@ public class BillType {
 
     public void setWeight(float weight) {
         this.weight = weight;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "name:" + this.getName() + "type:" + this.getType() + "time:" + this.getTime() + "weight:" + this.getWeight();
     }
 }

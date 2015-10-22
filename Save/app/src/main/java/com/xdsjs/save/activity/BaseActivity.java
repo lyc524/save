@@ -38,7 +38,7 @@ public class BaseActivity extends AppCompatActivity {
         toast.showMiddleToast(msg);
     }
 
-    protected void showNetErrorToast(){
+    protected void showNetErrorToast() {
         toast.showButtomToast(getString(R.string.internet_failed));
     }
 
@@ -59,6 +59,7 @@ public class BaseActivity extends AppCompatActivity {
 
     /**
      * 展示信息的对话框
+     *
      * @param context
      * @param content
      * @param onSweetClickListener

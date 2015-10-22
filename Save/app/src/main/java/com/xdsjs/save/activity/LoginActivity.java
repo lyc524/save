@@ -90,7 +90,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        params.put("json", jsonObject);
+        params.put("json", jsonObject.toString());
         HttpUtils.post(Global.NETWORK_ACTION_LOGIN, params, new AsyncHttpResponseHandler() {
 
             @Override
