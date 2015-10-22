@@ -50,11 +50,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     //键盘相关控件
     private Button btnOne, btnTwo, btnThree, btnFour, btnFive,
             btnSix, btnSeven, btnEight, btnNine, btnZero,
-            btnDelete, btnClear, btnDial, btnEqual, btnPlus;
+            btnDelete, btnClear, btnDial, btnConfirm, btnPlus;
+
+    private OnKeyBoardClickListener onKeyBoardClickListener;
 
     //键盘显示
-    private TextView tvBigNum,tvSmallNum;
+    private TextView tvBigNum, tvSmallNum;
 
+    //维护键盘输入的字符串变量
+    private StringBuffer stringBuffer;
 
     /**
      * 监听后台获取预判账单，成功后刷新页面
@@ -109,25 +113,28 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnDelete = (Button) findViewById(R.id.btn_delete);
         btnClear = (Button) findViewById(R.id.btn_clear);
         btnPlus = (Button) findViewById(R.id.btn_plus);
-        btnEqual = (Button) findViewById(R.id.btn_equal);
+        btnConfirm = (Button) findViewById(R.id.btn_confirm);
         tvBigNum = (TextView) findViewById(R.id.tv_bigNum);
         tvSmallNum = (TextView) findViewById(R.id.tv_smallNum);
 
-        btnOne.setOnClickListener(this);
-        btnTwo.setOnClickListener(this);
-        btnThree.setOnClickListener(this);
-        btnFour.setOnClickListener(this);
-        btnFive.setOnClickListener(this);
-        btnSix.setOnClickListener(this);
-        btnSeven.setOnClickListener(this);
-        btnEight.setOnClickListener(this);
-        btnNine.setOnClickListener(this);
-        btnZero.setOnClickListener(this);
-        btnDial.setOnClickListener(this);
-        btnDelete.setOnClickListener(this);
-        btnClear.setOnClickListener(this);
-        btnPlus.setOnClickListener(this);
-        btnEqual.setOnClickListener(this);
+        onKeyBoardClickListener = new OnKeyBoardClickListener();
+        btnOne.setOnClickListener(onKeyBoardClickListener);
+        btnTwo.setOnClickListener(onKeyBoardClickListener);
+        btnThree.setOnClickListener(onKeyBoardClickListener);
+        btnFour.setOnClickListener(onKeyBoardClickListener);
+        btnFive.setOnClickListener(onKeyBoardClickListener);
+        btnSix.setOnClickListener(onKeyBoardClickListener);
+        btnSeven.setOnClickListener(onKeyBoardClickListener);
+        btnEight.setOnClickListener(onKeyBoardClickListener);
+        btnNine.setOnClickListener(onKeyBoardClickListener);
+        btnZero.setOnClickListener(onKeyBoardClickListener);
+        btnDial.setOnClickListener(onKeyBoardClickListener);
+        btnDelete.setOnClickListener(onKeyBoardClickListener);
+        btnClear.setOnClickListener(onKeyBoardClickListener);
+        btnPlus.setOnClickListener(onKeyBoardClickListener);
+        btnConfirm.setOnClickListener(onKeyBoardClickListener);
+
+        stringBuffer = new StringBuffer();
     }
 
     private void initTypeShow() {
@@ -228,36 +235,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 if (!isPopupWindowShowing)
                     showPopupWindow(layoutTop);
                 break;
-            case R.id.btn_one:
-                break;
-            case R.id.btn_two:
-                break;
-            case R.id.btn_three:
-                break;
-            case R.id.btn_four:
-                break;
-            case R.id.btn_five:
-                break;
-            case R.id.btn_six:
-                break;
-            case R.id.btn_seven:
-                break;
-            case R.id.btn_eight:
-                break;
-            case R.id.btn_nine:
-                break;
-            case R.id.btn_zero:
-                break;
-            case R.id.btn_delete:
-                break;
-            case R.id.btn_dial:
-                break;
-            case R.id.btn_clear:
-                break;
-            case R.id.btn_plus:
-                break;
-            case R.id.btn_equal:
-                break;
         }
     }
 
@@ -307,5 +284,100 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             remarkSyncListener = null;
         }
         super.onDestroy();
+    }
+
+    private boolean isDelete = false;//标记是否按下了删除键
+    private boolean isPlus = false;//标记是否按下了加法键
+
+    private class OnKeyBoardClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.btn_one:
+                    stringBuffer.append("1");
+                    isPlus = false;
+                    break;
+                case R.id.btn_two:
+                    stringBuffer.append("2");
+                    isPlus = false;
+                    break;
+                case R.id.btn_three:
+                    stringBuffer.append("3");
+                    isPlus = false;
+                    break;
+                case R.id.btn_four:
+                    stringBuffer.append("4");
+                    isPlus = false;
+                    break;
+                case R.id.btn_five:
+                    stringBuffer.append("5");
+                    isPlus = false;
+                    break;
+                case R.id.btn_six:
+                    stringBuffer.append("6");
+                    isPlus = false;
+                    break;
+                case R.id.btn_seven:
+                    stringBuffer.append("7");
+                    isPlus = false;
+                    break;
+                case R.id.btn_eight:
+                    stringBuffer.append("8");
+                    isPlus = false;
+                    break;
+                case R.id.btn_nine:
+                    stringBuffer.append("9");
+                    isPlus = false;
+                    break;
+                case R.id.btn_zero:
+                    stringBuffer.append("0");
+                    isPlus = false;
+                    break;
+                case R.id.btn_delete:
+                    isPlus = false;
+                    isDelete = true;
+                    break;
+                case R.id.btn_dial:
+                    stringBuffer.append(".");
+                    isPlus = false;
+                    break;
+                case R.id.btn_clear:
+                    stringBuffer = new StringBuffer();
+                    isPlus = false;
+                    break;
+                case R.id.btn_plus:
+                    if (!isPlus && stringBuffer.length() > 0) {
+                        isPlus = true;
+                        stringBuffer.append("+");
+                    } else {
+                        return;
+                    }
+                    break;
+                case R.id.btn_confirm:
+                    return;
+            }
+            calculate(stringBuffer, isDelete);
+        }
+    }
+
+    //计算结果并刷新键盘显示界面
+    private void calculate(StringBuffer stringBuffer, boolean isDelete) {
+        if (stringBuffer.length() > 0 && isDelete) {
+            stringBuffer.deleteCharAt(stringBuffer.length() - 1);
+            this.isDelete = false;
+        }
+        if (stringBuffer.length() > 0) {
+            String num = new String(stringBuffer);
+            String[] nums = num.split("\\+");
+            float total = 0f;
+            for (int i = 0; i < nums.length; i++) {
+                total += Float.valueOf(nums[i]);
+            }
+            tvBigNum.setText(num);
+            tvSmallNum.setText(total + "");
+        } else {
+            tvBigNum.setText("0.0");
+            tvSmallNum.setText("0.0");
+        }
     }
 }

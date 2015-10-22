@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/whitesmoke"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -70,7 +70,7 @@
                     android:gravity="center"
                     android:scrollbars="none"
                     android:singleLine="true"
-                    android:text="0"
+                    android:text="0.0"
                     android:textSize="30sp" />
             </HorizontalScrollView>
 
@@ -85,7 +85,7 @@
                     android:layout_gravity="right"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:text="0"
+                    android:text="0.0"
                     android:textSize="20sp" />
             </HorizontalScrollView>
         </LinearLayout>
@@ -241,15 +241,12 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btn_equal"
+                android:id="@+id/btn_confirm"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="=" />
+                android:text="提交" />
         </LinearLayout>
-
-
     </LinearLayout>
-
 </LinearLayout>
