@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="top_title_color">#5bc276</color>
-
-
     <!-- 红1 -->
     <color name="red1">#CC0000</color>
 

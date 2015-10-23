@@ -91,7 +91,7 @@ public class MyController extends BaseController {
     }
 
     //根据日期获取一年内账单List
-    public List<Bill> getMonthYearList() {
+    public List<Bill> getYearBillList() {
         if (yearBills != null && !isBillChange) {
             return yearBills;
         }

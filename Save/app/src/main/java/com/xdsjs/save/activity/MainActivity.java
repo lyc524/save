@@ -221,6 +221,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onCheckSuccess() {
                 tvPwd.setText("密码输入正确");
+                openActivity(BillInfoActivity.class);
             }
 
             @Override

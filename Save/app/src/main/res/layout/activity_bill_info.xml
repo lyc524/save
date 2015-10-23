@@ -1,10 +1,9 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.xdsjs.save.activity.LoginActivity">
+    tools:context="com.xdsjs.save.activity.BillInfoActivity">
 
     <LinearLayout
         android:id="@+id/layout_top"
@@ -23,49 +22,35 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
-                android:src="@drawable/back"/>
+                android:src="@drawable/back" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="7dp"
-                android:text="@string/login"
+                android:text="财务详情"
                 android:textColor="@color/whitesmoke"
-                android:textSize="24sp"/>
+                android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/tv_regist"
+            <ImageView
+                android:id="@+id/iv_set"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="15dp"
-                android:text="注册"
-                android:textColor="@color/whitesmoke"
-                android:textSize="12sp"/>
+                android:src="@drawable/setting" />
 
         </FrameLayout>
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/et_account"
+    <com.astuetz.PagerSlidingTabStrip
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:focusable="true"
-        android:hint="请输入账号"/>
+        android:layout_height="48dip" />
 
-    <EditText
-        android:id="@+id/et_pwd"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:hint="请输入密码"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:onClick="confirm"
-        android:text="confirm"/>
-
+        android:layout_height="250dp" />
 </LinearLayout>

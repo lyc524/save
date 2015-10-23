@@ -9,13 +9,13 @@
     <LinearLayout
         android:id="@+id/layout_top"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/title_bar_height"
         android:background="@color/top_title_color"
         android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/title_bar_left_menu"
