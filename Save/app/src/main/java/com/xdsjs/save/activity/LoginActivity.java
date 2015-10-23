@@ -2,6 +2,7 @@ package com.xdsjs.save.activity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -11,6 +12,8 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.xdsjs.save.R;
 import com.xdsjs.save.config.Global;
+import com.xdsjs.save.controller.BaseController;
+import com.xdsjs.save.controller.MyController;
 import com.xdsjs.save.network.HttpUtils;
 import com.xdsjs.save.utils.SPUtils;
 
@@ -98,6 +101,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 dismissDialog();
                 if (statusCode == 200) {
                     String responce = new String(responseBody);
+                    Log.e("LoginActivity--------->", responce);
                     try {
                         JSONObject jsonObject = new JSONObject(responce);
                         String responseCode = jsonObject.getString("result");
@@ -106,6 +110,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             SPUtils.put(LoginActivity.this, Global.SHARE_PERSONAL_ACCOUNT, account);
                             SPUtils.put(LoginActivity.this, Global.SHARE_PERSONAL_PWD, pwd);
                             SPUtils.put(LoginActivity.this, Global.SHARE_PERSONAL_AUTO_LOGIN, true);
+                            //暂定为每次用户非自动登陆时都要后台获取账单list
+                            ((MyController) BaseController.getInstance()).getBillListFromServer();
                             LoginActivity.this.finish();
                         } else if (responseCode.equals("0")) {
                             showBottomToast("登陆失败");

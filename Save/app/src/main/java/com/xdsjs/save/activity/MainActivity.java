@@ -9,13 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.xdsjs.save.R;
 import com.xdsjs.save.adapter.ExpressionAdapter;
 import com.xdsjs.save.adapter.ExpressionPagerAdapter;
+import com.xdsjs.save.bean.Bill;
 import com.xdsjs.save.bean.BillType;
 import com.xdsjs.save.controller.BaseController;
 import com.xdsjs.save.controller.MyController;
@@ -57,8 +60,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     //键盘显示
     private TextView tvBigNum, tvSmallNum;
 
+    //备注
+    private ImageView remark;
+
     //维护键盘输入的字符串变量
     private StringBuffer stringBuffer;
+
+    //被选中的类型
+    private BillType billType = null;
+    private String money;
+    private String remarkText;
 
     /**
      * 监听后台获取预判账单，成功后刷新页面
@@ -89,8 +100,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         layoutTop = (LinearLayout) findViewById(R.id.layout_top);
         btnPersonal = (Button) findViewById(R.id.title_bar_left_menu);
         btnBillInfo = (Button) findViewById(R.id.title_bar_right_menu);
+        remark = (ImageView) findViewById(R.id.remark);
         btnPersonal.setOnClickListener(this);
         btnBillInfo.setOnClickListener(this);
+        remark.setOnClickListener(this);
         remarkSyncListener = new RemarkSyncListener();
         //添加监听后台获取预判list的listener
         BaseController.getInstance().addSyncRemarkListener(remarkSyncListener);
@@ -135,6 +148,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnConfirm.setOnClickListener(onKeyBoardClickListener);
 
         stringBuffer = new StringBuffer();
+
+        //检查同步上传本地信息
+        ((MyController) BaseController.getInstance()).updateBillListToServer();
     }
 
     private void initTypeShow() {
@@ -235,6 +251,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 if (!isPopupWindowShowing)
                     showPopupWindow(layoutTop);
                 break;
+            case R.id.remark:
+                new MaterialDialog.Builder(this)
+                        .title("备注")
+                        .inputMaxLength(14)
+                        .input(null, null, new MaterialDialog.InputCallback() {
+                            @Override
+                            public void onInput(MaterialDialog dialog, CharSequence input) {
+                                remarkText = input.toString();
+                            }
+                        }).show();
+                break;
         }
     }
 
@@ -255,7 +282,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         View view = View.inflate(this, R.layout.viewpager_item, null);
         ExpandGridView gv = (ExpandGridView) view.findViewById(R.id.gridview);
 
-        List<BillType> list = new ArrayList<BillType>();
+        final List<BillType> list = new ArrayList<BillType>();
         if (i == 1) {
             List<BillType> list1 = billTypes.subList(0, 8);
             list.addAll(list1);
@@ -270,7 +297,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                billType = list.get(position);
             }
         });
         return view;
@@ -354,6 +381,30 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     }
                     break;
                 case R.id.btn_confirm:
+                    money = tvSmallNum.getText().toString();
+                    if (!TextUtils.isEmpty(money) && !money.equals("0.0") && billType != null) {
+                        Bill bill = new Bill();
+                        bill.setTime(System.currentTimeMillis() + "");
+                        bill.setUpload(0);
+                        bill.setMoney(money);
+                        if (!TextUtils.isEmpty(remarkText)) {
+                            bill.setRemark(remarkText);
+                        }
+                        MyModel myModel = ((MyController) BaseController.getInstance()).getMyModel();
+                        if (billType.getName().equals("个人收入")) {
+                            //增加本地的总收入记录
+                            String moneyIn = myModel.getPersonalTotalIn();
+                            myModel.setPersonalTotalIn(String.valueOf(Float.valueOf(moneyIn) + Float.valueOf(money)));
+                        } else {
+                            //增加本地的总支出记录
+                            String moneyOut = myModel.getPersonalTotalOut();
+                            myModel.setPersonalTotalOut(String.valueOf(Float.valueOf(moneyOut) + Float.valueOf(money)));
+                        }
+                        bill.setType(billType.getName());
+                        ((MyController) BaseController.getInstance()).saveBill(bill);
+                        billType.setTime(billType.getTime() + 1);
+                        ((MyController) BaseController.getInstance()).updateTime(billType);
+                    }
                     return;
             }
             calculate(stringBuffer, isDelete);

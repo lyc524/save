@@ -34,8 +34,12 @@ public class BillTableDao {
     }
 
     //根据日期获取账单List
-    public List<Bill> getBillList(long time){
+    public List<Bill> getBillList(long time) {
         return DBManager.getInstance().getBill(time);
     }
 
+    //获取未更新到服务器的账单
+    public List<Bill> getUnUploadBillList() {
+        return DBManager.getInstance().getUnUploadBillList();
+    }
 }

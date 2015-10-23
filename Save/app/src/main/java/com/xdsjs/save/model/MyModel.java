@@ -39,6 +39,12 @@ public class MyModel extends DefaultModel {
         return billTableDao.getBillList(time);
     }
 
+    //获取未更新到服务器的账单
+    public List<Bill> getUnUploadBillList() {
+        BillTableDao billTableDao = new BillTableDao(context);
+        return billTableDao.getUnUploadBillList();
+    }
+
     //根据当前时间段更新次数表
     public void updateTime(BillType billType) {
         TimeDao timeDao = new TimeDao(context);
@@ -46,7 +52,7 @@ public class MyModel extends DefaultModel {
     }
 
     //根据当前时间段获取排好序的次数表
-    public List<BillType> getBillTypeList(){
+    public List<BillType> getBillTypeList() {
         TimeDao timeDao = new TimeDao(context);
         return timeDao.getBillTypeList();
     }

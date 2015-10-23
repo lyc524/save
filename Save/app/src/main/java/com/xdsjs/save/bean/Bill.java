@@ -9,7 +9,7 @@ public class Bill {
     private String money;
     private String remark;
     private String time;
-    private int upload = 0;
+    private int upload = 0;//0表示未更新，1表示已更新
 
     public String getMoney() {
         return money;

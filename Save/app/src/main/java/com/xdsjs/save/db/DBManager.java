@@ -86,6 +86,26 @@ public class DBManager {
         return bills;
     }
 
+    //获取未更新到服务器的账单
+    synchronized List<Bill> getUnUploadBillList() {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        List<Bill> bills = new ArrayList<>();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from " + BillTableDao.TABLE_NAME + " where " + BillTableDao.COLUMN_NAME_UPLOAD + " = ?", new String[]{"0"});
+            Bill bill;
+            while (cursor.moveToNext()) {
+                bill = new Bill();
+                bill.setType(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_MONEY)));
+                bill.setMoney(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_MONEY)));
+                bill.setRemark(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_REMARK)));
+                bill.setTime(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_TIME)));
+                bill.setUpload(cursor.getInt(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_UPLOAD)));
+                bills.add(bill);
+            }
+        }
+        return bills;
+    }
+
     //更新次数表
     synchronized void updateTime(BillType billType) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -119,16 +139,16 @@ public class DBManager {
                 return rhs.getTime() - lhs.getTime();
             }
         });
-        // 计算权重
-        if (!(billTypes.get(0).getTime() == 0)) {
-            int totalTime = 0;
-            for (BillType billType : billTypes) {
-                totalTime += billType.getTime();
-            }
-            for (BillType billType : billTypes) {
-                billType.setWeight(billType.getTime() / (float) totalTime);
-            }
-        }
+//        // 计算权重
+//        if (!(billTypes.get(0).getTime() == 0)) {
+//            int totalTime = 0;
+//            for (BillType billType : billTypes) {
+//                totalTime += billType.getTime();
+//            }
+//            for (BillType billType : billTypes) {
+//                billType.setWeight(billType.getTime() / (float) totalTime);
+//            }
+//        }
         Log.e("DBManager 获取数据库预判记账list", billTypes.toString());
         return billTypes;
     }

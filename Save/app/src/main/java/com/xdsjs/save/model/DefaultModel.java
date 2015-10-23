@@ -81,7 +81,7 @@ public class DefaultModel extends BaseModel {
     }
 
     public String getPersonalTotalIn() {
-        return (String) SPUtils.get(context, Global.SHARE_PERSONAL_TOTAL_IN, "");
+        return (String) SPUtils.get(context, Global.SHARE_PERSONAL_TOTAL_IN, "0");
     }
 
     public void setPersonalTotalOut(String totalOut) {
@@ -89,7 +89,7 @@ public class DefaultModel extends BaseModel {
     }
 
     public String getPersonalTotalOut() {
-        return (String) SPUtils.get(context, Global.SHARE_PERSONAL_TOTAL_OUT, "");
+        return (String) SPUtils.get(context, Global.SHARE_PERSONAL_TOTAL_OUT, "0");
     }
 
     public void setPersonalAutoLogin(boolean autoLogin) {

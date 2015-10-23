@@ -3,12 +3,22 @@ package com.xdsjs.save.controller;
 import android.content.Context;
 import android.util.Log;
 
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.xdsjs.save.application.MyApplication;
 import com.xdsjs.save.bean.Bill;
 import com.xdsjs.save.bean.BillType;
+import com.xdsjs.save.config.Global;
 import com.xdsjs.save.model.BaseModel;
 import com.xdsjs.save.model.MyModel;
+import com.xdsjs.save.network.HttpUtils;
 import com.xdsjs.save.utils.NetUtils;
 import com.xdsjs.save.utils.TimeUtils;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -89,6 +99,11 @@ public class MyController extends BaseController {
         return yearBills;
     }
 
+    //获取未更新到服务器的账单
+    public List<Bill> getUnUploadBillList() {
+        return getMyModel().getUnUploadBillList();
+    }
+
     //根据当前时间段更新次数表
     public void updateTime(BillType billType) {
         getMyModel().updateTime(billType);
@@ -99,11 +114,12 @@ public class MyController extends BaseController {
         if (billTypes == null) {
             billTypes = getMyModel().getBillTypeList();
         }
-        //如果当前有网络连接的话，则进行后台查询
-        if (NetUtils.isConnected(context)) {
+        //如果当前有网络连接且用户登录的情况下，则进行后台查询
+        if (NetUtils.isConnected(context) && ((MyController) BaseController.getInstance()).getMyModel().getPersonalAutoLogin()) {
             getForecastFormServer(context, billTypes, new OnGetForecastFromServer() {
                 @Override
                 public void onSuccess(List<BillType> billTypess) {
+                    Log.e("LoginActivity--------->", billTypess.toString());
                     billTypes = billTypess;
                     BillType billType = new BillType();
                     for (int i = 0; i < billTypes.size(); i++) {
@@ -134,5 +150,76 @@ public class MyController extends BaseController {
         }
         billTypes.add(0, billType);
         return billTypes;
+    }
+
+    /**
+     * 获取用户账单信息
+     * 每当用户非自动登陆情况下都要调用
+     */
+    public void getBillListFromServer() {
+        getBillListFormServer(new OnGetAllBillListFromServer() {
+            @Override
+            public void onSuccess(List<Bill> bills) {
+                saveBillList(bills);
+            }
+
+            @Override
+            public void onFail(String error) {
+                Log.e("MyController--->", error);
+            }
+        });
+    }
+
+
+    /**
+     * 向后台上传用户信息,包括为更新的账单，总支出和总收入
+     * 条件为有网络连接，且用户已登录，且用户设置了自动上传
+     */
+    public void updateBillListToServer() {
+        if (NetUtils.isConnected(MyApplication.getInstance()) && getMyModel().getPersonalAutoLogin() && getMyModel().getSettingUpLoad()) {
+            List<Bill> bills = getUnUploadBillList();
+            RequestParams params = new RequestParams();
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("username", getMyModel().getPersonalAccount());
+                jsonObject.put("pay_money_bef", getMyModel().getPersonalTotalOut());
+                jsonObject.put("get_money_bef", getMyModel().getPersonalTotalIn());
+                JSONArray jsonArray = new JSONArray();
+                JSONObject json;
+                for (Bill bill : bills) {
+                    json = new JSONObject();
+                    json.put("type", bill.getType());
+                    json.put("money", bill.getMoney());
+                    json.put("remark", bill.getRemark());
+                    json.put("update_time", bill.getTime());
+                    jsonArray.put(json);
+                }
+                jsonObject.put("bills", jsonArray);
+                params.put("json", jsonObject.toString());
+                HttpUtils.post(Global.NETWORK_ACTION_UPLOAD_USER_INFO, params, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                        try {
+                            JSONObject respose = new JSONObject(new String(responseBody));
+                            if (respose.getString("result").equals("1")) {
+                                Log.e("MyController--->", "上传账单信息成功");
+                            } else {
+                                Log.e("MyController--->", "上传账单信息失败");
+                            }
+                        } catch (JSONException e) {
+                            Log.e("MyController--->", "上传账单信息失败");
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                        Log.e("MyController--->", "上传账单信息失败");
+                    }
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

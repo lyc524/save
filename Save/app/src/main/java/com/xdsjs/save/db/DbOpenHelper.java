@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.xdsjs.save.controller.BaseController;
+import com.xdsjs.save.controller.MyController;
+
 
 public class DbOpenHelper extends SQLiteOpenHelper {
 
@@ -72,7 +75,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     }
 
     private static String getUserDatabaseName() {
-        return "_bill.db";
+        return ((MyController) BaseController.getInstance()).getMyModel().getPersonalAccount() + "_bill.db";
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.xdsjs.save.activity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -83,6 +84,7 @@ public class RegistActivity extends BaseActivity {
                 dismissDialog();
                 if (statusCode == 200) {
                     String responce = new String(responseBody);
+                    Log.e("RegistActivity-------->", responce);
                     try {
                         JSONObject jsonObject = new JSONObject(responce);
                         String responseCode = jsonObject.getString("result");
