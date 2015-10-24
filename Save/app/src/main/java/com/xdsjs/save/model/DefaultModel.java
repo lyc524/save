@@ -33,7 +33,7 @@ public class DefaultModel extends BaseModel {
 
     @Override
     public void setSettingBillPwd(boolean isBillPwd) {
-        SPUtils.get(context, Global.SHARE_SETTING_BILL_PWD, isBillPwd);
+        SPUtils.put(context, Global.SHARE_SETTING_BILL_PWD, isBillPwd);
     }
 
     @Override

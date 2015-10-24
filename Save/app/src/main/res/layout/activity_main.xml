@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/whitesmoke"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -54,12 +54,13 @@
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_weight="1"
-            android:background="#eee"
+            android:background="#fff"
+            android:gravity="center"
             android:orientation="vertical">
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="30dp"
                 android:scrollbars="none">
 
                 <TextView
@@ -71,12 +72,12 @@
                     android:scrollbars="none"
                     android:singleLine="true"
                     android:text="0.0"
-                    android:textSize="30sp" />
+                    android:textSize="20sp" />
             </HorizontalScrollView>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="30dp">
+                android:layout_height="50dp">
 
                 <TextView
                     android:id="@+id/tv_smallNum"
@@ -86,7 +87,7 @@
                     android:gravity="center"
                     android:singleLine="true"
                     android:text="0.0"
-                    android:textSize="20sp" />
+                    android:textSize="30sp" />
             </HorizontalScrollView>
         </LinearLayout>
 
@@ -106,23 +107,50 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_height="180dp"
         android:orientation="vertical">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
-        <LinearLayout
-            android:id="@+id/viewGroup"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-25px"
-            android:gravity="right"
-            android:orientation="horizontal"></LinearLayout>
     </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="5dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:src="@drawable/guide_point_selector" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dp"
+            android:src="@drawable/guide_point_selector" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:src="@drawable/guide_point_selector" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_save" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -141,21 +169,41 @@
                 style="@style/key_btn_style"
                 android:text="1" />
 
+            <ImageView
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray_save" />
+
             <Button
                 android:id="@+id/btn_two"
                 style="@style/key_btn_style"
                 android:text="2" />
+
+            <ImageView
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray_save" />
 
             <Button
                 android:id="@+id/btn_three"
                 style="@style/key_btn_style"
                 android:text="3" />
 
+            <ImageView
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray_save" />
+
             <Button
                 android:id="@+id/btn_delete"
                 style="@style/key_btn_style"
                 android:text="删除" />
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_save" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -168,21 +216,41 @@
                 style="@style/key_btn_style"
                 android:text="4" />
 
+            <ImageView
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray_save" />
+
             <Button
                 android:id="@+id/btn_five"
                 style="@style/key_btn_style"
                 android:text="5" />
+
+            <ImageView
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray_save" />
 
             <Button
                 android:id="@+id/btn_six"
                 style="@style/key_btn_style"
                 android:text="6" />
 
+            <ImageView
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray_save" />
+
             <Button
                 android:id="@+id/btn_plus"
                 style="@style/key_btn_style"
                 android:text="+" />
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_save" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -207,16 +275,36 @@
                         style="@style/key_btn_style"
                         android:text="7" />
 
+                    <ImageView
+                        android:layout_width="0.1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/gray_save" />
+
                     <Button
                         android:id="@+id/btn_eight"
                         style="@style/key_btn_style"
                         android:text="8" />
 
+                    <ImageView
+                        android:layout_width="0.1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/gray_save" />
+
                     <Button
                         android:id="@+id/btn_nine"
                         style="@style/key_btn_style"
                         android:text="9" />
+
+                    <ImageView
+                        android:layout_width="0.1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/gray_save" />
                 </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_save" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -229,10 +317,20 @@
                         style="@style/key_btn_style"
                         android:text="C" />
 
+                    <ImageView
+                        android:layout_width="0.1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/gray_save" />
+
                     <Button
                         android:id="@+id/btn_zero"
                         style="@style/key_btn_style"
                         android:text="0" />
+
+                    <ImageView
+                        android:layout_width="0.1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/gray_save" />
 
                     <Button
                         android:id="@+id/btn_dial"
@@ -246,8 +344,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/keyboard"
                 android:gravity="center"
-                android:text="提交" />
+                android:text="√"
+                android:textColor="@color/top_title_color"
+                android:textSize="25sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

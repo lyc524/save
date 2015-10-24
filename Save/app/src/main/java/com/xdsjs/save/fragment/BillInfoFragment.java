@@ -143,7 +143,7 @@ public class BillInfoFragment extends Fragment {
         pieChart.setTransparentCircleRadius(64f); // 半透明圈
         //pieChart.setHoleRadius(0)  //实心圆
 
-//        pieChart.setDescription("测试饼状图");
+        pieChart.setDescription("");
 
         // mChart.setDrawYValues(true);
         pieChart.setDrawCenterText(true);  //饼状图中间可以添加文字
@@ -169,7 +169,7 @@ public class BillInfoFragment extends Fragment {
 
 //      mChart.setOnAnimationListener(this);
 
-        pieChart.setCenterText("收入支出情况");  //饼状图中间的文字
+        pieChart.setCenterText("");  //饼状图中间的文字
 
         //设置数据
         pieChart.setData(pieData);

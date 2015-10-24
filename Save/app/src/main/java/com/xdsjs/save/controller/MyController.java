@@ -12,8 +12,11 @@ import com.xdsjs.save.config.Global;
 import com.xdsjs.save.model.BaseModel;
 import com.xdsjs.save.model.MyModel;
 import com.xdsjs.save.network.HttpUtils;
+import com.xdsjs.save.utils.Data;
 import com.xdsjs.save.utils.NetUtils;
+import com.xdsjs.save.utils.SecUtil;
 import com.xdsjs.save.utils.TimeUtils;
+import com.xdsjs.save.utils.desUtil;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -196,7 +199,15 @@ public class MyController extends BaseController {
                     jsonArray.put(json);
                 }
                 jsonObject.put("bills", jsonArray);
-                params.put("json", jsonObject.toString());
+                String result = null;
+                try {
+                    result = desUtil.encrypt(jsonObject.toString(), Data.key);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                result = SecUtil.encrypt(Data.pub, result);
+
+                params.put("json", result);
                 HttpUtils.post(Global.NETWORK_ACTION_UPLOAD_USER_INFO, params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

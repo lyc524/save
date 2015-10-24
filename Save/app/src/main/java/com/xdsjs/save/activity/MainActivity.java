@@ -164,14 +164,34 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         expressionPagerAdapter = new ExpressionPagerAdapter(views);
         viewPager.setAdapter(expressionPagerAdapter);
+
+        initPoint();
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                setCurDot(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     /**
      * 配置显示popupWindow
      */
+    private PopupWindow popupWindow;
+
     private void showPopupWindow(View view) {
         View contentView = LayoutInflater.from(this).inflate(R.layout.popupwindow_pwd, null);
-        PopupWindow popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(this, 150.0f), true);
+        popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(this, 150.0f), true);
 
         popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.top_title_color));
         popupWindow.setTouchable(false);
@@ -190,14 +210,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         isPopupWindowShowing = true;
         //判断当前用户是否设置了安全密码，如果没有，则引导设置
         final MyModel myModel = ((MyController) BaseController.getInstance()).getMyModel();
-        if (myModel.getSettingBillPwd()) {
-            if (TextUtils.isEmpty(myModel.getPersonalBillPwd())) {
-                Log.e("------------------>", myModel.getPersonalBillPwd());
-                etpwd.setCurrentMode(PasswordEditText.MODE_SET_PASSWORD);
-            } else {
-                etpwd.setCurrentMode(PasswordEditText.MODE_CHECK_PASSWORD);
-                etpwd.setPwd(myModel.getPersonalBillPwd());
-            }
+
+        if (TextUtils.isEmpty(myModel.getPersonalBillPwd())) {
+            Log.e("------------------>", myModel.getPersonalBillPwd());
+            etpwd.setCurrentMode(PasswordEditText.MODE_SET_PASSWORD);
+        } else {
+            etpwd.setCurrentMode(PasswordEditText.MODE_CHECK_PASSWORD);
+            etpwd.setPwd(myModel.getPersonalBillPwd());
         }
         etpwd.setOnSetPwdListener(new PasswordEditText.OnSetPwdListener() {
             @Override
@@ -215,6 +234,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             public void onSetPwdSuccess(String pwd) {
                 myModel.setPersonalBillPwd(pwd);
                 tvPwd.setText("密码设置成功");
+                openActivity(BillInfoActivity.class);
             }
         });
         etpwd.setOnCheckPwdListener(new PasswordEditText.OnCheckPwdListener() {
@@ -249,8 +269,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }
                 break;
             case R.id.title_bar_right_menu:
-                if (!isPopupWindowShowing)
-                    showPopupWindow(layoutTop);
+                if (!isPopupWindowShowing) {
+                    if (((MyController) BaseController.getInstance()).getMyModel().getSettingBillPwd()) {
+                        showPopupWindow(layoutTop);
+                    } else {
+                        openActivity(BillInfoActivity.class);
+                    }
+                }
                 break;
             case R.id.remark:
                 new MaterialDialog.Builder(this)
@@ -299,6 +324,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 billType = list.get(position);
+//                for (int i = 0; i < parent.getCount(); i++) {
+//                    View v = parent.getChildAt(i);
+//                    if (position == i) {
+//                        view.setBackgroundColor(getResources().getColor(R.color.top_title_color));
+//                    } else {
+//                        v.setBackgroundColor(getResources().getColor(R.color.transparent));
+//                    }
+//                }
             }
         });
         return view;
@@ -366,8 +399,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     isDelete = true;
                     break;
                 case R.id.btn_dial:
-                    stringBuffer.append(".");
-                    isPlus = false;
+                    if (stringBuffer.length() > 0) {
+                        stringBuffer.append(".");
+                        isPlus = false;
+                    }
                     break;
                 case R.id.btn_clear:
                     stringBuffer = new StringBuffer();
@@ -405,8 +440,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         ((MyController) BaseController.getInstance()).saveBill(bill);
                         billType.setTime(billType.getTime() + 1);
                         ((MyController) BaseController.getInstance()).updateTime(billType);
+                        showMiddleToast("记账成功");
+                        billType = null;
                     }
-                    return;
+                    stringBuffer = new StringBuffer();
+                    isPlus = false;
+                    break;
             }
             calculate(stringBuffer, isDelete);
         }
@@ -431,5 +470,58 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             tvBigNum.setText("0.0");
             tvSmallNum.setText("0.0");
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (popupWindow != null && popupWindow.isShowing()) {
+            popupWindow.dismiss();
+            isPopupWindowShowing = false;
+        }
+    }
+
+    // 底部小点的图片
+    private ImageView[] points;
+    // 记录当前选中位置
+    private int currentIndex;
+
+    /**
+     * 初始化底部小点
+     */
+    private void initPoint() {
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+
+        points = new ImageView[3];
+
+        // 循环取得小点图片
+        for (int i = 0; i < 3; i++) {
+            // 得到一个LinearLayout下面的每一个子元素
+            points[i] = (ImageView) linearLayout.getChildAt(i);
+            // 默认都设为灰色
+            points[i].setEnabled(true);
+            // 给每个小点设置监听
+            points[i].setOnClickListener(this);
+            // 设置位置tag，方便取出与当前位置对应
+            points[i].setTag(i);
+        }
+
+        // 设置当面默认的位置
+        currentIndex = 0;
+        // 设置为白色，即选中状态
+        points[currentIndex].setEnabled(false);
+    }
+
+    /**
+     * 设置当前的小点的位置
+     */
+    private void setCurDot(int positon) {
+        // 排除异常情况
+        if (positon < 0 || positon > 2 || currentIndex == positon) {
+            return;
+        }
+        points[positon].setEnabled(false);
+        points[currentIndex].setEnabled(true);
+        currentIndex = positon;
     }
 }
