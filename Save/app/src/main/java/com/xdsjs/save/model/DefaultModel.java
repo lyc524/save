@@ -46,7 +46,7 @@ public class DefaultModel extends BaseModel {
     }
 
     public float getSettingBudget() {
-        return (float) SPUtils.get(context, Global.SHARE_SETTING_BUDGET, 0);
+        return (float) SPUtils.get(context, Global.SHARE_SETTING_BUDGET, 0f);
     }
 
     /**

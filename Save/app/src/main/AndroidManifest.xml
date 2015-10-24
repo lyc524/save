@@ -27,6 +27,10 @@
             android:name=".activity.BillInfoActivity"
             android:label="@string/title_activity_bill_info" >
         </activity>
+        <activity
+            android:name=".activity.SettingActivity"
+            android:label="@string/title_activity_setting" >
+        </activity>
     </application>
 
 </manifest>

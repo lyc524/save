@@ -77,7 +77,7 @@ public class MyController extends BaseController {
         if (weekBills != null && !isBillChange) {
             return weekBills;
         }
-        Log.e("getFirstDayTimeOfWeek",TimeUtils.getFirstDayTimeOfWeek()+"");
+        Log.e("getFirstDayTimeOfWeek", TimeUtils.getFirstDayTimeOfWeek() + "");
         weekBills = getMyModel().getBillList(TimeUtils.getFirstDayTimeOfWeek());
         return weekBills;
     }
@@ -124,7 +124,7 @@ public class MyController extends BaseController {
                     billTypes = billTypess;
                     BillType billType = new BillType();
                     for (int i = 0; i < billTypes.size(); i++) {
-                        if (billTypes.get(i).getType().equals("type_0")) {
+                        if (billTypes.get(i).getType().equals("0")) {
                             billType = billTypes.get(i);
                             billTypes.remove(i);
                             break;
@@ -143,7 +143,7 @@ public class MyController extends BaseController {
         //将收入项放到第一个
         BillType billType = new BillType();
         for (int i = 0; i < billTypes.size(); i++) {
-            if (billTypes.get(i).getType().equals("type_0")) {
+            if (billTypes.get(i).getType().equals("0")) {
                 billType = billTypes.get(i);
                 billTypes.remove(i);
                 break;

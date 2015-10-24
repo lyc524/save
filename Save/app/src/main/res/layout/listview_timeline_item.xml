@@ -45,9 +45,9 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginLeft="10dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_type_name"
@@ -57,7 +57,7 @@
                 android:gravity="center_vertical"
                 android:text="手机"
                 android:textColor="@color/black"
-                android:textSize="22sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tv_type_remark"
@@ -67,16 +67,16 @@
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 android:text="儿子过生日，买个手机"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/tv_money"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:gravity="center"
             android:text="-105"
-            android:layout_marginRight="10dp"
             android:textColor="@color/red" />
     </LinearLayout>
 </LinearLayout>

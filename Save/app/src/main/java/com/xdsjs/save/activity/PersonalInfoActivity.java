@@ -1,6 +1,7 @@
 package com.xdsjs.save.activity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.xdsjs.save.R;
 
@@ -9,6 +10,9 @@ import com.xdsjs.save.R;
  * Created by xdsjs on 2015/10/17.
  */
 public class PersonalInfoActivity extends BaseActivity{
+
+    private TextView tvTotalOut;
+    private TextView tvTotalIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

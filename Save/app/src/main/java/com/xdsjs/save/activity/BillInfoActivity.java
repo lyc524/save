@@ -49,6 +49,7 @@ public class BillInfoActivity extends BaseActivity implements View.OnClickListen
                 this.finish();
                 break;
             case R.id.iv_set:
+                openActivity(SettingActivity.class);
                 break;
         }
     }

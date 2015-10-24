@@ -98,7 +98,7 @@ public class TimeUtils {
 
     public static String getPrettyTime(long time) {
         Date date = new Date(time);
-        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("MM.dd");
         return sdf2.format(date);
     }
 }

@@ -1,6 +1,9 @@
 package com.xdsjs.save.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +14,9 @@ import android.widget.TextView;
 import com.xdsjs.save.R;
 import com.xdsjs.save.bean.Bill;
 import com.xdsjs.save.config.Global;
+import com.xdsjs.save.utils.TimeUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,30 +26,36 @@ import java.util.List;
 public class TimelineAdapter extends BaseAdapter {
 
     private Context context;
-    private List<Bill> bills;
+    private List<Bill> bills = new ArrayList<>();
 
     public TimelineAdapter(Context context, List<Bill> bills) {
+        super();
+        Log.e("%%%%%%%%%%%%%%%%", "TimelineAdapter");
         this.context = context;
         this.bills = bills;
     }
 
     @Override
     public int getCount() {
+        Log.e("%%%%%%%%%%%%%%%%", "getCount");
         return bills.size();
     }
 
     @Override
     public Object getItem(int position) {
+        Log.e("%%%%%%%%%%%%%%%%", "getItem");
         return bills.get(position);
     }
 
     @Override
     public long getItemId(int position) {
+        Log.e("%%%%%%%%%%%%%%%%", "getItemId");
         return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        Log.e("%%%%%%%%%%%%%%%%", "getView");
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
@@ -60,14 +71,20 @@ public class TimelineAdapter extends BaseAdapter {
         }
         int resId = context.getResources().getIdentifier("type_" + bills.get(position).getType(), "drawable", context.getPackageName());
         viewHolder.ivIcon.setImageResource(resId);
-        viewHolder.tvDate.setText(bills.get(position).getTime());
+        viewHolder.tvDate.setText(TimeUtils.getPrettyTime(Long.valueOf(bills.get(position).getTime())));
         viewHolder.tvTypeName.setText(Global.types[Integer.valueOf(bills.get(position).getType())]);
-        if (!bills.get(position).getRemark().equals(null)) {
+        if (!TextUtils.isEmpty(bills.get(position).getRemark())) {
             viewHolder.tvRemark.setText(bills.get(position).getRemark());
         } else {
             viewHolder.tvRemark.setVisibility(View.GONE);
         }
-        viewHolder.tvMoney.setText(bills.get(position).getMoney());
+        if (bills.get(position).getType().equals("0")){
+            viewHolder.tvMoney.setTextColor(Color.GREEN);
+            viewHolder.tvMoney.setText(bills.get(position).getMoney());
+        }else {
+            viewHolder.tvMoney.setTextColor(Color.RED);
+            viewHolder.tvMoney.setText("-"+bills.get(position).getMoney());
+        }
         return convertView;
     }
 

@@ -94,6 +94,11 @@ public class BillInfoFragment extends Fragment {
 
         Log.e("---bills---bills-->", bills.toString());
 
+        //时光轴
+        listView = (ListView) view.findViewById(R.id.list);
+        timelineAdapter = new TimelineAdapter(this.getActivity(), bills);
+        listView.setAdapter(timelineAdapter);
+
         map = new HashMap<>();
         //计算总的支出和收入情况
         for (Bill bill : bills) {
@@ -114,11 +119,6 @@ public class BillInfoFragment extends Fragment {
         tvTotalOut.setText(String.valueOf(totalOut));
         PieData mPieData = getPieData(map.size(), 100);
         showChart(pieChart, mPieData);
-
-        //时光轴
-        listView = (ListView) view.findViewById(R.id.list);
-        timelineAdapter = new TimelineAdapter(this.getActivity(), bills);
-        listView.setAdapter(timelineAdapter);
     }
 
     /**
