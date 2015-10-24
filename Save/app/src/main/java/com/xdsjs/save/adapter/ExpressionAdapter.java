@@ -42,7 +42,7 @@ public class ExpressionAdapter extends ArrayAdapter<BillType> {
         TextView tvTypeName = (TextView) convertView.findViewById(R.id.tv_type_name);
 
         String typeName = getItem(position).getName();
-        int resId = getContext().getResources().getIdentifier(getItem(position).getType(), "drawable", getContext().getPackageName());
+        int resId = getContext().getResources().getIdentifier("type_" + getItem(position).getType(), "drawable", getContext().getPackageName());
 
         ivTypeAvatar.setImageResource(resId);
 

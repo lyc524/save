@@ -71,11 +71,12 @@ public class DBManager {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Bill> bills = new ArrayList<>();
         if (db.isOpen()) {
-            Cursor cursor = db.rawQuery("select * from " + BillTableDao.TABLE_NAME + " where " + BillTableDao.COLUMN_NAME_TIME + " < ?", new String[]{time + ""});
+            Log.e("^^^^^^^^^^^^^", "select * from " + BillTableDao.TABLE_NAME + " where " + BillTableDao.COLUMN_NAME_TIME + " > ?");
+            Cursor cursor = db.rawQuery("select * from " + BillTableDao.TABLE_NAME + " where " + BillTableDao.COLUMN_NAME_TIME + " > ?", new String[]{time + ""});
             Bill bill;
             while (cursor.moveToNext()) {
                 bill = new Bill();
-                bill.setType(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_MONEY)));
+                bill.setType(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_TYPE)));
                 bill.setMoney(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_MONEY)));
                 bill.setRemark(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_REMARK)));
                 bill.setTime(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_TIME)));
@@ -111,7 +112,7 @@ public class DBManager {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         if (db.isOpen()) {
             ContentValues cv = new ContentValues();
-            cv.put(billType.getType(), billType.getTime());
+            cv.put("type_" + billType.getType(), billType.getTime());
             db.update(TimeDao.TABLE_NAME, cv, "time = ?", new String[]{TimeUtils.getCurrentTime() + ""});
         }
     }
@@ -127,7 +128,7 @@ public class DBManager {
                 for (int i = 0; i < 20; i++) {
                     billType = new BillType();
                     billType.setTime(cursor.getInt(cursor.getColumnIndex("type_" + i)));
-                    billType.setType("type_" + i);
+                    billType.setType(i + "");
                     billType.setName(Global.types[i]);
                     billTypes.add(billType);
                 }

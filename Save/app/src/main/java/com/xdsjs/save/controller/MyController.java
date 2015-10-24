@@ -77,6 +77,7 @@ public class MyController extends BaseController {
         if (weekBills != null && !isBillChange) {
             return weekBills;
         }
+        Log.e("getFirstDayTimeOfWeek",TimeUtils.getFirstDayTimeOfWeek()+"");
         weekBills = getMyModel().getBillList(TimeUtils.getFirstDayTimeOfWeek());
         return weekBills;
     }

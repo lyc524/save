@@ -401,7 +401,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                             String moneyOut = myModel.getPersonalTotalOut();
                             myModel.setPersonalTotalOut(String.valueOf(Float.valueOf(moneyOut) + Float.valueOf(money)));
                         }
-                        bill.setType(billType.getName());
+                        bill.setType(billType.getType());
                         ((MyController) BaseController.getInstance()).saveBill(bill);
                         billType.setTime(billType.getTime() + 1);
                         ((MyController) BaseController.getInstance()).updateTime(billType);

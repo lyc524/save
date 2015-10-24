@@ -1,5 +1,7 @@
 package com.xdsjs.save.config;
 
+import android.graphics.Color;
+
 /**
  * 这里保存一些全局的参数
  * Created by xdsjs on 2015/10/14.
@@ -14,6 +16,16 @@ public class Global {
             "网上购物", "打车租车", "交流通讯", "旅游度假",
             "化妆饰品", "数码设备", "通讯上网", "邮寄快递",
             "宠物宝贝", "水电煤气", "学习培训", "其他杂项"
+    };
+
+    public static final int[] colors = new int[]{
+            Color.rgb(205, 205, 205), Color.rgb(114, 188, 223), Color.rgb(255, 123, 124),
+            Color.rgb(57, 135, 200), Color.rgb(50, 205, 205), Color.rgb(29, 58, 196),
+            Color.rgb(96, 856, 205), Color.rgb(89, 152, 86), Color.rgb(160, 55, 185),
+            Color.rgb(55, 88, 99), Color.rgb(99, 88, 55), Color.rgb(88, 77, 33),
+            Color.rgb(111, 111, 55), Color.rgb(150, 122, 258), Color.rgb(59, 86, 128),
+            Color.rgb(55, 258, 134), Color.rgb(25, 150, 198), Color.rgb(75, 55, 205),
+            Color.rgb(200, 55, 55), Color.rgb(88, 200, 77)
     };
     /**
      * 要缓存的设置信息
