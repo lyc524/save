@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.xdsjs.save.BillInfoFragment;
+import com.xdsjs.save.fragment.BillInfoFragment;
 import com.xdsjs.save.R;
 
 public class BillInfoActivity extends BaseActivity implements View.OnClickListener {

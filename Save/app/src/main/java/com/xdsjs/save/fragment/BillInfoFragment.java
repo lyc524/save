@@ -1,4 +1,4 @@
-package com.xdsjs.save;
+package com.xdsjs.save.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -15,6 +16,8 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.xdsjs.save.R;
+import com.xdsjs.save.adapter.TimelineAdapter;
 import com.xdsjs.save.bean.Bill;
 import com.xdsjs.save.config.Global;
 import com.xdsjs.save.controller.BaseController;
@@ -50,6 +53,9 @@ public class BillInfoFragment extends Fragment {
     private float totalMoney;//总金额
 
     HashMap<String, Float> map;
+
+    private TimelineAdapter timelineAdapter;
+    private ListView listView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -108,6 +114,11 @@ public class BillInfoFragment extends Fragment {
         tvTotalOut.setText(String.valueOf(totalOut));
         PieData mPieData = getPieData(map.size(), 100);
         showChart(pieChart, mPieData);
+
+        //时光轴
+        listView = (ListView) view.findViewById(R.id.list);
+        timelineAdapter = new TimelineAdapter(this.getActivity(), bills);
+        listView.setAdapter(timelineAdapter);
     }
 
     /**
