@@ -1,5 +1,6 @@
 package com.xdsjs.save.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
@@ -9,12 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.xdsjs.save.Animation.ActivitySwitcher;
 import com.xdsjs.save.R;
 import com.xdsjs.save.adapter.ExpressionAdapter;
 import com.xdsjs.save.adapter.ExpressionPagerAdapter;
@@ -154,7 +157,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initTypeShow() {
-        List<View> views = new ArrayList<>();
+        final List<View> views = new ArrayList<>();
         View view1 = getGridChildView(1);
         View view2 = getGridChildView(2);
         View view3 = getGridChildView(3);
@@ -175,6 +178,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onPageSelected(int position) {
                 setCurDot(position);
+                if (index != position) {
+                }
             }
 
             @Override
@@ -263,7 +268,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.title_bar_left_menu:
                 if (((MyController) BaseController.getInstance()).getMyModel().getPersonalAutoLogin()) {
-                    openActivity(PersonalInfoActivity.class);
+                    final Intent intent = new Intent(getApplicationContext(), PersonalInfoActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    ActivitySwitcher.animationOut(findViewById(R.id.container), getWindowManager(), new ActivitySwitcher.AnimationFinishedListener() {
+                        @Override
+                        public void onAnimationFinished() {
+                            startActivity(intent);
+                        }
+                    });
+//                    openActivity(PersonalInfoActivity.class);
                 } else {
                     openActivity(LoginActivity.class);
                 }
@@ -304,18 +317,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     /**
      * 获取表情的gridview的子view
      */
-    private View getGridChildView(int i) {
+    private int index;
+    private List<GridView> gridViews = new ArrayList<>();
+
+    List<BillType> list1 = billTypes.subList(0, 8);
+    List<BillType> list2 = billTypes.subList(8, 16);
+    List<BillType> list3 = billTypes.subList(16, billTypes.size());
+
+    private View getGridChildView(final int i) {
         View view = View.inflate(this, R.layout.viewpager_item, null);
         ExpandGridView gv = (ExpandGridView) view.findViewById(R.id.gridview);
 
         final List<BillType> list = new ArrayList<BillType>();
         if (i == 1) {
-            List<BillType> list1 = billTypes.subList(0, 8);
             list.addAll(list1);
         } else if (i == 2) {
-            list.addAll(billTypes.subList(8, 16));
+            list.addAll(list2);
         } else if (i == 3) {
-            list.addAll(billTypes.subList(16, billTypes.size()));
+            list.addAll(list3);
         }
         final ExpressionAdapter expressionAdapter = new ExpressionAdapter(this,
                 1, list);
@@ -324,16 +343,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 billType = list.get(position);
-//                for (int i = 0; i < parent.getCount(); i++) {
-//                    View v = parent.getChildAt(i);
-//                    if (position == i) {
-//                        view.setBackgroundColor(getResources().getColor(R.color.top_title_color));
-//                    } else {
-//                        v.setBackgroundColor(getResources().getColor(R.color.transparent));
-//                    }
-//                }
+                for (int i = 0; i < parent.getCount(); i++) {
+                    index = i;
+                    View v = parent.getChildAt(i);
+                    if (position == i) {
+                        view.setBackgroundColor(getResources().getColor(R.color.top_title_color));
+                    } else {
+                        v.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    }
+                }
             }
         });
+        gridViews.add(gv);
         return view;
     }
 
@@ -474,6 +495,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onResume() {
+        ActivitySwitcher.animationIn(findViewById(R.id.container), getWindowManager());
         super.onResume();
         if (popupWindow != null && popupWindow.isShowing()) {
             popupWindow.dismiss();

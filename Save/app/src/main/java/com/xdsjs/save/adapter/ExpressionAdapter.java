@@ -51,4 +51,9 @@ public class ExpressionAdapter extends ArrayAdapter<BillType> {
         return convertView;
     }
 
+    @Override
+    public BillType getItem(int position) {
+        return super.getItem(position);
+    }
+
 }

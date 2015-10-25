@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.xdsjs.save.Animation.ActivitySwitcher;
 import com.xdsjs.save.R;
 import com.xdsjs.save.controller.BaseController;
 import com.xdsjs.save.controller.MyController;
@@ -52,5 +53,22 @@ public class PersonalInfoActivity extends BaseActivity {
                 PersonalInfoActivity.this.finish();
             }
         });
+    }
+
+    @Override
+    public void finish() {
+        ActivitySwitcher.animationOut(findViewById(R.id.container), getWindowManager(), new ActivitySwitcher.AnimationFinishedListener() {
+            @Override
+            public void onAnimationFinished() {
+                PersonalInfoActivity.super.finish();
+                overridePendingTransition(0, 0);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        ActivitySwitcher.animationIn(findViewById(R.id.container), getWindowManager());
+        super.onResume();
     }
 }

@@ -46,7 +46,8 @@ public class Global {
     /**
      * 接口信息
      */
-    public static final String NETWORK_URL = "http://192.168.0.42:8080/";//接口地址前缀
+    //http://saveapp.cn-hangzhou.aliapp.com/
+    public static final String NETWORK_URL = "http://saveapp.cn-hangzhou.aliapp.com/";//接口地址前缀
 
     public static final String NETWORK_ACTION_LOGIN = NETWORK_URL + "login";//登陆
     public static final String NETWORK_ACTION_REGIST = NETWORK_URL + "insert";//注册

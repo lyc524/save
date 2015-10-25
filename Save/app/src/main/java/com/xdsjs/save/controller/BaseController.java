@@ -87,7 +87,7 @@ public abstract class BaseController {
                             }
                             billTypes.add(0, billType);
                             for (int i = 0; i < billTypes.size(); i++) {
-                                if (billTypes.get(i).getType().equals("type_0")) {
+                                if (billTypes.get(i).getType().equals("0")) {
                                     billType = billTypes.get(i);
                                     billTypes.remove(i);
                                     break;
@@ -116,6 +116,7 @@ public abstract class BaseController {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("username", ((MyController) BaseController.getInstance()).getMyModel().getPersonalAccount());
+            jsonObject.put("password", ((MyController) BaseController.getInstance()).getMyModel().getPersonalPwd());
         } catch (JSONException e) {
             e.printStackTrace();
         }
