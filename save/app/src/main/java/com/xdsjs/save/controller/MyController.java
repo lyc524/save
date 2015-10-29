@@ -138,7 +138,7 @@ public class MyController extends BaseController {
                         }
                     }
                     billTypes.add(0, billType);
-                    noitifyRemarkSyncListeners(billTypes);
+                    notifyRemarkSyncListeners(billTypes);
                 }
 
                 @Override

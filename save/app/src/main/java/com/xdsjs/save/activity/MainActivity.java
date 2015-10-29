@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -165,7 +166,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initTypeShow() {
-        List<View> views = new ArrayList<>();
+        final List<View> views = new ArrayList<>();
         View view1 = getGridChildView(1);
         View view2 = getGridChildView(2);
         View view3 = getGridChildView(3);
@@ -186,6 +187,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onPageSelected(int position) {
                 setCurDot(position);
+                final List<BillType> list = new ArrayList<BillType>();
+                ExpressionAdapter expressionAdapter;
+                if (position == 0) {
+                    list.addAll(billTypes.subList(0, 8));
+                } else if (position == 1) {
+                    list.addAll(billTypes.subList(8, 16));
+                } else if (position == 2) {
+                    list.addAll(billTypes.subList(16, billTypes.size()));
+                }
+                expressionAdapter = new ExpressionAdapter(MainActivity.this, 1, list);
+                ((GridView) ((ViewGroup) views.get(position)).getChildAt(0)).setAdapter(expressionAdapter);
+                expressionAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -321,8 +334,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         final List<BillType> list = new ArrayList<BillType>();
         if (i == 1) {
-            List<BillType> list1 = billTypes.subList(0, 8);
-            list.addAll(list1);
+            list.addAll(billTypes.subList(0, 8));
         } else if (i == 2) {
             list.addAll(billTypes.subList(8, 16));
         } else if (i == 3) {
@@ -334,10 +346,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                billType = list.get(position);
+                //保存选中的billtype
+                billType = billTypes.get(position);
+                for (int j = 0; j < billTypes.size(); j++) {
+                    if (j == (8 * (i - 1) + position)) {
+                        billTypes.get(j).setIsPressed(true);
+                        Log.e("88888888888888888888888", "你点击了---->" + billTypes.get(j).getName());
+                    } else {
+//                        Log.e("88888888888888888888888", "你点击了---->" + billTypes.get(j).getName());
+                        billTypes.get(j).setIsPressed(false);
+                    }
+                }
                 for (int j = 0; j < parent.getCount(); j++) {
                     View v = parent.getChildAt(j);
                     if (position == j) {
+                        //根据资源名称获取ID
                         int resId = MainActivity.this.getResources().getIdentifier("type_" + list.get(position).getType() + "_press", "drawable", MainActivity.this.getPackageName());
                         ((ImageView) ((ViewGroup) view).getChildAt(0)).setImageResource(resId);
                     } else {

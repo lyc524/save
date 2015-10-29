@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  * Created by xdsjs on 2015/10/15.
  */
 public abstract class BaseController {
@@ -182,7 +183,7 @@ public abstract class BaseController {
         }
     }
 
-    public void noitifyRemarkSyncListeners(List<BillType> billTypes) {
+    public void notifyRemarkSyncListeners(List<BillType> billTypes) {
         for (SyncListener listener : syncRemarkListener) {
             listener.onSyncSuccess(billTypes);
         }

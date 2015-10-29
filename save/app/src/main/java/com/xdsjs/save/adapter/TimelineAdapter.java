@@ -30,32 +30,27 @@ public class TimelineAdapter extends BaseAdapter {
 
     public TimelineAdapter(Context context, List<Bill> bills) {
         super();
-        Log.e("%%%%%%%%%%%%%%%%", "TimelineAdapter");
         this.context = context;
         this.bills = bills;
     }
 
     @Override
     public int getCount() {
-        Log.e("%%%%%%%%%%%%%%%%", "getCount");
         return bills.size();
     }
 
     @Override
     public Object getItem(int position) {
-        Log.e("%%%%%%%%%%%%%%%%", "getItem");
         return bills.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        Log.e("%%%%%%%%%%%%%%%%", "getItemId");
         return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.e("%%%%%%%%%%%%%%%%", "getView");
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
@@ -69,7 +64,7 @@ public class TimelineAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        int resId = context.getResources().getIdentifier("type_" + bills.get(position).getType(), "drawable", context.getPackageName());
+        int resId = context.getResources().getIdentifier("type_" + bills.get(position).getType() + "_normal", "drawable", context.getPackageName());
         viewHolder.ivIcon.setImageResource(resId);
         viewHolder.tvDate.setText(TimeUtils.getPrettyTime(Long.valueOf(bills.get(position).getTime())));
         viewHolder.tvTypeName.setText(Global.types[Integer.valueOf(bills.get(position).getType())]);
@@ -78,12 +73,12 @@ public class TimelineAdapter extends BaseAdapter {
         } else {
             viewHolder.tvRemark.setVisibility(View.GONE);
         }
-        if (bills.get(position).getType().equals("0")){
+        if (bills.get(position).getType().equals("0")) {
             viewHolder.tvMoney.setTextColor(Color.GREEN);
             viewHolder.tvMoney.setText(bills.get(position).getMoney());
-        }else {
+        } else {
             viewHolder.tvMoney.setTextColor(Color.RED);
-            viewHolder.tvMoney.setText("-"+bills.get(position).getMoney());
+            viewHolder.tvMoney.setText("-" + bills.get(position).getMoney());
         }
         return convertView;
     }
