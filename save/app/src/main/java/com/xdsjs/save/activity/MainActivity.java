@@ -158,8 +158,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         //检查同步上传本地信息
         ((MyController) BaseController.getInstance()).updateBillListToServer();
 
+        Log.e("----------------->",Float.valueOf(myModel.getPersonalTotalOut())+"");
+
         //检查预算
-        if (Float.valueOf(myModel.getPersonalTotalOut()) > Float.valueOf(myModel.getSettingBudget())) {
+        if ((Float.valueOf(myModel.getPersonalTotalOut()) != 0.0f) && (Float.valueOf(myModel.getPersonalTotalOut()) > Float.valueOf(myModel.getSettingBudget()))) {
             layoutTop.setBackgroundColor(getResources().getColor(R.color.red));
         }
 

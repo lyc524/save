@@ -12,4 +12,6 @@
     <string name="login">登陆</string>
     <string name="title_activity_bill_info">BillInfoActivity</string>
     <string name="title_activity_setting">SettingActivity</string>
+
+
 </resources>
