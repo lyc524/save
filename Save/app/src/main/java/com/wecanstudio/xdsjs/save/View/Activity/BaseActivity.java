@@ -70,7 +70,7 @@ public abstract class BaseActivity<VM extends ViewModel, B extends ViewDataBindi
     fragmentTransaction.commit();
   }
 
-  public <T extends Fragment>T getFragment(String tag) {
+  public <T extends Fragment> T getFragment(String tag) {
     return (T) getFragmentManager().findFragmentByTag(tag);
   }
 
