@@ -1,4 +1,4 @@
-package com.wecanstudio.xdsjs.save.View.Fragment;
+package com.wecanstudio.xdsjs.save.View.fragment;
 
 import android.app.Fragment;
 import android.databinding.ViewDataBinding;
