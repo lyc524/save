@@ -84,7 +84,6 @@ public class DBManager {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Bill> bills = new ArrayList<>();
         if (db.isOpen()) {
-            Log.e("^^^^^^^^^^^^^", "select * from " + BillTableDao.TABLE_NAME + " where " + BillTableDao.COLUMN_NAME_TIME + " > ?");
             Cursor cursor = db.rawQuery("select * from " + BillTableDao.TABLE_NAME + " where " + BillTableDao.COLUMN_NAME_TIME + " > ?", new String[]{time + ""});
             Bill bill;
             while (cursor.moveToNext()) {
