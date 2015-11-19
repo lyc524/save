@@ -7,14 +7,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.wecanstudio.xdsjs.save.Model.BillType;
+import com.wecanstudio.xdsjs.save.Model.db.BillTableDao;
+import com.wecanstudio.xdsjs.save.Model.db.DBManager;
+import com.wecanstudio.xdsjs.save.Model.db.TimeDao;
 import com.wecanstudio.xdsjs.save.R;
 import com.wecanstudio.xdsjs.save.Utils.ActivityManager;
+import com.wecanstudio.xdsjs.save.Utils.TimeUtils;
 import com.wecanstudio.xdsjs.save.View.adapter.ExpressionAdapter;
 import com.wecanstudio.xdsjs.save.View.adapter.ExpressionPagerAdapter;
 import com.wecanstudio.xdsjs.save.View.widget.ExpandGridView;
@@ -24,24 +27,20 @@ import com.wecanstudio.xdsjs.save.databinding.ActivityMainBinding;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observable;
+import rx.Scheduler;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
 
 public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBinding> implements View.OnClickListener {
 
     private ViewPager viewPager;
-    private LinearLayout layoutTop;
-    private Button btnPersonal;
-    private Button btnBillInfo;
-
     private List<BillType> billTypes;
-
     private ExpressionPagerAdapter expressionPagerAdapter;//pager adapter
     private ExpressionAdapter expressionAdapter; //gridview adapter
-
     private boolean isPopupWindowShowing = false;//标记popupWindow是否显示
-
-    //备注
-    private ImageView remark;
-
     //被选中的类型
     private BillType billType = null;
     private String money;
@@ -58,15 +57,12 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
 
     private void initView() {
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-        layoutTop = (LinearLayout) findViewById(R.id.layout_top);
-        btnPersonal = (Button) findViewById(R.id.title_bar_left_menu);
-        btnBillInfo = (Button) findViewById(R.id.title_bar_right_menu);
-        remark = (ImageView) findViewById(R.id.remark);
-        btnPersonal.setOnClickListener(this);
-        btnBillInfo.setOnClickListener(this);
-        remark.setOnClickListener(this);
         //获取预判的记账类型
-//        getBillTypes();
+        TimeDao timeDao = new TimeDao(this);
+        Observable.create(subscriber -> subscriber.onNext(timeDao.getBillTypeList()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> Log.e("------->", s.toString()));
 //        initTypeShow();
     }
 
@@ -134,16 +130,6 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
 //                        }).show();
                 break;
         }
-    }
-
-    //获取预判的账单list
-    private List<BillType> getBillTypes() {
-//        billTypes = ((MyController) BaseController.getInstance()).getBillTypeList(this);
-//        if (billTypes == null) {
-//            billTypes = new ArrayList<>();
-//        }
-//        Log.e("MainAct 最终的预判记账list", billTypes.toString());
-        return billTypes;
     }
 
     /**
