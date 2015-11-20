@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:toggle="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -97,18 +96,6 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <com.wecanstudio.xdsjs.save.View.widget.ToggleButton
-                    android:id="@+id/tb_pwd"
-                    android:layout_width="54dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginRight="15dp"
-                    toggle:borderWidth="2dp"
-                    toggle:offBorderColor="#ddd"
-                    toggle:offColor="#ddd"
-                    toggle:onColor="#5bc276"
-                    toggle:spotColor="#ffffff"></com.wecanstudio.xdsjs.save.View.widget.ToggleButton>
             </RelativeLayout>
 
             <ImageView
@@ -206,18 +193,6 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <com.wecanstudio.xdsjs.save.View.widget.ToggleButton
-                    android:id="@+id/tbUpdate"
-                    android:layout_width="54dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginRight="15dp"
-                    toggle:borderWidth="2dp"
-                    toggle:offBorderColor="#ddd"
-                    toggle:offColor="#ddd"
-                    toggle:onColor="#5bc276"
-                    toggle:spotColor="#ffffff"></com.wecanstudio.xdsjs.save.View.widget.ToggleButton>
             </RelativeLayout>
 
             <ImageView

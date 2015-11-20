@@ -2,8 +2,13 @@ package com.wecanstudio.xdsjs.save.View.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -39,7 +44,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 
-public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBinding> implements View.OnClickListener {
+public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBinding> implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private ViewPager viewPager;
     private List<BillType> billTypes;
@@ -57,6 +62,19 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         setViewModel(new MainPageViewModel());
         setBinding(DataBindingUtil.<ActivityMainBinding>setContentView(this, R.layout.activity_main));
         getBinding().setMainPageModel(getViewModel());
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        getSupportActionBar().setTitle("易帐");
         initView();
     }
 
@@ -85,6 +103,7 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
                     }
                 });
     }
+
     private void initTypeShow() {
         final List<View> views = new ArrayList<>();
         View view1 = getGridChildView(1);
@@ -255,5 +274,10 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         points[positon].setEnabled(false);
         points[currentIndex].setEnabled(true);
         currentIndex = positon;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        return false;
     }
 }
