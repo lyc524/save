@@ -12,24 +12,29 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.wecanstudio.xdsjs.save.Model.BillType;
-import com.wecanstudio.xdsjs.save.Model.db.BillTableDao;
-import com.wecanstudio.xdsjs.save.Model.db.DBManager;
+import com.wecanstudio.xdsjs.save.Model.Register;
+import com.wecanstudio.xdsjs.save.Model.Response;
+import com.wecanstudio.xdsjs.save.Model.User;
 import com.wecanstudio.xdsjs.save.Model.db.TimeDao;
+import com.wecanstudio.xdsjs.save.Model.net.RestApi;
+import com.wecanstudio.xdsjs.save.MyApplication;
 import com.wecanstudio.xdsjs.save.R;
 import com.wecanstudio.xdsjs.save.Utils.ActivityManager;
-import com.wecanstudio.xdsjs.save.Utils.TimeUtils;
 import com.wecanstudio.xdsjs.save.View.adapter.ExpressionAdapter;
 import com.wecanstudio.xdsjs.save.View.adapter.ExpressionPagerAdapter;
 import com.wecanstudio.xdsjs.save.View.widget.ExpandGridView;
 import com.wecanstudio.xdsjs.save.ViewModel.MainPageViewModel;
 import com.wecanstudio.xdsjs.save.databinding.ActivityMainBinding;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
-import rx.Scheduler;
-import rx.Subscriber;
+import rx.Observer;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -59,13 +64,27 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         //获取预判的记账类型
         TimeDao timeDao = new TimeDao(this);
-        Observable.create(subscriber -> subscriber.onNext(timeDao.getBillTypeList()))
+        Observable.create(subscriber -> timeDao.getBillTypeList())
+                .subscribe(s -> Log.e("------->", s.toString()));
+        MyApplication.getInstance().createApi(RestApi.class)
+                .regist(new Register("sss", "123456", "123456"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> Log.e("------->", s.toString()));
-//        initTypeShow();
-    }
+                .subscribe(new Observer<Response>() {
+                    @Override
+                    public void onCompleted() {
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(Response s) {
+                    }
+                });
+    }
     private void initTypeShow() {
         final List<View> views = new ArrayList<>();
         View view1 = getGridChildView(1);

@@ -1,15 +1,36 @@
 package com.wecanstudio.xdsjs.save.Model.net;
 
+import com.wecanstudio.xdsjs.save.Model.Register;
+import com.wecanstudio.xdsjs.save.Model.Response;
+import com.wecanstudio.xdsjs.save.Model.User;
+import com.wecanstudio.xdsjs.save.Model.UserInfo;
+
+import retrofit.http.Body;
+import retrofit.http.GET;
+import retrofit.http.Header;
+import retrofit.http.POST;
+import retrofit.http.Path;
+import rx.Observable;
+
 /**
  * RestApi for retrieving data from the network.
  */
 public interface RestApi {
-    String API_BASE_URL = "http://121.42.209.19:8080/sparkjava";
+    @POST("/sparkjava/login")
+    Observable<Response> getResponse(@Body User user);
 
-    String NETWORK_ACTION_LOGIN = API_BASE_URL + "login"; //登陆
-    String NETWORK_ACTION_REGIST = API_BASE_URL + "insert"; //注册
-    String NETWORK_ACTION_GET_USER_PERSONAL_INFO = API_BASE_URL + "getUserMessage";//获取用户个人信息
-    String NETWORK_ACTION_UPLOAD_USER_INFO = API_BASE_URL + "updateUserMessage";//上传用户信息
-    String NETWORK_ACTION_GET_USER_BILL_INFO = API_BASE_URL + "getBillsMessage";//获取用户账单信息
-    String NETWORK_ACTION_GET_FORECAST_TYPE = API_BASE_URL + "getMaxType";//获取预判的种类
+    @GET("/sparkjava/userMessage/{username}")
+    Observable<UserInfo> getUserInfo(@Header("access_token") String token, @Path("username") String username);
+
+    @POST("/sparkjava/user")
+    Observable<Response> regist(@Body Register register);
+
+    @GET("/sparkjava/billsMessage/{username}")
+    Observable<String> getBillMessage(@Header("access_token") String token, @Path("username") String username);
+
+    @POST("/sparkjava/type/{username}")
+    Observable<String> addType(@Header("access_token") String token, @Path("username") String username, @Body MyBillType myBillType);
+
+    @POST("/sparkjava/userMessage/")
+    Observable<Response> updateUserInfo(@Header("access_token") String token, @Body UserInfo userInfo);
 }
