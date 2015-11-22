@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -70,8 +71,10 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         Observable.create(subscriber -> subscriber.onNext(timeDao.getBillTypeList()))
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> billTypes = (List<BillType>) s);
-//        initTypeShow();
+                .subscribe(s -> {
+                    billTypes = (List<BillType>) s;
+                    initTypeShow();
+                });
     }
 
     private void initTypeShow() {
