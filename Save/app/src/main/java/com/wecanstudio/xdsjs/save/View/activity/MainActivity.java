@@ -28,16 +28,12 @@ import com.wecanstudio.xdsjs.save.databinding.ActivityMainBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-
 
 public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBinding> implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private ViewPager viewPager;
     private List<BillType> billTypes;
     private ExpressionPagerAdapter expressionPagerAdapter;//pager adapter
-    private ExpressionAdapter expressionAdapter; //gridview adapter
     private boolean isPopupWindowShowing = false;//标记popupWindow是否显示
     //被选中的类型
     private BillType billType = null;
@@ -68,17 +64,13 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         //数据库获取所有的记账类型
         TimeDao timeDao = new TimeDao(this);
-        Observable.create(subscriber -> subscriber.onNext(timeDao.getBillTypeList()))
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> {
-                    billTypes = (List<BillType>) s;
-                    initTypeShow();
-                });
+        billTypes = timeDao.getBillTypeList();
+        initTypeShow();
     }
 
     private void initTypeShow() {
         final List<View> views = new ArrayList<>();
+
         View view1 = getGridChildView(1);
         View view2 = getGridChildView(2);
         View view3 = getGridChildView(3);
@@ -106,9 +98,6 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         }
     }
 
-    /**
-     * 获取表情的gridview的子view
-     */
     private View getGridChildView(final int i) {
         View view = View.inflate(this, R.layout.viewpager_item, null);
         final ExpandGridView gv = (ExpandGridView) view.findViewById(R.id.gridview);

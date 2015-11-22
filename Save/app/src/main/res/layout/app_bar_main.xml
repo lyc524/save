@@ -102,16 +102,10 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <FrameLayout
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:orientation="vertical">
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewPager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </FrameLayout>
+            android:layout_height="180dp" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
