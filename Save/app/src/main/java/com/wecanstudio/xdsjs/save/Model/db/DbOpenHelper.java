@@ -44,21 +44,6 @@ public class DbOpenHelper extends SQLiteOpenHelper {
             "type_17 integer default 0," +
             "type_18 integer default 0," +
             "type_19 integer default 0);";
-    //为次数表添加数据
-    private static final String TIME_TABLE_DEFAULT =
-            "insert into s_time (time) values(\"0\");" +
-                    "insert into s_time (time) values(\"1\");" +
-                    "insert into s_time (time) values(\"2\");" +
-                    "insert into s_time (time) values(\"3\");" +
-                    "insert into s_time (time) values(\"4\");" +
-                    "insert into s_time (time) values(\"5\");" +
-                    "insert into s_time (time) values(\"6\");" +
-                    "insert into s_time (time) values(\"7\");" +
-                    "insert into s_time (time) values(\"8\");" +
-                    "insert into s_time (time) values(\"9\");" +
-                    "insert into s_time (time) values(\"10\");" +
-                    "insert into s_time (time) values(\"11\");" +
-                    "insert into s_time (time) values(\"12\");";
 
     private DbOpenHelper(Context context) {
         super(context, getUserDatabaseName(), null, DATABASE_VERSION);

@@ -95,6 +95,7 @@ public class DBManager {
                 bill.setUpload(cursor.getInt(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_UPLOAD)));
                 bills.add(bill);
             }
+            cursor.close();
         }
         return bills;
     }
@@ -115,6 +116,7 @@ public class DBManager {
                 bill.setUpload(cursor.getInt(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_UPLOAD)));
                 bills.add(bill);
             }
+            cursor.close();
         }
         return bills;
     }
@@ -129,7 +131,7 @@ public class DBManager {
         }
     }
 
-    //获取排好序的预判list
+    //获取所有记账类型
     synchronized List<BillType> getBillTypeList() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<BillType> billTypes = new ArrayList<>();
@@ -145,6 +147,7 @@ public class DBManager {
                     billTypes.add(billType);
                 }
             }
+            cursor.close();
         }
         Log.e("DBManager 获取数据库预判记账list", billTypes.toString());
         return billTypes;

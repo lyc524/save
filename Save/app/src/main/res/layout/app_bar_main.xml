@@ -35,13 +35,13 @@
             android:orientation="horizontal">
 
             <RelativeLayout
-                android:layout_width="80dp"
-                android:layout_height="80dp">
+                android:layout_width="60dp"
+                android:layout_height="60dp">
 
                 <ImageView
                     android:id="@+id/choose_type"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_centerInParent="true"
                     android:layout_gravity="center"
                     android:src="@drawable/iconfont_bianji" />
@@ -89,13 +89,13 @@
             </LinearLayout>
 
             <RelativeLayout
-                android:layout_width="80dp"
-                android:layout_height="80dp">
+                android:layout_width="60dp"
+                android:layout_height="60dp">
 
                 <ImageView
                     android:id="@+id/remark"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_centerInParent="true"
                     android:layout_gravity="center"
                     android:src="@drawable/iconfont_bianji" />
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:clickable="true"
-                android:src="@drawable/guide_point_selector" />
+                android:src="@{mainPageModel.isOneDialChoosed ? @drawable/dial_1 : @drawable/dial_2}" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -128,14 +128,14 @@
                 android:clickable="true"
                 android:paddingLeft="15dip"
                 android:paddingRight="15dp"
-                android:src="@drawable/guide_point_selector" />
+                android:src="@{mainPageModel.isTwoDialChoosed ? @drawable/dial_1 : @drawable/dial_2}" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:clickable="true"
-                android:src="@drawable/guide_point_selector" />
+                android:src="@{mainPageModel.isThreeDialChoosed ? @drawable/dial_1 : @drawable/dial_2}" />
         </LinearLayout>
 
         <ImageView

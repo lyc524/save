@@ -1,12 +1,20 @@
 package com.wecanstudio.xdsjs.save.ViewModel;
 
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.databinding.tool.expr.CastExpr;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 
+import com.wecanstudio.xdsjs.save.Model.BillType;
 import com.wecanstudio.xdsjs.save.Model.Global;
 import com.wecanstudio.xdsjs.save.Model.cache.SPUtils;
+import com.wecanstudio.xdsjs.save.Model.db.TimeDao;
 import com.wecanstudio.xdsjs.save.MyApplication;
+
+import java.util.List;
 
 /**
  * Created by xdsjs on 2015/11/18.
@@ -17,6 +25,9 @@ public class MainPageViewModel extends LoadingViewModel {
     private StringBuffer stringBuffer = new StringBuffer();
     public final ObservableField<String> totalMoney = new ObservableField<>();
     public final ObservableField<String> total = new ObservableField<>();
+    public final ObservableBoolean isOneDialChoosed = new ObservableBoolean();
+    public final ObservableBoolean isTwoDialChoosed = new ObservableBoolean();
+    public final ObservableBoolean isThreeDialChoosed = new ObservableBoolean();
 
     @Command
     public void onLeftBarClicked(View view) {
@@ -103,5 +114,78 @@ public class MainPageViewModel extends LoadingViewModel {
             total += Float.valueOf(nums[i]);
         }
         return String.valueOf(total);
+    }
+
+
+    /*
+    确定点的状态
+     */
+    public void setCurDial(int position) {
+        switch (position) {
+            case 0:
+                isOneDialChoosed.set(true);
+                isTwoDialChoosed.set(false);
+                isThreeDialChoosed.set(false);
+                break;
+            case 1:
+                isOneDialChoosed.set(false);
+                isTwoDialChoosed.set(true);
+                isThreeDialChoosed.set(false);
+                break;
+            case 2:
+                isOneDialChoosed.set(false);
+                isTwoDialChoosed.set(false);
+                isThreeDialChoosed.set(true);
+                break;
+        }
+    }
+
+    /*
+    添加viewPager监听器
+     */
+    public ViewPager.OnPageChangeListener getOnPagerChangeListener() {
+        return new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                setCurDial(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        };
+    }
+
+    /*
+    添加gridView监听器
+     */
+    public AdapterView.OnItemClickListener getOnItemClickListener() {
+        return new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        };
+    }
+
+    /*
+    处理类型选择动画
+     */
+    public void startAnimator() {
+
+    }
+
+    /*
+    本地数据库获取所有记账类型
+     */
+    public List<BillType> getBillTypeListFromDB() {
+        TimeDao timeDao = new TimeDao(MyApplication.getContext());
+        return timeDao.getBillTypeList();
     }
 }

@@ -8,12 +8,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.wecanstudio.xdsjs.save.Model.BillType;
 import com.wecanstudio.xdsjs.save.Model.db.TimeDao;
@@ -35,10 +33,8 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
     private List<BillType> billTypes;
     private ExpressionPagerAdapter expressionPagerAdapter;//pager adapter
     private boolean isPopupWindowShowing = false;//标记popupWindow是否显示
-    //被选中的类型
-    private BillType billType = null;
-    private String money;
-    private String remarkText;
+    private ImageView ivChooseTye;
+    private BillType billType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +48,7 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
     private void initView() {
         //初始化toolbar和drawerlayout
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ivChooseTye = (ImageView) findViewById(R.id.choose_type);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,8 +60,8 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         getSupportActionBar().setTitle("记一笔");
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         //数据库获取所有的记账类型
-        TimeDao timeDao = new TimeDao(this);
-        billTypes = timeDao.getBillTypeList();
+        billTypes = getViewModel().getBillTypeListFromDB();
+
         initTypeShow();
     }
 
@@ -81,7 +78,8 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         expressionPagerAdapter = new ExpressionPagerAdapter(views);
         viewPager.setAdapter(expressionPagerAdapter);
 
-        initPoint();
+        viewPager.setOnPageChangeListener(getViewModel().getOnPagerChangeListener());
+        getViewModel().setCurDial(0);
     }
 
     @Override
@@ -113,6 +111,7 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         final ExpressionAdapter expressionAdapter = new ExpressionAdapter(this,
                 1, list);
         gv.setAdapter(expressionAdapter);
+        gv.setOnItemClickListener(getViewModel().getOnItemClickListener());
         return view;
     }
 
@@ -128,50 +127,6 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
 //            popupWindow.dismiss();
 //            isPopupWindowShowing = false;
 //        }
-    }
-
-    // 底部小点的图片
-    private ImageView[] points;
-    // 记录当前选中位置
-    private int currentIndex;
-
-    /**
-     * 初始化底部小点
-     */
-    private void initPoint() {
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
-
-        points = new ImageView[3];
-
-        // 循环取得小点图片
-        for (int i = 0; i < 3; i++) {
-            // 得到一个LinearLayout下面的每一个子元素
-            points[i] = (ImageView) linearLayout.getChildAt(i);
-            // 默认都设为灰色
-            points[i].setEnabled(true);
-            // 给每个小点设置监听
-            points[i].setOnClickListener(this);
-            // 设置位置tag，方便取出与当前位置对应
-            points[i].setTag(i);
-        }
-
-        // 设置当面默认的位置
-        currentIndex = 0;
-        // 设置为白色，即选中状态
-        points[currentIndex].setEnabled(false);
-    }
-
-    /**
-     * 设置当前的小点的位置
-     */
-    private void setCurDot(int positon) {
-        // 排除异常情况
-        if (positon < 0 || positon > 2 || currentIndex == positon) {
-            return;
-        }
-        points[positon].setEnabled(false);
-        points[currentIndex].setEnabled(true);
-        currentIndex = positon;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.wecanstudio.xdsjs.save.Model.net;
 
+import com.wecanstudio.xdsjs.save.Model.BillTypeList;
 import com.wecanstudio.xdsjs.save.Model.MyBillType;
 import com.wecanstudio.xdsjs.save.Model.Register;
 import com.wecanstudio.xdsjs.save.Model.Response;
@@ -79,6 +80,7 @@ public interface RestApi {
 
     /**
      * 更新头像
+     *
      * @param token
      * @param username
      * @param userInfo
@@ -87,6 +89,12 @@ public interface RestApi {
     @PUT("/image/{username}")
     Observable<Response> updateUserAvatar(@Header("access_token") String token, @Path("username") String username, @Body UserInfo userInfo);
 
+    /**
+     * 获取预判类型
+     * @param token
+     * @param billTypeList
+     * @return
+     */
     @POST("/MaxType")
-    Observable<Response> getMaxType();
+    Observable<Response> getMaxType(@Header("access_token") String token, @Body BillTypeList billTypeList);
 }
