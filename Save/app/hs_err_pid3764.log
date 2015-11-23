@@ -106,12 +106,13 @@ Event: 2.970 Thread 0x00000000079ca800 Uncommon trap: reason=class_check action=
 Event: 2.970 Thread 0x00000000079ca800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000000000f2b9070 method=com.android.dx.ssa.NormalSsaInsn.accept(Lcom/android/dx/ssa/SsaInsn$Visitor;)V @ 9
 Event: 2.970 Thread 0x00000000079ca800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000000000f2b9070 method=com.android.dx.ssa.NormalSsaInsn.accept(Lcom/android/dx/ssa/SsaInsn$Visitor;)V @ 9
 Event: 3.044 Thread 0x00000000079ca800 Uncommon trap: reason=null_check action=make_not_entrant pc=0x000000000f33a1f0 method=com.android.dx.ssa.SsaRenamer.getLocalForNewReg(I)Lcom/android/dx/rop/code/LocalItem; @ 19
-Event: 3.170 Thread 0x00000000078de800 Uncommon trap: reason=null_check action=make_not_entrant pc=0x000000000f3a34a0 method=com.android.dx.rop.type.Type.equals(Ljava/lang/Object;)Z @ 8
+Event: 3.170 Thread 0x00000000078de800 Uncommon trap: reason=null_check action=make_not_entrant pc=0x000000000f3a34a0 method=com.android.dx.rop.typeId.Type.equals(Ljava/lang/Object;)Z @ 8
 Event: 3.579 Thread 0x00000000079d0000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x000000000f2dce30 method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 126
 
 Internal exceptions (4 events):
 Event: 1.031 Thread 0x000000000261d800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x00000000eab13060) thrown at [C:\workspace\8-2-build-windows-amd64-cygwin\jdk8u65\4987\hotspot\src\s
-Event: 1.031 Thread 0x000000000261d800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.prefetchRead(Ljava/lang/Object;J)V name or signature does not match> (0x00000000eab13348) thrown at [C:\workspace\8-2-build-windows-amd64-cygwin\jdk8u65\4987\hotspot\src\share\vm\prims\jni.`ÅUY@
+Event: 1.031 Thread 0x000000000261d800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.prefetchRead(Ljava/lang/Object;J)V name or signature does not match> (0x00000000eab13348) thrown at [C:\workspace\8-2-build-windows-amd64-cygwin\jdk8u65\4987\hotspot\src\share\vm\prims\jni.`
+ï¿½UY@
 Event: 3.044 Thread 0x00000000079ca800 Implicit null exception at 0x000000000f338ab8 to 0x000000000f33a1a5
 Event: 3.170 Thread 0x00000000078de800 Implicit null exception at 0x000000000f3a33a2 to 0x000000000f3a3492
 
@@ -179,7 +180,7 @@ Launcher Type: SUN_STANDARD
 Environment Variables:
 JAVA_HOME=C:\Program Files\Java\jdk1.8.0_65
 CLASSPATH= .;C:\Program Files\Java\jdk1.8.0_65\lib;C:\Program Files\Java\jdk1.8.0_65\lib\tools.jar
-PATH=C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_65\bin;C:\Program Files\Java\jdk1.8.0_65\jre\bin;D:\sjs±¸·ÝÎÄ¼þ\adt-bundle-windows-x86_64-20131030\sdk\platform-tools;D:\sjs±¸·ÝÎÄ¼þ\adt-bundle-windows-x86_64-20131030\sdk\tools;;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Python27;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Python27\Scripts;C:\Program Files\MySQL\bin;C:\Program Files (x86)\MySQL\MySQL Fabric 1.5 & MySQL Utilities 1.5\;C:\Program Files (x86)\MySQL\MySQL Fabric 1.5 & MySQL Utilities 1.5\Doctrine extensions for PHP\
+PATH=C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_65\bin;C:\Program Files\Java\jdk1.8.0_65\jre\bin;D:\sjsï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½\adt-bundle-windows-x86_64-20131030\sdk\platform-tools;D:\sjsï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½\adt-bundle-windows-x86_64-20131030\sdk\tools;;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Python27;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Python27\Scripts;C:\Program Files\MySQL\bin;C:\Program Files (x86)\MySQL\MySQL Fabric 1.5 & MySQL Utilities 1.5\;C:\Program Files (x86)\MySQL\MySQL Fabric 1.5 & MySQL Utilities 1.5\Doctrine extensions for PHP\
 USERNAME=xdsjs
 OS=Windows_NT
 PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 58 Stepping 9, GenuineIntel

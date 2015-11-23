@@ -24,9 +24,9 @@ public class BillTypeList {
     }
 
     public static class DataEntity {
-        private int type_id;
-        private int choose;
-        private long time;
+        private int type_id;//类型对应的id
+        private int choose;//选择的次数
+        private long time;//时间戳
 
         public void setType_id(int type_id) {
             this.type_id = type_id;

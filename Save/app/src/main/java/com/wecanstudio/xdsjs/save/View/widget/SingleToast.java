@@ -22,13 +22,13 @@ public class SingleToast {
         mToast = Toast.makeText(mContext, "", Toast.LENGTH_SHORT);
     }
 
-    public void showButtomToast(String msg) {
+    public void showBottomToast(String msg) {
         mToast.setText(msg);
         mToast.setGravity(Gravity.BOTTOM, 0, mContext.getResources().getDimensionPixelOffset(R.dimen.toast_y));
         mToast.show();
     }
 
-    public void showButtomToast(int messageId) {
+    public void showBottomToast(int messageId) {
         mToast.setText(messageId+"");
         mToast.setGravity(Gravity.BOTTOM, 0, mContext.getResources().getDimensionPixelOffset(R.dimen.toast_y));
         mToast.show();

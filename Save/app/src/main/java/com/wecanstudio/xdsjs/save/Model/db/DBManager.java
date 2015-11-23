@@ -4,17 +4,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 
 import com.wecanstudio.xdsjs.save.Model.Bill;
 import com.wecanstudio.xdsjs.save.Model.BillType;
-import com.wecanstudio.xdsjs.save.Model.Global;
+import com.wecanstudio.xdsjs.save.Model.config.Global;
 import com.wecanstudio.xdsjs.save.Utils.TimeUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class DBManager {
@@ -126,7 +123,7 @@ public class DBManager {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         if (db.isOpen()) {
             ContentValues cv = new ContentValues();
-            cv.put("type_" + billType.getType(), billType.getTime());
+            cv.put("type_" + billType.getTypeId(), billType.getTime());
             db.update(TimeDao.TABLE_NAME, cv, "time = ?", new String[]{TimeUtils.getCurrentTime() + ""});
         }
     }
@@ -142,14 +139,13 @@ public class DBManager {
                 for (int i = 0; i < 20; i++) {
                     billType = new BillType();
                     billType.setTime(cursor.getInt(cursor.getColumnIndex("type_" + i)));
-                    billType.setType(i + "");
-                    billType.setName(Global.types[i]);
+                    billType.setTypeId(i);
+                    billType.setTypeName(Global.types[i]);
                     billTypes.add(billType);
                 }
             }
             cursor.close();
         }
-        Log.e("DBManager 获取数据库预判记账list", billTypes.toString());
         return billTypes;
     }
 }

@@ -128,11 +128,11 @@ Event: 1.633 Thread 0x000000000772d000 Uncommon trap: reason=unstable_if action=
 Event: 1.947 Thread 0x00000000077f9800 Uncommon trap: reason=null_check action=make_not_entrant pc=0x000000000f32a348 method=com.android.dx.ssa.SsaRenamer.getLocalForNewReg(I)Lcom/android/dx/rop/code/LocalItem; @ 19
 Event: 2.249 Thread 0x0000000007722800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x000000000f2d92b0 method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 126
 Event: 2.347 Thread 0x0000000007722800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000000f35561c method=com.android.dx.rop.cst.Constant.compareTo(Lcom/android/dx/rop/cst/Constant;)I @ 12
-Event: 2.512 Thread 0x0000000007800000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000000f357e58 method=com.android.dx.rop.code.RegisterSpec.equals(ILcom/android/dx/rop/type/TypeBearer;Lcom/android/dx/rop/code/LocalItem;)Z @ 42
+Event: 2.512 Thread 0x0000000007800000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000000f357e58 method=com.android.dx.rop.code.RegisterSpec.equals(ILcom/android/dx/rop/typeId/TypeBearer;Lcom/android/dx/rop/code/LocalItem;)Z @ 42
 
 Internal exceptions (3 events):
 Event: 0.326 Thread 0x00000000021bd800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x00000000eab13060) thrown at [C:\workspace\8-2-build-windows-amd64-cygwin\jdk8u65\4987\hotspot\src\s
-Event: 0.327 Thread 0x00000000021bd800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.prefetchRead(Ljava/lang/Object;J)V name or signature does not match> (0x00000000eab13348) thrown at [C:\workspace\8-2-build-windows-amd64-cygwin\jdk8u65\4987\hotspot\src\share\vm\prims\jni.pF‚Åƒ&ˇ?
+Event: 0.327 Thread 0x00000000021bd800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.prefetchRead(Ljava/lang/Object;J)V name or signature does not match> (0x00000000eab13348) thrown at [C:\workspace\8-2-build-windows-amd64-cygwin\jdk8u65\4987\hotspot\src\share\vm\prims\jni.pFÔøΩÔøΩ&ÔøΩ?
 Event: 1.947 Thread 0x00000000077f9800 Implicit null exception at 0x000000000f328ab2 to 0x000000000f32a301
 
 Events (10 events):
@@ -199,7 +199,7 @@ Launcher Type: SUN_STANDARD
 Environment Variables:
 JAVA_HOME=C:\Program Files\Java\jdk1.8.0_65
 CLASSPATH= .;C:\Program Files\Java\jdk1.8.0_65\lib;C:\Program Files\Java\jdk1.8.0_65\lib\tools.jar
-PATH=C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_65\bin;C:\Program Files\Java\jdk1.8.0_65\jre\bin;D:\sjs±∏∑›Œƒº˛\adt-bundle-windows-x86_64-20131030\sdk\platform-tools;D:\sjs±∏∑›Œƒº˛\adt-bundle-windows-x86_64-20131030\sdk\tools;;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Python27;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Python27\Scripts;C:\Program Files\MySQL\bin;C:\Program Files (x86)\MySQL\MySQL Fabric 1.5 & MySQL Utilities 1.5\;C:\Program Files (x86)\MySQL\MySQL Fabric 1.5 & MySQL Utilities 1.5\Doctrine extensions for PHP\
+PATH=C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_65\bin;C:\Program Files\Java\jdk1.8.0_65\jre\bin;D:\sjsÔøΩÔøΩÔøΩÔøΩÔøΩƒºÔøΩ\adt-bundle-windows-x86_64-20131030\sdk\platform-tools;D:\sjsÔøΩÔøΩÔøΩÔøΩÔøΩƒºÔøΩ\adt-bundle-windows-x86_64-20131030\sdk\tools;;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Python27;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Python27\Scripts;C:\Program Files\MySQL\bin;C:\Program Files (x86)\MySQL\MySQL Fabric 1.5 & MySQL Utilities 1.5\;C:\Program Files (x86)\MySQL\MySQL Fabric 1.5 & MySQL Utilities 1.5\Doctrine extensions for PHP\
 USERNAME=xdsjs
 OS=Windows_NT
 PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 58 Stepping 9, GenuineIntel

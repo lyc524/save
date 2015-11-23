@@ -1,6 +1,7 @@
 package com.wecanstudio.xdsjs.save.Model.net;
 
 import com.wecanstudio.xdsjs.save.Model.BillTypeList;
+import com.wecanstudio.xdsjs.save.Model.MaxTypeResponse;
 import com.wecanstudio.xdsjs.save.Model.MyBillType;
 import com.wecanstudio.xdsjs.save.Model.Register;
 import com.wecanstudio.xdsjs.save.Model.Response;
@@ -26,7 +27,7 @@ public interface RestApi {
      * @return
      */
     @POST("/sparkjava/login")
-    Observable<Response> getResponse(@Body User user);
+    Observable<Response> login(@Body User user);
 
     /**
      * 获取用户信息
@@ -91,10 +92,11 @@ public interface RestApi {
 
     /**
      * 获取预判类型
+     *
      * @param token
      * @param billTypeList
      * @return
      */
     @POST("/MaxType")
-    Observable<Response> getMaxType(@Header("access_token") String token, @Body BillTypeList billTypeList);
+    Observable<MaxTypeResponse> getMaxType(@Header("access_token") String token, @Body BillTypeList billTypeList);
 }

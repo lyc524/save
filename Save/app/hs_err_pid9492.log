@@ -109,7 +109,7 @@ Event: 2.413 Thread 0x0000000007dab800 Uncommon trap: reason=unstable_if action=
 Event: 2.669 Thread 0x0000000002d12800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000000f2a1878 method=com.android.dx.rop.cst.StdConstantPool.set(ILcom/android/dx/rop/cst/Constant;)V @ 12
 
 Internal exceptions (2 events):
-Event: 0.244 Thread 0x0000000002d12800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x00000000eab13060) thrown at [C:\workspace\8-2-build-windows-amd64-cygwin\jdk8u65\4987\hotspot\src\s⁄rÁçMœ?
+Event: 0.244 Thread 0x0000000002d12800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x00000000eab13060) thrown at [C:\workspace\8-2-build-windows-amd64-cygwin\jdk8u65\4987\hotspot\src\sÔøΩrÔøΩMÔøΩ?
 Event: 0.245 Thread 0x0000000002d12800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.prefetchRead(Ljava/lang/Object;J)V name or signature does not match> (0x00000000eab13348) thrown at [C:\workspace\8-2-build-windows-amd64-cygwin\jdk8u65\4987\hotspot\src\share\vm\prims\jni.
 
 Events (10 events):
@@ -176,7 +176,7 @@ Launcher Type: SUN_STANDARD
 Environment Variables:
 JAVA_HOME=C:\Program Files\Java\jdk1.8.0_65
 CLASSPATH= .;C:\Program Files\Java\jdk1.8.0_65\lib;C:\Program Files\Java\jdk1.8.0_65\lib\tools.jar
-PATH=C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_65\bin;C:\Program Files\Java\jdk1.8.0_65\jre\bin;D:\sjs±∏∑›Œƒº˛\adt-bundle-windows-x86_64-20131030\sdk\platform-tools;D:\sjs±∏∑›Œƒº˛\adt-bundle-windows-x86_64-20131030\sdk\tools;;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Python27;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Python27\Scripts;C:\Program Files\MySQL\bin;C:\Program Files (x86)\MySQL\MySQL Fabric 1.5 & MySQL Utilities 1.5\;C:\Program Files (x86)\MySQL\MySQL Fabric 1.5 & MySQL Utilities 1.5\Doctrine extensions for PHP\
+PATH=C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_65\bin;C:\Program Files\Java\jdk1.8.0_65\jre\bin;D:\sjsÔøΩÔøΩÔøΩÔøΩÔøΩƒºÔøΩ\adt-bundle-windows-x86_64-20131030\sdk\platform-tools;D:\sjsÔøΩÔøΩÔøΩÔøΩÔøΩƒºÔøΩ\adt-bundle-windows-x86_64-20131030\sdk\tools;;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Python27;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Python27\Scripts;C:\Program Files\MySQL\bin;C:\Program Files (x86)\MySQL\MySQL Fabric 1.5 & MySQL Utilities 1.5\;C:\Program Files (x86)\MySQL\MySQL Fabric 1.5 & MySQL Utilities 1.5\Doctrine extensions for PHP\
 USERNAME=xdsjs
 OS=Windows_NT
 PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 58 Stepping 9, GenuineIntel

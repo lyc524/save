@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wecanstudio.xdsjs.save.Model.Bill;
-import com.wecanstudio.xdsjs.save.Model.Global;
+import com.wecanstudio.xdsjs.save.Model.config.Global;
 import com.wecanstudio.xdsjs.save.R;
 import com.wecanstudio.xdsjs.save.Utils.TimeUtils;
 

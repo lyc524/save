@@ -5,19 +5,17 @@ package com.wecanstudio.xdsjs.save.Model;
  * Created by xdsjs on 2015/10/20.
  */
 public class BillType {
-    private String type;//记账种类
+    private int typeId;//记账种类对应的Id
     private int time;//对应次数
 
-    private float weight = 0;//对应权重
-    private String name;
-    private boolean isPressed;
+    private String typeName;//类型名称
 
-    public String getType() {
-        return type;
+    public int getTypeId() {
+        return typeId;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
 
     public int getTime() {
@@ -28,34 +26,17 @@ public class BillType {
         this.time = time;
     }
 
-    public float getWeight() {
-        return weight;
+
+    public String getTypeName() {
+        return typeName;
     }
 
-    public void setWeight(float weight) {
-        this.weight = weight;
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isPressed() {
-        return isPressed;
-    }
-
-    public void setIsPressed(boolean isPressed) {
-        this.isPressed = isPressed;
-    }
-
-
 
     @Override
     public String toString() {
-        return "name:" + this.getName() + "type:" + this.getType() + "time:" + this.getTime() + "weight:" + this.getWeight();
+        return "name:" + this.getTypeName() + "typeId:" + this.getTypeId() + "time:" + this.getTime();
     }
 }

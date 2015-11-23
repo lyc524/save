@@ -25,7 +25,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 public abstract class BaseActivity<VM extends ViewModel, B extends ViewDataBinding> extends AppCompatActivity {
 
-    protected String TAG = "****"+this.getClass().getSimpleName()+"****";
+    protected String TAG = "****" + this.getClass().getSimpleName() + "****";
 
     private VM viewModel;
     private B binding;
@@ -75,7 +75,7 @@ public abstract class BaseActivity<VM extends ViewModel, B extends ViewDataBindi
 
     //吐司
     protected void showBottomToast(String msg) {
-        toast.showButtomToast(msg);
+        toast.showBottomToast(msg);
     }
 
     protected void showMiddleToast(String msg) {
@@ -83,7 +83,7 @@ public abstract class BaseActivity<VM extends ViewModel, B extends ViewDataBindi
     }
 
     protected void showNetErrorToast() {
-        toast.showButtomToast(getString(R.string.internet_failed));
+        toast.showBottomToast(getString(R.string.internet_failed));
     }
 
 
@@ -96,6 +96,13 @@ public abstract class BaseActivity<VM extends ViewModel, B extends ViewDataBindi
     protected void addFragment(int containerViewId, Fragment fragment, String tag) {
         FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
         fragmentTransaction.add(containerViewId, fragment, tag);
+        fragmentTransaction.commit();
+    }
+
+    protected void replaceFragment(int containerViewId, Fragment fragment, String tag) {
+        FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(containerViewId, fragment, tag);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 

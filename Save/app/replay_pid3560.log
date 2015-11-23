@@ -292,14 +292,14 @@ instanceKlass com/android/dx/cf/iface/Method
 instanceKlass com/android/dx/cf/iface/Field
 instanceKlass com/android/dx/cf/iface/Member
 instanceKlass com/android/dx/cf/direct/MemberListParser
-instanceKlass com/android/dx/rop/type/Prototype
-instanceKlass com/android/dx/rop/type/Type
+instanceKlass com/android/dx/rop/typeId/Prototype
+instanceKlass com/android/dx/rop/typeId/Type
 instanceKlass com/android/dx/util/MutabilityControl
 instanceKlass com/android/dx/cf/cst/ConstantPoolParser
 instanceKlass com/android/dx/cf/code/BytecodeArray$Visitor
 instanceKlass com/android/dx/cf/iface/Attribute
 instanceKlass com/android/dx/util/ByteArray
-instanceKlass com/android/dx/rop/type/TypeList
+instanceKlass com/android/dx/rop/typeId/TypeList
 instanceKlass com/android/dx/cf/iface/MethodList
 instanceKlass com/android/dx/cf/iface/FieldList
 instanceKlass com/android/dx/cf/iface/AttributeList
@@ -338,7 +338,7 @@ instanceKlass com/android/dx/dex/file/Section
 instanceKlass com/android/dx/util/AnnotatedOutput
 instanceKlass com/android/dx/util/Output
 instanceKlass com/android/dex/util/ByteOutput
-instanceKlass com/android/dx/rop/type/TypeBearer
+instanceKlass com/android/dx/rop/typeId/TypeBearer
 instanceKlass com/android/dx/rop/cst/Constant
 instanceKlass com/android/dx/util/ToHuman
 instanceKlass com/android/dx/dex/file/DexFile
@@ -983,7 +983,7 @@ instanceKlass com/android/dx/cf/code/ByteCatchList
 instanceKlass com/android/dx/cf/iface/StdAttributeList
 instanceKlass com/android/dx/cf/iface/StdMethodList
 instanceKlass com/android/dx/cf/iface/StdFieldList
-instanceKlass com/android/dx/rop/type/StdTypeList
+instanceKlass com/android/dx/rop/typeId/StdTypeList
 ciInstanceKlass com/android/dx/util/FixedSizeList 1 1 170 10 7 9 100 100 8 10 10 7 10 10 10 100 10 10 10 10 10 10 8 8 10 10 10 100 8 10 10 100 10 100 8 10 8 100 10 10 100 11 10 10 7 1 1 1 1 1 1 1 1 1 1 1 1 1 1 100 100 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 100 1 1 1 1 1 100 100 1 1 1 1 1 1 1 1 1 1 1 1 100 1 1 12 1 12 1 1 1 12 12 1 7 12 12 100 12 1 12 100 12 12 12 12 12 1 1 12 12 12 1 1 12 1 12 1 1 1 1 12 12 1 12 12 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 ciInstanceKlass com/android/dx/dex/file/EncodedMethod 1 1 259 10 100 8 10 9 9 7 10 7 10 10 100 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 100 10 10 10 8 10 10 8 10 10 10 100 8 10 11 8 100 10 10 11 10 8 10 8 10 8 11 7 100 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 100 100 100 100 1 1 1 1 1 1 1 1 1 1 100 1 1 1 1 1 1 1 1 100 100 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 100 100 1 1 1 1 1 1 12 1 1 12 12 12 1 12 1 12 100 12 1 12 100 12 12 12 12 100 12 12 12 100 12 12 100 12 100 12 12 12 100 12 1 12 12 12 1 100 12 1 12 12 100 12 1 1 100 12 1 1 100 12 100 12 12 100 12 1 12 1 100 12 1 12 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 instanceKlass com/android/dx/rop/code/FillArrayDataInsn

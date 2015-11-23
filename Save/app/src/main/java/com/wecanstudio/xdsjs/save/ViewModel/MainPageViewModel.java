@@ -2,29 +2,38 @@ package com.wecanstudio.xdsjs.save.ViewModel;
 
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
-import android.databinding.tool.expr.CastExpr;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 
 import com.wecanstudio.xdsjs.save.Model.BillType;
-import com.wecanstudio.xdsjs.save.Model.Global;
+import com.wecanstudio.xdsjs.save.Model.BillTypeList;
+import com.wecanstudio.xdsjs.save.Model.config.Global;
+import com.wecanstudio.xdsjs.save.Model.MaxTypeResponse;
 import com.wecanstudio.xdsjs.save.Model.cache.SPUtils;
 import com.wecanstudio.xdsjs.save.Model.db.TimeDao;
+import com.wecanstudio.xdsjs.save.Model.net.RestApi;
 import com.wecanstudio.xdsjs.save.MyApplication;
 import com.wecanstudio.xdsjs.save.Utils.ResourceIdUtils;
+import com.wecanstudio.xdsjs.save.Utils.TimeUtils;
 import com.wecanstudio.xdsjs.save.databinding.AppBarMainBinding;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by xdsjs on 2015/11/18.
  */
 public class MainPageViewModel extends LoadingViewModel {
+
+    private static final String TAG = "**MainPageViewModel**";
 
     private StringBuffer totalBuffer = new StringBuffer();
     private StringBuffer stringBuffer = new StringBuffer();
@@ -202,19 +211,57 @@ public class MainPageViewModel extends LoadingViewModel {
     设置默认的记账类型（即预判得到的）
      */
     public void setDefaultType() {
-        AppBarMainBinding appBarMainBinding = new AppBarMainBinding();
-        BillType billType;
+        List<BillType> newbillTypes = new ArrayList<>();
         if (billTypes != null) {
-            Collections.sort(billTypes, new Comparator<BillType>() {
+            newbillTypes = billTypes;
+            Collections.sort(newbillTypes, new Comparator<BillType>() {
                 @Override
                 public int compare(BillType lhs, BillType rhs) {
                     return lhs.getTime() - lhs.getTime();
                 }
             });
         }
-        billType = billTypes.get(0);
-        int resId = ResourceIdUtils.getIdOfResource("type_" + billType.getType() + "_normal", "drawable");
-        appBarMainBinding.chooseType.setImageResource(resId);
+        final BillType billType = newbillTypes.get(0);
+        refresh(billType);
+        List<BillTypeList.DataEntity> dataEntities = new ArrayList<>();
+        BillTypeList billTypeList = new BillTypeList();
+        BillTypeList.DataEntity dataEntity;
+        for (BillType billType1 : billTypes) {
+            dataEntity = new BillTypeList.DataEntity();
+            dataEntity.setChoose(billType.getTime());
+            dataEntity.setTime(TimeUtils.getCurrentTime());
+            dataEntity.setType_id(billType.getTypeId());
+            dataEntities.add(dataEntity);
+        }
+        billTypeList.setData(dataEntities);
+        //服务器请求获取预判的类型并更新
+        MyApplication.getInstance().createApi(RestApi.class)
+                .getMaxType("token", billTypeList)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<MaxTypeResponse>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.e(TAG, "服务器获取预判类型完成");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "服务器获取预判类型失败");
+                    }
+
+                    @Override
+                    public void onNext(MaxTypeResponse maxTypeResponse) {
+                        if (maxTypeResponse.getStatus().equals("1")) {
+                            refresh(billTypes.get(maxTypeResponse.getType()));
+                        }
+                    }
+                });
     }
 
+    private void refresh(BillType billType) {
+        AppBarMainBinding appBarMainBinding = new AppBarMainBinding();
+        int resId = ResourceIdUtils.getIdOfResource("type_" + billType.getTypeId() + "_normal", "drawable");
+        appBarMainBinding.chooseType.setImageResource(resId);
+    }
 }

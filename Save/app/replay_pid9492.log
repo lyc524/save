@@ -159,8 +159,8 @@ instanceKlass com/android/dx/cf/direct/AttributeListParser
 instanceKlass com/android/dx/cf/iface/Field
 instanceKlass com/android/dx/cf/iface/Member
 instanceKlass com/android/dx/cf/direct/MemberListParser
-instanceKlass com/android/dx/rop/type/Prototype
-instanceKlass com/android/dx/rop/type/Type
+instanceKlass com/android/dx/rop/typeId/Prototype
+instanceKlass com/android/dx/rop/typeId/Type
 instanceKlass com/android/dx/util/MutabilityControl
 instanceKlass com/android/dx/cf/cst/ConstantPoolParser
 instanceKlass com/android/dx/cf/code/BytecodeArray$Visitor
@@ -168,7 +168,7 @@ instanceKlass com/android/dx/cf/iface/Attribute
 instanceKlass com/android/dx/util/ByteArray
 instanceKlass com/android/dx/cf/iface/MethodList
 instanceKlass com/android/dx/cf/iface/FieldList
-instanceKlass com/android/dx/rop/type/TypeList
+instanceKlass com/android/dx/rop/typeId/TypeList
 instanceKlass com/android/dx/cf/iface/AttributeList
 instanceKlass com/android/dx/rop/cst/ConstantPool
 instanceKlass com/android/dx/cf/direct/DirectClassFile
@@ -201,7 +201,7 @@ instanceKlass sun/security/action/GetBooleanAction
 instanceKlass java/util/Arrays$LegacyMergeSort
 instanceKlass com/android/dx/dex/file/MixedItemSection$1
 instanceKlass com/android/dx/dex/file/Item
-instanceKlass com/android/dx/rop/type/TypeBearer
+instanceKlass com/android/dx/rop/typeId/TypeBearer
 instanceKlass com/android/dx/rop/cst/Constant
 instanceKlass com/android/dx/util/ToHuman
 instanceKlass com/android/dx/util/AnnotatedOutput

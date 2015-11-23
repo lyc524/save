@@ -1,4 +1,4 @@
-package com.wecanstudio.xdsjs.save.Model;
+package com.wecanstudio.xdsjs.save.Model.config;
 
 import android.graphics.Color;
 
@@ -41,6 +41,7 @@ public class Global {
     public static final String SHARE_PERSONAL_BILL_PWD = "personal_bill_pwd";//个人安全密码
     public static final String SHARE_PERSONAL_TOTAL_IN = "personal_total_in";//个人历史总收入
     public static final String SHARE_PERSONAL_TOTAL_OUT = "personal_total_out";//个人历史总支出
+    public static final String SHARE_PERSINAL_TOKEN = "personal_token";//token
 
     public static final String SHARE_PERSONAL_AUTO_LOGIN = "personal_auto_login";//标记是否自动登录
 

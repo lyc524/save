@@ -206,7 +206,7 @@ Heap after GC invocations=5 (full 0):
 
 Deoptimization events (10 events):
 Event: 4.113 Thread 0x00000000078ca800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000000f41d73c method=com.android.dx.util.IntList.binarysearch(I)I @ 105
-Event: 4.139 Thread 0x00000000078cb800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000000f5cecd4 method=com.android.dx.rop.code.RegisterSpec.equals(ILcom/android/dx/rop/type/TypeBearer;Lcom/android/dx/rop/code/LocalItem;)Z @ 42
+Event: 4.139 Thread 0x00000000078cb800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000000f5cecd4 method=com.android.dx.rop.code.RegisterSpec.equals(ILcom/android/dx/rop/typeId/TypeBearer;Lcom/android/dx/rop/code/LocalItem;)Z @ 42
 Event: 4.245 Thread 0x00000000078ca800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x000000000f6a4a08 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 1501
 Event: 4.247 Thread 0x00000000078ca800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x000000000f6a4a08 method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 1501
 Event: 4.561 Thread 0x00000000078cb800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000000f57cc40 method=com.android.dx.ssa.SCCP.simulateStmt(Lcom/android/dx/ssa/SsaInsn;)V @ 53
@@ -217,7 +217,7 @@ Event: 4.995 Thread 0x00000000078cc800 Uncommon trap: reason=class_check action=
 Event: 4.996 Thread 0x00000000078cc800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000000000f7364bc method=com.android.dx.cf.code.BytecodeArray.parseInstruction(ILcom/android/dx/cf/code/BytecodeArray$Visitor;)I @ 2399
 
 Internal exceptions (2 events):
-Event: 1.306 Thread 0x000000000254d800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x00000000eab13060) thrown at [C:\workspace\8-2-build-windows-amd64-cygwin\jdk8u65\4987\hotspot\src\sËæÔêÂÙ?
+Event: 1.306 Thread 0x000000000254d800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x00000000eab13060) thrown at [C:\workspace\8-2-build-windows-amd64-cygwin\jdk8u65\4987\hotspot\src\sÔøΩÔøΩÔøΩÔøΩÔøΩ?
 Event: 1.306 Thread 0x000000000254d800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.prefetchRead(Ljava/lang/Object;J)V name or signature does not match> (0x00000000eab13348) thrown at [C:\workspace\8-2-build-windows-amd64-cygwin\jdk8u65\4987\hotspot\src\share\vm\prims\jni.
 
 Events (10 events):
@@ -284,7 +284,7 @@ Launcher Type: SUN_STANDARD
 Environment Variables:
 JAVA_HOME=C:\Program Files\Java\jdk1.8.0_65
 CLASSPATH= .;C:\Program Files\Java\jdk1.8.0_65\lib;C:\Program Files\Java\jdk1.8.0_65\lib\tools.jar
-PATH=C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_65\bin;C:\Program Files\Java\jdk1.8.0_65\jre\bin;D:\sjs±∏∑›Œƒº˛\adt-bundle-windows-x86_64-20131030\sdk\platform-tools;D:\sjs±∏∑›Œƒº˛\adt-bundle-windows-x86_64-20131030\sdk\tools;;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Python27;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Python27\Scripts;C:\Program Files\MySQL\bin;C:\Program Files (x86)\MySQL\MySQL Fabric 1.5 & MySQL Utilities 1.5\;C:\Program Files (x86)\MySQL\MySQL Fabric 1.5 & MySQL Utilities 1.5\Doctrine extensions for PHP\
+PATH=C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_65\bin;C:\Program Files\Java\jdk1.8.0_65\jre\bin;D:\sjsÔøΩÔøΩÔøΩÔøΩÔøΩƒºÔøΩ\adt-bundle-windows-x86_64-20131030\sdk\platform-tools;D:\sjsÔøΩÔøΩÔøΩÔøΩÔøΩƒºÔøΩ\adt-bundle-windows-x86_64-20131030\sdk\tools;;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Python27;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Python27\Scripts;C:\Program Files\MySQL\bin;C:\Program Files (x86)\MySQL\MySQL Fabric 1.5 & MySQL Utilities 1.5\;C:\Program Files (x86)\MySQL\MySQL Fabric 1.5 & MySQL Utilities 1.5\Doctrine extensions for PHP\
 USERNAME=xdsjs
 OS=Windows_NT
 PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 58 Stepping 9, GenuineIntel
