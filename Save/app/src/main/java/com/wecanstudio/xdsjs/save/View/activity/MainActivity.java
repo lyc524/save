@@ -61,7 +61,6 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         //数据库获取所有的记账类型
         billTypes = getViewModel().getBillTypeListFromDB();
-
         initTypeShow();
     }
 

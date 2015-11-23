@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.wecanstudio.xdsjs.save.Model.BillType;
 import com.wecanstudio.xdsjs.save.R;
+import com.wecanstudio.xdsjs.save.Utils.ResourceIdUtils;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class ExpressionAdapter extends ArrayAdapter<BillType> {
         }
         viewHolder.ivTypeImage = (ImageView) convertView.findViewById(R.id.iv_type_avatar);
         viewHolder.tvTypeName = (TextView) convertView.findViewById(R.id.tv_type_name);
-        int resId = getContext().getResources().getIdentifier("type_" + getItem(position).getType() + "_normal", "drawable", getContext().getPackageName());
+        int resId = ResourceIdUtils.getIdOfResource("type_" + getItem(position).getType() + "_normal", "drawable");
         viewHolder.ivTypeImage.setImageResource(resId);
         viewHolder.tvTypeName.setText(getItem(position).getName());
         return convertView;

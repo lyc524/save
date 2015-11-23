@@ -7,13 +7,18 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 
 import com.wecanstudio.xdsjs.save.Model.BillType;
 import com.wecanstudio.xdsjs.save.Model.Global;
 import com.wecanstudio.xdsjs.save.Model.cache.SPUtils;
 import com.wecanstudio.xdsjs.save.Model.db.TimeDao;
 import com.wecanstudio.xdsjs.save.MyApplication;
+import com.wecanstudio.xdsjs.save.Utils.ResourceIdUtils;
+import com.wecanstudio.xdsjs.save.databinding.AppBarMainBinding;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -181,11 +186,35 @@ public class MainPageViewModel extends LoadingViewModel {
 
     }
 
+
+    private List<BillType> billTypes;
+
     /*
     本地数据库获取所有记账类型
      */
     public List<BillType> getBillTypeListFromDB() {
         TimeDao timeDao = new TimeDao(MyApplication.getContext());
-        return timeDao.getBillTypeList();
+        billTypes = timeDao.getBillTypeList();
+        return billTypes;
     }
+
+    /*
+    设置默认的记账类型（即预判得到的）
+     */
+    public void setDefaultType() {
+        AppBarMainBinding appBarMainBinding = new AppBarMainBinding();
+        BillType billType;
+        if (billTypes != null) {
+            Collections.sort(billTypes, new Comparator<BillType>() {
+                @Override
+                public int compare(BillType lhs, BillType rhs) {
+                    return lhs.getTime() - lhs.getTime();
+                }
+            });
+        }
+        billType = billTypes.get(0);
+        int resId = ResourceIdUtils.getIdOfResource("type_" + billType.getType() + "_normal", "drawable");
+        appBarMainBinding.chooseType.setImageResource(resId);
+    }
+
 }

@@ -52,6 +52,8 @@ public class BillType {
         this.isPressed = isPressed;
     }
 
+
+
     @Override
     public String toString() {
         return "name:" + this.getName() + "type:" + this.getType() + "time:" + this.getTime() + "weight:" + this.getWeight();

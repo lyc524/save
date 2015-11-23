@@ -25,6 +25,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 public abstract class BaseActivity<VM extends ViewModel, B extends ViewDataBinding> extends AppCompatActivity {
 
+    protected String TAG = "****"+this.getClass().getSimpleName()+"****";
+
     private VM viewModel;
     private B binding;
 
