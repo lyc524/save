@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.wecanstudio.xdsjs.save.Model.BillType;
@@ -189,18 +190,6 @@ public class MainPageViewModel extends LoadingViewModel {
     }
 
     /*
-    添加gridView监听器
-     */
-    public AdapterView.OnItemClickListener getOnItemClickListener() {
-        return new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        };
-    }
-
-    /*
     处理类型选择动画
      */
     public void startAnimator() {
@@ -271,7 +260,7 @@ public class MainPageViewModel extends LoadingViewModel {
                 });
     }
 
-    private void refresh(BillType billType) {
+    public void refresh(BillType billType) {
         int resId = ResourceIdUtils.getIdOfResource("type_" + billType.getTypeId() + "_normal", "drawable");
         defaultChooseType.set(appContext.getResources().getDrawable(resId));
     }

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 
 import com.wecanstudio.xdsjs.save.Model.BillType;
@@ -121,7 +122,12 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         final ExpressionAdapter expressionAdapter = new ExpressionAdapter(this,
                 1, list);
         gv.setAdapter(expressionAdapter);
-        gv.setOnItemClickListener(getViewModel().getOnItemClickListener());
+        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                getViewModel().refresh(list.get(position));
+            }
+        });
         return view;
     }
 
