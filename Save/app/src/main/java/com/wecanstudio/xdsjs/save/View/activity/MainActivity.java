@@ -2,7 +2,6 @@ package com.wecanstudio.xdsjs.save.View.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -24,7 +23,7 @@ import com.wecanstudio.xdsjs.save.View.widget.ExpandGridView;
 import com.wecanstudio.xdsjs.save.ViewModel.MainPageViewModel;
 import com.wecanstudio.xdsjs.save.ViewModel.UserInfoViewModel;
 import com.wecanstudio.xdsjs.save.databinding.ActivityMainBinding;
-import com.wecanstudio.xdsjs.save.databinding.NavHeaderMainBinding;
+import com.wecanstudio.xdsjs.save.databinding.HeaderJustUsernameBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,8 +67,12 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
 
     private void setUpDrawer() {
         LayoutInflater inflater = LayoutInflater.from(this);
-        getBinding().idLvLeftMenu.addHeaderView(inflater.inflate(R.layout.header_just_username, getBinding().idLvLeftMenu, false));
+        HeaderJustUsernameBinding headerBinding = DataBindingUtil.inflate(inflater, R.layout.header_just_username, getBinding().idLvLeftMenu, false);
+        getBinding().idLvLeftMenu.addHeaderView(headerBinding.getRoot());
         getBinding().idLvLeftMenu.setAdapter(new MenuItemAdapter(this));
+        UserInfoViewModel userInfoViewModel = new UserInfoViewModel();
+        userInfoViewModel.onInit();
+        headerBinding.setUserInfoViewModel(userInfoViewModel);
     }
 
     private void initTypeShow() {

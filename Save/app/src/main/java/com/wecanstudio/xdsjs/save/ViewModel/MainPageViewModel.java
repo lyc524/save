@@ -11,12 +11,12 @@ import android.widget.AdapterView;
 import com.wecanstudio.xdsjs.save.Model.BillType;
 import com.wecanstudio.xdsjs.save.Model.BillTypeList;
 import com.wecanstudio.xdsjs.save.Model.MaxTypeResponse;
-import com.wecanstudio.xdsjs.save.Model.UserInfo;
 import com.wecanstudio.xdsjs.save.Model.cache.SPUtils;
 import com.wecanstudio.xdsjs.save.Model.config.Global;
 import com.wecanstudio.xdsjs.save.Model.db.TimeDao;
 import com.wecanstudio.xdsjs.save.Model.net.RestApi;
 import com.wecanstudio.xdsjs.save.MyApplication;
+import com.wecanstudio.xdsjs.save.R;
 import com.wecanstudio.xdsjs.save.Utils.ResourceIdUtils;
 import com.wecanstudio.xdsjs.save.Utils.TimeUtils;
 
@@ -28,8 +28,6 @@ import java.util.List;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import com.wecanstudio.xdsjs.save.R;
 
 /**
  * Created by xdsjs on 2015/11/18.
@@ -55,30 +53,6 @@ public class MainPageViewModel extends LoadingViewModel {
         total.set("0.0");
         totalMoney.set("0.0");
         defaultChooseType.set(appContext.getResources().getDrawable(R.drawable.type_1));
-        avatar.set(appContext.getResources().getDrawable(R.drawable.delete_press));
-        //获取个人信息
-        MyApplication.getInstance().createApi(RestApi.class)
-                .getUserInfo((String) SPUtils.get(appContext, Global.SHARE_PERSINAL_TOKEN, "123"), (String) SPUtils.get(appContext, Global.SHARE_PERSONAL_ACCOUNT, ""))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<UserInfo>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(UserInfo userInfo) {
-                        SPUtils.put(appContext, Global.SHARE_PERSONAL_AVATAR, userInfo.getImgurl());
-                        Log.e("UserInfoViewModel", "头像地址" + userInfo.getImgurl());
-                        avatar.set(appContext.getResources().getDrawable(R.drawable.remark));
-                    }
-                });
     }
 
     @Command

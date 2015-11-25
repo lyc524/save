@@ -8,6 +8,8 @@
         <variable
             name="mainPageModel"
             type="com.wecanstudio.xdsjs.save.ViewModel.MainPageViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <LinearLayout
