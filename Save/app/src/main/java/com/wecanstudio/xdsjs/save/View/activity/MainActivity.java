@@ -14,13 +14,13 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.wecanstudio.xdsjs.save.Model.BillType;
-import com.wecanstudio.xdsjs.save.Model.db.TimeDao;
 import com.wecanstudio.xdsjs.save.R;
 import com.wecanstudio.xdsjs.save.Utils.ActivityManager;
 import com.wecanstudio.xdsjs.save.View.adapter.ExpressionAdapter;
 import com.wecanstudio.xdsjs.save.View.adapter.ExpressionPagerAdapter;
 import com.wecanstudio.xdsjs.save.View.widget.ExpandGridView;
 import com.wecanstudio.xdsjs.save.ViewModel.MainPageViewModel;
+import com.wecanstudio.xdsjs.save.ViewModel.UserInfoViewModel;
 import com.wecanstudio.xdsjs.save.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
@@ -62,6 +62,8 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         //数据库获取所有的记账类型
         billTypes = getViewModel().getBillTypeListFromDB();
         initTypeShow();
+        UserInfoViewModel userInfoViewModel = new UserInfoViewModel();
+        userInfoViewModel.onInit();
     }
 
     private void initTypeShow() {
@@ -112,6 +114,18 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         gv.setAdapter(expressionAdapter);
         gv.setOnItemClickListener(getViewModel().getOnItemClickListener());
         return view;
+    }
+
+
+    /**
+     * 头像的点击事件处理
+     *
+     * @param view
+     */
+    public void onAvatarClicked(View view) {
+        openActivity(LRActivity.class);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
     }
 
     @Override

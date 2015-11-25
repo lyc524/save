@@ -1,5 +1,4 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -15,13 +14,13 @@
 
         <LinearLayout
             android:id="@+id/layout_top"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="@dimen/title_bar_height"
             android:background="@color/top_title_color"
             android:orientation="vertical">
 
             <FrameLayout
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent">
 
                 <TextView
@@ -69,16 +68,16 @@
             android:textSize="16sp" />
 
         <Button
+            android:id="@+id/btn_regist"
             android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="45dp"
             android:background="@drawable/btn_login"
-            android:onClick="@{registViewModel.onRegistClicked}"
+            android:onClick="confirm"
             android:text="立即注册"
             android:textColor="@color/white"
             android:textSize="18sp" />
     </LinearLayout>
-
 </layout>

@@ -3,7 +3,7 @@ package com.wecanstudio.xdsjs.save.Model;
 /**
  * Created by xdsjs on 2015/11/20.
  */
-public class Response {
+public class LoginResponse {
     private String status;
     private String access_token;
 

@@ -2,6 +2,7 @@ package com.wecanstudio.xdsjs.save.ViewModel;
 
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -9,15 +10,14 @@ import android.widget.AdapterView;
 
 import com.wecanstudio.xdsjs.save.Model.BillType;
 import com.wecanstudio.xdsjs.save.Model.BillTypeList;
-import com.wecanstudio.xdsjs.save.Model.config.Global;
 import com.wecanstudio.xdsjs.save.Model.MaxTypeResponse;
 import com.wecanstudio.xdsjs.save.Model.cache.SPUtils;
+import com.wecanstudio.xdsjs.save.Model.config.Global;
 import com.wecanstudio.xdsjs.save.Model.db.TimeDao;
 import com.wecanstudio.xdsjs.save.Model.net.RestApi;
 import com.wecanstudio.xdsjs.save.MyApplication;
 import com.wecanstudio.xdsjs.save.Utils.ResourceIdUtils;
 import com.wecanstudio.xdsjs.save.Utils.TimeUtils;
-import com.wecanstudio.xdsjs.save.databinding.AppBarMainBinding;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,6 +42,7 @@ public class MainPageViewModel extends LoadingViewModel {
     public final ObservableBoolean isOneDialChoosed = new ObservableBoolean();
     public final ObservableBoolean isTwoDialChoosed = new ObservableBoolean();
     public final ObservableBoolean isThreeDialChoosed = new ObservableBoolean();
+    public final ObservableField<Drawable> defaultChooseType = new ObservableField<>();//默认选择的记账类型
 
     @Command
     public void onLeftBarClicked(View view) {
@@ -260,8 +261,7 @@ public class MainPageViewModel extends LoadingViewModel {
     }
 
     private void refresh(BillType billType) {
-        AppBarMainBinding appBarMainBinding = new AppBarMainBinding();
         int resId = ResourceIdUtils.getIdOfResource("type_" + billType.getTypeId() + "_normal", "drawable");
-        appBarMainBinding.chooseType.setImageResource(resId);
+        defaultChooseType.set(appContext.getResources().getDrawable(resId));
     }
 }

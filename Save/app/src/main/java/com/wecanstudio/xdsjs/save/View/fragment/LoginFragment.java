@@ -34,27 +34,29 @@ public class LoginFragment extends BaseFragment<LoginViewModel, FragmentLoginBin
         return getBinding().getRoot();
     }
 
-    public void confirm(View view) {
-        if (checkLogin())
-            getViewModel().doLogin(account, pwd);
-        else
-            return;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         getBinding().tvRegist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onClickedListener.onRegistClicked();
             }
         });
+        getBinding().btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkLogin())
+                    getViewModel().doLogin(account, pwd);
+                else
+                    return;
+            }
+        });
     }
 
     private boolean checkLogin() {
-        account = getBinding().etAccount.getText().toString();
-        pwd = getBinding().etPwd.getText().toString();
+        account = getBinding().etAccount.getText().toString().trim();
+        pwd = getBinding().etPwd.getText().toString().trim();
         if (TextUtils.isEmpty(account)) {
             showBottomToast("请输入账号");
             return false;

@@ -3,8 +3,9 @@ package com.wecanstudio.xdsjs.save.Model.net;
 import com.wecanstudio.xdsjs.save.Model.BillTypeList;
 import com.wecanstudio.xdsjs.save.Model.MaxTypeResponse;
 import com.wecanstudio.xdsjs.save.Model.MyBillType;
+import com.wecanstudio.xdsjs.save.Model.RegistResponse;
 import com.wecanstudio.xdsjs.save.Model.Register;
-import com.wecanstudio.xdsjs.save.Model.Response;
+import com.wecanstudio.xdsjs.save.Model.LoginResponse;
 import com.wecanstudio.xdsjs.save.Model.User;
 import com.wecanstudio.xdsjs.save.Model.UserInfo;
 
@@ -27,7 +28,7 @@ public interface RestApi {
      * @return
      */
     @POST("/sparkjava/login")
-    Observable<Response> login(@Body User user);
+    Observable<LoginResponse> login(@Body User user);
 
     /**
      * 获取用户信息
@@ -46,7 +47,7 @@ public interface RestApi {
      * @return
      */
     @POST("/sparkjava/user")
-    Observable<Response> regist(@Body Register register);
+    Observable<RegistResponse> regist(@Body Register register);
 
     /**
      * 获取账单信息
@@ -77,7 +78,7 @@ public interface RestApi {
      * @return
      */
     @POST("/sparkjava/userMessage/")
-    Observable<Response> updateUserInfo(@Header("access_token") String token, @Body UserInfo userInfo);
+    Observable<LoginResponse> updateUserInfo(@Header("access_token") String token, @Body UserInfo userInfo);
 
     /**
      * 更新头像
@@ -88,7 +89,7 @@ public interface RestApi {
      * @return
      */
     @PUT("/image/{username}")
-    Observable<Response> updateUserAvatar(@Header("access_token") String token, @Path("username") String username, @Body UserInfo userInfo);
+    Observable<LoginResponse> updateUserAvatar(@Header("access_token") String token, @Path("username") String username, @Body UserInfo userInfo);
 
     /**
      * 获取预判类型

@@ -33,7 +33,7 @@ public class ExpressionAdapter extends ArrayAdapter<BillType> {
         viewHolder.tvTypeName = (TextView) convertView.findViewById(R.id.tv_type_name);
         int resId = ResourceIdUtils.getIdOfResource("type_" + getItem(position).getTypeId() + "_normal", "drawable");
         viewHolder.ivTypeImage.setImageResource(resId);
-        viewHolder.tvTypeName.setText(getItem(position).getName());
+        viewHolder.tvTypeName.setText(getItem(position).getTypeName());
         return convertView;
     }
 
