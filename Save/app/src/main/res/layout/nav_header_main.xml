@@ -6,6 +6,10 @@
         <variable
             name="userInfoViewModel"
             type="com.wecanstudio.xdsjs.save.ViewModel.UserInfoViewModel" />
+
+        <variable
+            name="mainPageModel"
+            type="com.wecanstudio.xdsjs.save.ViewModel.MainPageViewModel" />
     </data>
 
     <LinearLayout
@@ -26,7 +30,7 @@
             android:layout_height="wrap_content"
             android:onClick="onAvatarClicked"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:src="@drawable/default_avatar" />
+            android:src="@{mainPageModel.avatar}" />
 
         <TextView
             android:layout_width="match_parent"

@@ -68,4 +68,5 @@ public class UserInfo {
     public String getStatus() {
         return status;
     }
+
 }

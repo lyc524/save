@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,16 +19,18 @@ import com.wecanstudio.xdsjs.save.R;
 import com.wecanstudio.xdsjs.save.Utils.ActivityManager;
 import com.wecanstudio.xdsjs.save.View.adapter.ExpressionAdapter;
 import com.wecanstudio.xdsjs.save.View.adapter.ExpressionPagerAdapter;
+import com.wecanstudio.xdsjs.save.View.adapter.MenuItemAdapter;
 import com.wecanstudio.xdsjs.save.View.widget.ExpandGridView;
 import com.wecanstudio.xdsjs.save.ViewModel.MainPageViewModel;
 import com.wecanstudio.xdsjs.save.ViewModel.UserInfoViewModel;
 import com.wecanstudio.xdsjs.save.databinding.ActivityMainBinding;
+import com.wecanstudio.xdsjs.save.databinding.NavHeaderMainBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBinding> implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBinding> implements View.OnClickListener {
 
     private ViewPager viewPager;
     private List<BillType> billTypes;
@@ -42,6 +45,7 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         setViewModel(new MainPageViewModel());
         setBinding(DataBindingUtil.<ActivityMainBinding>setContentView(this, R.layout.activity_main));
         getBinding().setMainPageModel(getViewModel());
+        getViewModel().onInit();
         initView();
     }
 
@@ -50,20 +54,22 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         ivChooseTye = (ImageView) findViewById(R.id.choose_type);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+                this, getBinding().drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        getBinding().drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
         getSupportActionBar().setTitle("记一笔");
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         //数据库获取所有的记账类型
         billTypes = getViewModel().getBillTypeListFromDB();
         initTypeShow();
-        UserInfoViewModel userInfoViewModel = new UserInfoViewModel();
-        userInfoViewModel.onInit();
+        setUpDrawer();
+    }
+
+    private void setUpDrawer() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        getBinding().idLvLeftMenu.addHeaderView(inflater.inflate(R.layout.header_just_username, getBinding().idLvLeftMenu, false));
+        getBinding().idLvLeftMenu.setAdapter(new MenuItemAdapter(this));
     }
 
     private void initTypeShow() {
@@ -159,27 +165,5 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 }

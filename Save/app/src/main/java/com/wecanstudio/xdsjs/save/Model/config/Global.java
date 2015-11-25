@@ -36,6 +36,7 @@ public class Global {
     /**
      * 要缓存的个人信息
      */
+    public static final String SHARE_PERSONAL_AVATAR = "personal_avatar";//头像
     public static final String SHARE_PERSONAL_ACCOUNT = "personal_account";//个人账号
     public static final String SHARE_PERSONAL_PWD = "personal_pwd";//个人密码
     public static final String SHARE_PERSONAL_BILL_PWD = "personal_bill_pwd";//个人安全密码

@@ -66,6 +66,7 @@ public class LoginViewModel extends LoadingViewModel {
                             SPUtils.put(appContext, Global.SHARE_PERSINAL_TOKEN, response.getAccess_token());
                             SPUtils.put(appContext, Global.SHARE_PERSONAL_ACCOUNT, account);
                             SPUtils.put(appContext, Global.SHARE_PERSONAL_PWD, pwd);
+                            SPUtils.put(appContext, Global.SHARE_PERSONAL_AUTO_LOGIN, true);
                             loginFragment.getActivity().finish();
                         } else if (response.getStatus().equals("-1")) {
                             Log.e("Login", "该用户不存在");
