@@ -42,7 +42,6 @@ public class MainPageViewModel extends LoadingViewModel {
     public final ObservableBoolean isTwoDialChoosed = new ObservableBoolean();
     public final ObservableBoolean isThreeDialChoosed = new ObservableBoolean();
     public final ObservableField<Drawable> defaultChooseType = new ObservableField<>();//默认选择的记账类型
-    public final ObservableField<Drawable> avatar = new ObservableField<>();//头像
 
     public MainPageViewModel() {
         onInit();
@@ -54,7 +53,7 @@ public class MainPageViewModel extends LoadingViewModel {
     private void onInit() {
         total.set("0.0");
         totalMoney.set("0.0");
-        defaultChooseType.set(appContext.getResources().getDrawable(R.drawable.type_1));
+        defaultChooseType.set(appContext.getResources().getDrawable(R.drawable.type_0_normal));
     }
 
     @Command

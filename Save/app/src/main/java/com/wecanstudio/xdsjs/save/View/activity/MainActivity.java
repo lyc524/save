@@ -8,7 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +19,7 @@ import com.wecanstudio.xdsjs.save.R;
 import com.wecanstudio.xdsjs.save.Utils.ActivityManager;
 import com.wecanstudio.xdsjs.save.View.adapter.ExpressionAdapter;
 import com.wecanstudio.xdsjs.save.View.adapter.ExpressionPagerAdapter;
+import com.wecanstudio.xdsjs.save.View.fragment.LoginDialogFragment;
 import com.wecanstudio.xdsjs.save.View.widget.ExpandGridView;
 import com.wecanstudio.xdsjs.save.ViewModel.MainPageViewModel;
 import com.wecanstudio.xdsjs.save.ViewModel.UserInfoViewModel;
@@ -30,12 +30,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBinding> implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBinding> implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, LoginDialogFragment.LoginListener {
 
     private ViewPager viewPager;
     private List<BillType> billTypes;
     private ExpressionPagerAdapter expressionPagerAdapter;//pager adapter
-    private boolean isPopupWindowShowing = false;//标记popupWindow是否显示
+    private LoginDialogFragment loginDialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,8 +132,10 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
     public void onAvatarClicked(View view) {
         if ((Boolean) SPUtils.get(this, Global.SHARE_PERSONAL_AUTO_LOGIN, false))
             openActivity(UserInfoActivity.class);
-        else
-            openActivity(LRActivity.class);
+        else {
+            loginDialogFragment = new LoginDialogFragment();
+            loginDialogFragment.show(getFragmentManager(), "loginDialog");
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
@@ -153,42 +155,29 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_billinfo) {
-            showMiddleToast("billInfo");
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_billInfo) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_theme) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_about) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_setting) {
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onLoginSucceed() {
+        if (loginDialogFragment != null && loginDialogFragment.isVisible())
+            loginDialogFragment.dismiss();
+        getViewModel().setDefaultType();
     }
 }
