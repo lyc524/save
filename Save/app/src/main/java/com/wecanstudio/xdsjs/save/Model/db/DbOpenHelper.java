@@ -24,26 +24,26 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     private static final String TIME_TABLE_CREAT = "CREATE TABLE " +
             TimeDao.TABLE_NAME + " (" +
             "time varchar(10) NOT NULL," +
-            "type_0 integer default 0," +
-            "type_1 integer default 0," +
-            "type_2 integer default 0," +
-            "type_3 integer default 0," +
-            "type_4 integer default 0," +
-            "type_5 integer default 0," +
-            "type_6 integer default 0," +
-            "type_7 integer default 0," +
-            "type_8 integer default 0," +
-            "type_9 integer default 0," +
-            "type_10 integer default 0," +
-            "type_11 integer default 0," +
-            "type_12 integer default 0," +
-            "type_13 integer default 0," +
-            "type_14 integer default 0," +
-            "type_15 integer default 0," +
-            "type_16 integer default 0," +
-            "type_17 integer default 0," +
-            "type_18 integer default 0," +
-            "type_19 integer default 0);";
+            "type_0 integer default 10," +
+            "type_1 integer default 10," +
+            "type_2 integer default 10," +
+            "type_3 integer default 10," +
+            "type_4 integer default 10," +
+            "type_5 integer default 10," +
+            "type_6 integer default 10," +
+            "type_7 integer default 10," +
+            "type_8 integer default 10," +
+            "type_9 integer default 10," +
+            "type_10 integer default 10," +
+            "type_11 integer default 10," +
+            "type_12 integer default 10," +
+            "type_13 integer default 10," +
+            "type_14 integer default 10," +
+            "type_15 integer default 10," +
+            "type_16 integer default 10," +
+            "type_17 integer default 10," +
+            "type_18 integer default 10," +
+            "type_19 integer default 10);";
 
     private DbOpenHelper(Context context) {
         super(context, getUserDatabaseName(), null, DATABASE_VERSION);

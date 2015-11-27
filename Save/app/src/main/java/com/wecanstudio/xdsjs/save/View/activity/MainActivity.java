@@ -2,42 +2,40 @@ package com.wecanstudio.xdsjs.save.View.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 
 import com.wecanstudio.xdsjs.save.Model.BillType;
+import com.wecanstudio.xdsjs.save.Model.cache.SPUtils;
+import com.wecanstudio.xdsjs.save.Model.config.Global;
 import com.wecanstudio.xdsjs.save.R;
 import com.wecanstudio.xdsjs.save.Utils.ActivityManager;
 import com.wecanstudio.xdsjs.save.View.adapter.ExpressionAdapter;
 import com.wecanstudio.xdsjs.save.View.adapter.ExpressionPagerAdapter;
-import com.wecanstudio.xdsjs.save.View.adapter.MenuItemAdapter;
 import com.wecanstudio.xdsjs.save.View.widget.ExpandGridView;
 import com.wecanstudio.xdsjs.save.ViewModel.MainPageViewModel;
 import com.wecanstudio.xdsjs.save.ViewModel.UserInfoViewModel;
 import com.wecanstudio.xdsjs.save.databinding.ActivityMainBinding;
-import com.wecanstudio.xdsjs.save.databinding.HeaderJustUsernameBinding;
+import com.wecanstudio.xdsjs.save.databinding.NavHeaderMainBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBinding> implements View.OnClickListener {
+public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBinding> implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private ViewPager viewPager;
     private List<BillType> billTypes;
     private ExpressionPagerAdapter expressionPagerAdapter;//pager adapter
     private boolean isPopupWindowShowing = false;//标记popupWindow是否显示
-    private ImageView ivChooseTye;
-    private BillType billType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,35 +43,29 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         setViewModel(new MainPageViewModel());
         setBinding(DataBindingUtil.<ActivityMainBinding>setContentView(this, R.layout.activity_main));
         getBinding().setMainPageModel(getViewModel());
-        getViewModel().onInit();
         initView();
     }
 
     private void initView() {
         //初始化toolbar和drawerlayout
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        ivChooseTye = (ImageView) findViewById(R.id.choose_type);
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, getBinding().drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         getBinding().drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
+        getBinding().navView.setNavigationItemSelectedListener(this);
         getSupportActionBar().setTitle("记一笔");
+        //完成对HeaderView的绑定
+        NavHeaderMainBinding navBind = DataBindingUtil.inflate(getLayoutInflater(), R.layout.nav_header_main, null, false);
+        getBinding().navView.addHeaderView(navBind.getRoot());
+        navBind.setUserInfoViewModel(new UserInfoViewModel());
+
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         //数据库获取所有的记账类型
         billTypes = getViewModel().getBillTypeListFromDB();
         initTypeShow();
-        setUpDrawer();
-    }
-
-    private void setUpDrawer() {
-        LayoutInflater inflater = LayoutInflater.from(this);
-        HeaderJustUsernameBinding headerBinding = DataBindingUtil.inflate(inflater, R.layout.header_just_username, getBinding().idLvLeftMenu, false);
-        getBinding().idLvLeftMenu.addHeaderView(headerBinding.getRoot());
-        getBinding().idLvLeftMenu.setAdapter(new MenuItemAdapter(this));
-        UserInfoViewModel userInfoViewModel = new UserInfoViewModel();
-        userInfoViewModel.onInit();
-        headerBinding.setUserInfoViewModel(userInfoViewModel);
+        getViewModel().setDefaultType();
     }
 
     private void initTypeShow() {
@@ -138,7 +130,10 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
      * @param view
      */
     public void onAvatarClicked(View view) {
-        openActivity(LRActivity.class);
+        if ((Boolean) SPUtils.get(this, Global.SHARE_PERSONAL_AUTO_LOGIN, false))
+            openActivity(UserInfoActivity.class);
+        else
+            openActivity(LRActivity.class);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
@@ -172,7 +167,28 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
             showMiddleToast("billInfo");
             return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

@@ -6,8 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import com.wecanstudio.xdsjs.save.Model.BillType;
 import com.wecanstudio.xdsjs.save.Model.BillTypeList;
@@ -19,7 +17,6 @@ import com.wecanstudio.xdsjs.save.Model.net.RestApi;
 import com.wecanstudio.xdsjs.save.MyApplication;
 import com.wecanstudio.xdsjs.save.R;
 import com.wecanstudio.xdsjs.save.Utils.ResourceIdUtils;
-import com.wecanstudio.xdsjs.save.Utils.TimeUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,27 +44,17 @@ public class MainPageViewModel extends LoadingViewModel {
     public final ObservableField<Drawable> defaultChooseType = new ObservableField<>();//默认选择的记账类型
     public final ObservableField<Drawable> avatar = new ObservableField<>();//头像
 
+    public MainPageViewModel() {
+        onInit();
+    }
+
     /*
-    初始化操作
-     */
-    public void onInit() {
+        初始化操作
+         */
+    private void onInit() {
         total.set("0.0");
         totalMoney.set("0.0");
         defaultChooseType.set(appContext.getResources().getDrawable(R.drawable.type_1));
-    }
-
-    @Command
-    public void onLeftBarClicked(View view) {
-        if ((boolean) SPUtils.get(MyApplication.getContext(), Global.SHARE_PERSONAL_AUTO_LOGIN, false)) {
-            //跳转到个人信息界面
-        } else {
-            //跳转到登录注册界面
-        }
-    }
-
-    @Command
-    public void onRightBarClicked(View view) {
-
     }
 
     @Command
@@ -189,14 +176,6 @@ public class MainPageViewModel extends LoadingViewModel {
         };
     }
 
-    /*
-    处理类型选择动画
-     */
-    public void startAnimator() {
-
-    }
-
-
     private List<BillType> billTypes;
 
     /*
@@ -229,15 +208,15 @@ public class MainPageViewModel extends LoadingViewModel {
         BillTypeList.DataEntity dataEntity;
         for (BillType billType1 : billTypes) {
             dataEntity = new BillTypeList.DataEntity();
-            dataEntity.setChoose(billType.getTime());
-            dataEntity.setTime(TimeUtils.getCurrentTime());
-            dataEntity.setType_id(billType.getTypeId());
+            dataEntity.setChoose(billType1.getTime());
+            dataEntity.setTime(System.currentTimeMillis());
+            dataEntity.setType_id(billType1.getTypeId() + 1);
             dataEntities.add(dataEntity);
         }
         billTypeList.setData(dataEntities);
         //服务器请求获取预判的类型并更新
         MyApplication.getInstance().createApi(RestApi.class)
-                .getMaxType("token", billTypeList)
+                .getMaxType((String) SPUtils.get(appContext, Global.SHARE_PERSINAL_TOKEN, ""), billTypeList)
                 .subscribeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<MaxTypeResponse>() {
@@ -254,7 +233,7 @@ public class MainPageViewModel extends LoadingViewModel {
                     @Override
                     public void onNext(MaxTypeResponse maxTypeResponse) {
                         if (maxTypeResponse.getStatus().equals("1")) {
-                            refresh(billTypes.get(maxTypeResponse.getType()));
+                            refresh(billTypes.get(maxTypeResponse.getType() - 1));
                         }
                     }
                 });

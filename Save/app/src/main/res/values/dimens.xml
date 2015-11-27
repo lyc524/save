@@ -14,4 +14,6 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="drawer_icon_size">24dp</dimen>
+
+    <dimen name="app_bar_size">180dp</dimen>
 </resources>

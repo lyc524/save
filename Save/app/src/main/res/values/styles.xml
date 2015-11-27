@@ -17,6 +17,8 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppBarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
 
     <!-- 键盘button -->
     <style name="key_btn_style">

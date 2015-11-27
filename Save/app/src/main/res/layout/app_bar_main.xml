@@ -8,8 +8,6 @@
         <variable
             name="mainPageModel"
             type="com.wecanstudio.xdsjs.save.ViewModel.MainPageViewModel" />
-
-        <import type="android.view.View" />
     </data>
 
     <LinearLayout
@@ -100,7 +98,7 @@
                     android:layout_height="30dp"
                     android:layout_centerInParent="true"
                     android:layout_gravity="center"
-                    android:src="@drawable/iconfont_bianji" />
+                    android:src="@drawable/iconfont_bianji"/>
             </RelativeLayout>
         </LinearLayout>
 

@@ -25,12 +25,17 @@ public class UserInfoViewModel extends LoadingViewModel {
     public final ObservableField<Drawable> avatar = new ObservableField<>();//头像
     public final ObservableField<String> account = new ObservableField<>();//账号
 
+
+    public UserInfoViewModel() {
+        onInit();
+    }
+
     /**
      * 对变量进行初始化操作
      */
-    public void onInit() {
+    private void onInit() {
         String avatarUrl = (String) SPUtils.get(appContext, Global.SHARE_PERSONAL_AVATAR, "");
-        avatar.set(avatarUrl.equals("") ? appContext.getResources().getDrawable(R.drawable.default_avatar) : getDrawableByUrl(avatarUrl));
+        avatar.set(avatarUrl.equals("") ? appContext.getResources().getDrawable(R.drawable.images) : getDrawableByUrl(avatarUrl));
         String acc = (String) SPUtils.get(appContext, Global.SHARE_PERSONAL_ACCOUNT, "");
         account.set(acc.equals("") ? "未登录" : acc);
         //获取个人信息
@@ -53,14 +58,14 @@ public class UserInfoViewModel extends LoadingViewModel {
                     public void onNext(UserInfo userInfo) {
                         SPUtils.put(appContext, Global.SHARE_PERSONAL_AVATAR, userInfo.getImgurl());
                         Log.e("UserInfoViewModel", "头像地址" + userInfo.getImgurl());
-                        avatar.set(appContext.getResources().getDrawable(R.drawable.remark));
+                        avatar.set(appContext.getResources().getDrawable(R.drawable.images));
                         account.set(userInfo.getUsername());
                     }
                 });
     }
 
     public Drawable getDrawableByUrl(String url) {
-        return appContext.getResources().getDrawable(R.drawable.type_0);
+        return appContext.getResources().getDrawable(R.drawable.images);
     }
 
     @Override

@@ -1,6 +1,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -22,16 +23,13 @@
             android:layout_height="match_parent"
             bind:mainPageModel="@{mainPageModel}" />
 
-        <ListView
-            android:id="@+id/id_lv_left_menu"
-            android:layout_width="match_parent"
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="#ffffffff"
-            android:clipToPadding="false"
-            android:divider="@null"
-            android:listSelector="?attr/selectableItemBackground"
-            android:paddingTop="0dp" />
+            android:fitsSystemWindows="true"
+            app:menu="@menu/activity_main_drawer" />
 
     </android.support.v4.widget.DrawerLayout>
 </layout>

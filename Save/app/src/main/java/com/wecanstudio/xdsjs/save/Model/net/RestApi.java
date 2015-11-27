@@ -88,7 +88,7 @@ public interface RestApi {
      * @param userInfo
      * @return
      */
-    @PUT("/image/{username}")
+    @PUT("/sparkjava/image/{username}")
     Observable<LoginResponse> updateUserAvatar(@Header("access_token") String token, @Path("username") String username, @Body UserInfo userInfo);
 
     /**
@@ -98,6 +98,6 @@ public interface RestApi {
      * @param billTypeList
      * @return
      */
-    @POST("/MaxType")
+    @POST("/sparkjava/MaxType")
     Observable<MaxTypeResponse> getMaxType(@Header("access_token") String token, @Body BillTypeList billTypeList);
 }
