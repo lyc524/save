@@ -44,7 +44,7 @@
                     android:layout_height="30dp"
                     android:layout_centerInParent="true"
                     android:layout_gravity="center"
-                    android:src="@{mainPageModel.defaultChooseType}" />
+                    android:src="@{mainPageModel.defaultChooseType.getTypeDrawable}" />
             </RelativeLayout>
 
             <LinearLayout

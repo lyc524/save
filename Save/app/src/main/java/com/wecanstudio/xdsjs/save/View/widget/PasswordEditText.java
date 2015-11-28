@@ -44,7 +44,7 @@ public class PasswordEditText extends EditText {
     public PasswordEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
         passwordLength = 4;
-        passwordColor = getResources().getColor(R.color.whitesmoke);
+        passwordColor = getResources().getColor(R.color.top_title_color);
         passwordRadius = 15.0f;
     }
 
@@ -75,7 +75,6 @@ public class PasswordEditText extends EditText {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
         this.textlength = text.toString().length();
         invalidate();
-        Log.e("--------------->", text.toString().length() + "" + "^^^^^^" + text.toString());
         if (this.textlength == 4) {
             switch (currentMode) {
                 case MODE_CHECK_PASSWORD:

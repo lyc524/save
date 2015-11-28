@@ -1,12 +1,12 @@
 package com.wecanstudio.xdsjs.save.View.fragment;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.ViewDataBinding;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import com.wecanstudio.xdsjs.save.View.widget.SingleToast;

@@ -11,8 +11,6 @@ import com.wecanstudio.xdsjs.save.MyApplication;
  */
 public abstract class LoadingViewModel extends ViewModel {
 
-	protected Context appContext = MyApplication.getContext();
-
 	public final ObservableBoolean showRetry = new ObservableBoolean(false);
 	public final ObservableBoolean showLoading = new ObservableBoolean(false);
 

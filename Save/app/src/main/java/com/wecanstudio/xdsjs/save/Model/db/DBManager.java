@@ -40,7 +40,7 @@ public class DBManager {
             db.delete(BillTableDao.TABLE_NAME, null, null);
             for (Bill bill : bills) {
                 ContentValues cv = new ContentValues();
-                cv.put(BillTableDao.COLUMN_NAME_TYPE, bill.getType());
+                cv.put(BillTableDao.COLUMN_NAME_TYPE, bill.getTypeId());
                 cv.put(BillTableDao.COLUMN_NAME_MONEY, bill.getMoney());
                 cv.put(BillTableDao.COLUMN_NAME_REMARK, bill.getRemark());
                 cv.put(BillTableDao.COLUMN_NAME_TIME, bill.getTime());
@@ -67,7 +67,7 @@ public class DBManager {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         if (db.isOpen()) {
             ContentValues cv = new ContentValues();
-            cv.put(BillTableDao.COLUMN_NAME_TYPE, bill.getType());
+            cv.put(BillTableDao.COLUMN_NAME_TYPE, bill.getTypeId());
             cv.put(BillTableDao.COLUMN_NAME_MONEY, bill.getMoney());
             cv.put(BillTableDao.COLUMN_NAME_REMARK, bill.getRemark());
             cv.put(BillTableDao.COLUMN_NAME_TIME, bill.getTime());
@@ -85,7 +85,7 @@ public class DBManager {
             Bill bill;
             while (cursor.moveToNext()) {
                 bill = new Bill();
-                bill.setType(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_TYPE)));
+                bill.setTypeId(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_TYPE)));
                 bill.setMoney(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_MONEY)));
                 bill.setRemark(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_REMARK)));
                 bill.setTime(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_TIME)));
@@ -106,7 +106,7 @@ public class DBManager {
             Bill bill;
             while (cursor.moveToNext()) {
                 bill = new Bill();
-                bill.setType(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_TYPE)));
+                bill.setTypeId(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_TYPE)));
                 bill.setMoney(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_MONEY)));
                 bill.setRemark(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_REMARK)));
                 bill.setTime(cursor.getString(cursor.getColumnIndex(BillTableDao.COLUMN_NAME_TIME)));

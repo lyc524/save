@@ -63,16 +63,16 @@ public class TimelineAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        int resId = context.getResources().getIdentifier("type_" + bills.get(position).getType() + "_normal", "drawable", context.getPackageName());
+        int resId = context.getResources().getIdentifier("type_" + bills.get(position).getTypeId() + "_normal", "drawable", context.getPackageName());
         viewHolder.ivIcon.setImageResource(resId);
         viewHolder.tvDate.setText(TimeUtils.getPrettyTime(Long.valueOf(bills.get(position).getTime())));
-        viewHolder.tvTypeName.setText(Global.types[Integer.valueOf(bills.get(position).getType())]);
+        viewHolder.tvTypeName.setText(Global.types[Integer.valueOf(bills.get(position).getTypeId())]);
         if (!TextUtils.isEmpty(bills.get(position).getRemark())) {
             viewHolder.tvRemark.setText(bills.get(position).getRemark());
         } else {
             viewHolder.tvRemark.setVisibility(View.GONE);
         }
-        if (bills.get(position).getType().equals("0")) {
+        if (bills.get(position).getTypeId().equals("0")) {
             viewHolder.tvMoney.setTextColor(Color.GREEN);
             viewHolder.tvMoney.setText(bills.get(position).getMoney());
         } else {

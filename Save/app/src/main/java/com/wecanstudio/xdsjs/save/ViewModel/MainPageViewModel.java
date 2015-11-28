@@ -4,19 +4,27 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 
+import com.wecanstudio.xdsjs.save.Model.Bill;
 import com.wecanstudio.xdsjs.save.Model.BillType;
 import com.wecanstudio.xdsjs.save.Model.BillTypeList;
 import com.wecanstudio.xdsjs.save.Model.MaxTypeResponse;
 import com.wecanstudio.xdsjs.save.Model.cache.SPUtils;
 import com.wecanstudio.xdsjs.save.Model.config.Global;
+import com.wecanstudio.xdsjs.save.Model.db.BillTableDao;
 import com.wecanstudio.xdsjs.save.Model.db.TimeDao;
 import com.wecanstudio.xdsjs.save.Model.net.RestApi;
 import com.wecanstudio.xdsjs.save.MyApplication;
 import com.wecanstudio.xdsjs.save.R;
 import com.wecanstudio.xdsjs.save.Utils.ResourceIdUtils;
+import com.wecanstudio.xdsjs.save.Utils.ToastUtils;
+import com.wecanstudio.xdsjs.save.View.activity.MainActivity;
+import com.wecanstudio.xdsjs.save.View.adapter.ExpressionAdapter;
+import com.wecanstudio.xdsjs.save.View.widget.ExpandGridView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,9 +38,11 @@ import rx.schedulers.Schedulers;
 /**
  * Created by xdsjs on 2015/11/18.
  */
-public class MainPageViewModel extends LoadingViewModel {
+public class MainPageViewModel extends ViewModel {
 
     private static final String TAG = "**MainPageViewModel**";
+
+    private MainActivity mainActivity;
 
     private StringBuffer totalBuffer = new StringBuffer();
     private StringBuffer stringBuffer = new StringBuffer();
@@ -41,19 +51,13 @@ public class MainPageViewModel extends LoadingViewModel {
     public final ObservableBoolean isOneDialChoosed = new ObservableBoolean();
     public final ObservableBoolean isTwoDialChoosed = new ObservableBoolean();
     public final ObservableBoolean isThreeDialChoosed = new ObservableBoolean();
-    public final ObservableField<Drawable> defaultChooseType = new ObservableField<>();//默认选择的记账类型
+    public final ObservableField<BillType> defaultChooseType = new ObservableField<>();//默认选择的记账类型
 
-    public MainPageViewModel() {
-        onInit();
-    }
-
-    /*
-        初始化操作
-         */
-    private void onInit() {
+    public MainPageViewModel(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
         total.set("0.0");
         totalMoney.set("0.0");
-        defaultChooseType.set(appContext.getResources().getDrawable(R.drawable.type_0_normal));
+        getBillTypeListFromDB();
     }
 
     @Command
@@ -109,12 +113,38 @@ public class MainPageViewModel extends LoadingViewModel {
 
     @Command
     public void onSubmitKeyClicked(View view) {
-
+        if (defaultChooseType.get() != null && TextUtils.isEmpty(total.get())) {
+            ToastUtils.showToast("请输入价格");
+            return;
+        }
+        BillTableDao billTableDao = new BillTableDao(mainActivity);
+        billTableDao.saveBill(new Bill(defaultChooseType.get().getTypeId() + "", totalMoney.get(), "", String.valueOf(System.currentTimeMillis()), 0));
+        ToastUtils.showToast("记账成功");
     }
 
-    @Override
-    public View.OnClickListener onRetryClick() {
-        return null;
+    @Command
+    public View getGridChildView(final int i) {
+        View view = View.inflate(mainActivity, R.layout.viewpager_item, null);
+        final ExpandGridView gv = (ExpandGridView) view.findViewById(R.id.gridview);
+
+        final List<BillType> list = new ArrayList<BillType>();
+        if (i == 1) {
+            list.addAll(billTypes.subList(0, 8));
+        } else if (i == 2) {
+            list.addAll(billTypes.subList(8, 16));
+        } else if (i == 3) {
+            list.addAll(billTypes.subList(16, billTypes.size()));
+        }
+        final ExpressionAdapter expressionAdapter = new ExpressionAdapter(mainActivity,
+                1, list);
+        gv.setAdapter(expressionAdapter);
+        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                defaultChooseType.set(list.get(position));
+            }
+        });
+        return view;
     }
 
     private String calculate(StringBuffer stringBuffer) {
@@ -200,8 +230,8 @@ public class MainPageViewModel extends LoadingViewModel {
                 }
             });
         }
-        final BillType billType = newbillTypes.get(0);
-        refresh(billType);
+        defaultChooseType.set(newbillTypes.get(0));
+
         List<BillTypeList.DataEntity> dataEntities = new ArrayList<>();
         BillTypeList billTypeList = new BillTypeList();
         BillTypeList.DataEntity dataEntity;
@@ -232,14 +262,9 @@ public class MainPageViewModel extends LoadingViewModel {
                     @Override
                     public void onNext(MaxTypeResponse maxTypeResponse) {
                         if (maxTypeResponse.getStatus().equals("1")) {
-                            refresh(billTypes.get(maxTypeResponse.getType() - 1));
+                            defaultChooseType.set(billTypes.get(maxTypeResponse.getType() - 1));
                         }
                     }
                 });
-    }
-
-    public void refresh(BillType billType) {
-        int resId = ResourceIdUtils.getIdOfResource("type_" + billType.getTypeId() + "_normal", "drawable");
-        defaultChooseType.set(appContext.getResources().getDrawable(resId));
     }
 }
