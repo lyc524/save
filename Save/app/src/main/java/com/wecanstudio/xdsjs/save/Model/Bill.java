@@ -1,5 +1,11 @@
 package com.wecanstudio.xdsjs.save.Model;
 
+import android.graphics.drawable.Drawable;
+
+import com.wecanstudio.xdsjs.save.Model.config.Global;
+import com.wecanstudio.xdsjs.save.MyApplication;
+import com.wecanstudio.xdsjs.save.Utils.ResourceIdUtils;
+
 /**
  * 账单
  * Created by xdsjs on 2015/10/14.
@@ -10,6 +16,8 @@ public class Bill {
     private String remark;
     private String time;
     private int upload = 0;//0表示未更新，1表示已更新
+    private String typeName;//记账种类的名称
+    private Drawable typeDrawable;//记账种类对应的图像
 
     public Bill() {
     }
@@ -60,6 +68,15 @@ public class Bill {
 
     public void setUpload(int upload) {
         this.upload = upload;
+    }
+
+    public String getTypeName() {
+        return Global.types[Integer.valueOf(this.getTypeId())];
+    }
+
+    public Drawable getTypeDrawable() {
+        int resId = ResourceIdUtils.getIdOfResource("type_" + this.getTypeId() + "_normal", "drawable");
+        return MyApplication.getContext().getResources().getDrawable(resId);
     }
 
     @Override

@@ -113,7 +113,7 @@ public class MainPageViewModel extends ViewModel {
 
     @Command
     public void onSubmitKeyClicked(View view) {
-        if (defaultChooseType.get() != null && TextUtils.isEmpty(total.get())) {
+        if (defaultChooseType.get() != null && total.get().equals("0.0")) {
             ToastUtils.showToast("请输入价格");
             return;
         }

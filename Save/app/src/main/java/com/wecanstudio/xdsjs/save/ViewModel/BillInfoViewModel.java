@@ -1,8 +1,9 @@
 package com.wecanstudio.xdsjs.save.ViewModel;
 
+import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
+import android.databinding.ObservableList;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -56,13 +57,16 @@ public class BillInfoViewModel extends ViewModel {
         pieData = getPieData(map.size(), 100);
     }
 
+    ObservableList<Bill> observableList = new ObservableArrayList<>();
+
     /**
      * 获取相应的账单list
      *
      * @return
      */
-    public List<Bill> getBills() {
-        return bills;
+    public ObservableList<Bill> getBills() {
+        observableList.addAll(bills);
+        return observableList;
     }
 
     public PieData getPieDate() {

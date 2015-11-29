@@ -93,7 +93,5 @@ public class BindingRecyclerView {
             super(binding.getRoot());
             this.binding = binding;
         }
-
     }
-
 }

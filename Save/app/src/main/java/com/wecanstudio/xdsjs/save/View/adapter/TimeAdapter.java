@@ -22,12 +22,12 @@ import java.util.List;
  * 时光轴的适配器
  * Created by xdsjs on 2015/10/24.
  */
-public class TimelineAdapter extends BaseAdapter {
+public class TimeAdapter extends BaseAdapter {
 
     private Context context;
     private List<Bill> bills = new ArrayList<>();
 
-    public TimelineAdapter(Context context, List<Bill> bills) {
+    public TimeAdapter(Context context, List<Bill> bills) {
         super();
         this.context = context;
         this.bills = bills;
@@ -53,7 +53,7 @@ public class TimelineAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.listview_timeline_item, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.recycler_timeline_item, null);
             viewHolder.ivIcon = (ImageView) convertView.findViewById(R.id.iv_icon);
             viewHolder.tvDate = (TextView) convertView.findViewById(R.id.tv_date);
             viewHolder.tvMoney = (TextView) convertView.findViewById(R.id.tv_money);

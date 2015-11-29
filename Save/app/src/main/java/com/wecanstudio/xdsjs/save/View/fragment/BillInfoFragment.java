@@ -3,6 +3,7 @@ package com.wecanstudio.xdsjs.save.View.fragment;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +12,14 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.wecanstudio.xdsjs.save.R;
+import com.wecanstudio.xdsjs.save.View.adapter.TimeLineAdapter;
 import com.wecanstudio.xdsjs.save.ViewModel.BillInfoViewModel;
 import com.wecanstudio.xdsjs.save.databinding.FragmentBillinfoBinding;
 
 /**
  * Created by xdsjs on 2015/11/28.
  */
-public class BillInfoFragment extends BaseFragment<BillInfoViewModel, FragmentBillinfoBinding> {
+public class BillInfoFragment extends BaseFragment<BillInfoViewModel, FragmentBillinfoBinding> implements TimeLineAdapter.OnItemClickLitener {
 
     public static final String ARGUMENT = "argument";
     private String mArgument;
@@ -44,6 +46,8 @@ public class BillInfoFragment extends BaseFragment<BillInfoViewModel, FragmentBi
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         showChart(getBinding().pie, getViewModel().getPieDate());
+        getBinding().recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        getBinding().recyclerview.setAdapter(new TimeLineAdapter(getActivity(), getViewModel().getBills(), this));
     }
 
     /**
@@ -58,6 +62,18 @@ public class BillInfoFragment extends BaseFragment<BillInfoViewModel, FragmentBi
         BillInfoFragment contentFragment = new BillInfoFragment();
         contentFragment.setArguments(bundle);
         return contentFragment;
+    }
+
+    //recyclerView的单击事件
+    @Override
+    public void onItemClick(View view, int position) {
+
+    }
+
+    //recyclerView的长按事件
+    @Override
+    public void onItemLongClick(View view, int position) {
+
     }
 
     //显示饼状图
