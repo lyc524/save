@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBinding> implements NavigationView.OnNavigationItemSelectedListener, LoginDialogFragment.LoginListener,BillPwdDialog.BillPwdListener {
+public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBinding> implements NavigationView.OnNavigationItemSelectedListener, LoginDialogFragment.LoginListener, BillPwdDialog.BillPwdListener {
 
     private ViewPager viewPager;
     private LoginDialogFragment loginDialogFragment;
@@ -114,7 +114,7 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         } else if (id == R.id.nav_about) {
 
         } else if (id == R.id.nav_setting) {
-
+            openActivity(SettingActivity.class);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
