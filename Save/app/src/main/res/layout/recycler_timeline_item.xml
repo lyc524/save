@@ -5,7 +5,7 @@
 
         <variable
             name="bill"
-            type="com.wecanstudio.xdsjs.save.Model.Bill" />
+            type="com.wecanstudio.xdsjs.save.Model.bean.Bill" />
     </data>
 
     <com.balysv.materialripple.MaterialRippleLayout

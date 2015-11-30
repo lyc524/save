@@ -1,4 +1,4 @@
-package com.wecanstudio.xdsjs.save.Model;
+package com.wecanstudio.xdsjs.save.Model.bean;
 
 /**
  * Created by xdsjs on 2015/11/23.

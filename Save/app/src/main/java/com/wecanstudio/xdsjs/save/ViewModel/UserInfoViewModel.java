@@ -3,10 +3,9 @@ package com.wecanstudio.xdsjs.save.ViewModel;
 import android.databinding.ObservableField;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
-import android.view.SoundEffectConstants;
 import android.view.View;
 
-import com.wecanstudio.xdsjs.save.Model.UserInfo;
+import com.wecanstudio.xdsjs.save.Model.bean.UserInfo;
 import com.wecanstudio.xdsjs.save.Model.cache.SPUtils;
 import com.wecanstudio.xdsjs.save.Model.config.Global;
 import com.wecanstudio.xdsjs.save.Model.net.RestApi;

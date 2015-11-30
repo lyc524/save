@@ -4,10 +4,10 @@ import android.app.ProgressDialog;
 import android.util.Log;
 import android.view.View;
 
-import com.wecanstudio.xdsjs.save.Model.LoginResponse;
-import com.wecanstudio.xdsjs.save.Model.RegistResponse;
-import com.wecanstudio.xdsjs.save.Model.Register;
-import com.wecanstudio.xdsjs.save.Model.User;
+import com.wecanstudio.xdsjs.save.Model.bean.LoginResponse;
+import com.wecanstudio.xdsjs.save.Model.bean.RegistResponse;
+import com.wecanstudio.xdsjs.save.Model.bean.Register;
+import com.wecanstudio.xdsjs.save.Model.bean.User;
 import com.wecanstudio.xdsjs.save.Model.cache.SPUtils;
 import com.wecanstudio.xdsjs.save.Model.config.Global;
 import com.wecanstudio.xdsjs.save.Model.net.RestApi;

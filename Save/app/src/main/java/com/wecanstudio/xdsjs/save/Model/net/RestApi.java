@@ -1,13 +1,13 @@
 package com.wecanstudio.xdsjs.save.Model.net;
 
-import com.wecanstudio.xdsjs.save.Model.BillTypeList;
-import com.wecanstudio.xdsjs.save.Model.MaxTypeResponse;
-import com.wecanstudio.xdsjs.save.Model.MyBillType;
-import com.wecanstudio.xdsjs.save.Model.RegistResponse;
-import com.wecanstudio.xdsjs.save.Model.Register;
-import com.wecanstudio.xdsjs.save.Model.LoginResponse;
-import com.wecanstudio.xdsjs.save.Model.User;
-import com.wecanstudio.xdsjs.save.Model.UserInfo;
+import com.wecanstudio.xdsjs.save.Model.bean.BillTypeList;
+import com.wecanstudio.xdsjs.save.Model.bean.MaxTypeResponse;
+import com.wecanstudio.xdsjs.save.Model.bean.MyBillType;
+import com.wecanstudio.xdsjs.save.Model.bean.RegistResponse;
+import com.wecanstudio.xdsjs.save.Model.bean.Register;
+import com.wecanstudio.xdsjs.save.Model.bean.LoginResponse;
+import com.wecanstudio.xdsjs.save.Model.bean.User;
+import com.wecanstudio.xdsjs.save.Model.bean.UserInfo;
 
 import retrofit.http.Body;
 import retrofit.http.GET;

@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wecanstudio.xdsjs.save.Model.BillType;
+import com.wecanstudio.xdsjs.save.Model.bean.BillType;
 import com.wecanstudio.xdsjs.save.R;
 import com.wecanstudio.xdsjs.save.Utils.ResourceIdUtils;
 

@@ -13,19 +13,19 @@ import java.lang.annotation.Target;
 /**
  * Created by rocko on 15-11-5.
  */
-public abstract class ViewModel extends BaseObservable{ // TODO: Need Context(Activity)?
+public abstract class ViewModel extends BaseObservable { // TODO: Need Context(Activity)?
 
-	protected Context appContext = MyApplication.getContext();
+    protected Context appContext = MyApplication.getContext();
 
-	/* Just mark a method in ViewModel */
-	@Target(ElementType.METHOD)
-	@Retention(RetentionPolicy.SOURCE)
-	protected  @interface Command {
-	}
+    /* Just mark a method in ViewModel */
+    @Target(ElementType.METHOD)
+    @Retention(RetentionPolicy.SOURCE)
+    protected @interface Command {
+    }
 
-	@Target(ElementType.METHOD)
-	@Retention(RetentionPolicy.SOURCE)
-	protected @interface BindView {
-	}
-	// ... InstanceState in ViewModel
+    @Target(ElementType.METHOD)
+    @Retention(RetentionPolicy.SOURCE)
+    protected @interface BindView {
+    }
+    // ... InstanceState in ViewModel
 }

@@ -11,12 +11,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.wecanstudio.xdsjs.save.Model.cache.SPModel;
 import com.wecanstudio.xdsjs.save.Model.cache.SPUtils;
 import com.wecanstudio.xdsjs.save.Model.config.Global;
 import com.wecanstudio.xdsjs.save.R;
 import com.wecanstudio.xdsjs.save.Utils.ActivityManager;
 import com.wecanstudio.xdsjs.save.View.adapter.ExpressionPagerAdapter;
-import com.wecanstudio.xdsjs.save.View.fragment.BillPwdDialog;
+import com.wecanstudio.xdsjs.save.View.fragment.CheckBillPwdDialog;
 import com.wecanstudio.xdsjs.save.View.fragment.LoginDialogFragment;
 import com.wecanstudio.xdsjs.save.ViewModel.MainPageViewModel;
 import com.wecanstudio.xdsjs.save.ViewModel.UserInfoViewModel;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBinding> implements NavigationView.OnNavigationItemSelectedListener, LoginDialogFragment.LoginListener, BillPwdDialog.BillPwdListener {
+public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBinding> implements NavigationView.OnNavigationItemSelectedListener, LoginDialogFragment.LoginListener, CheckBillPwdDialog.CheckBillPwdListener {
 
     private ViewPager viewPager;
     private LoginDialogFragment loginDialogFragment;
@@ -107,8 +108,11 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
         if (id == R.id.nav_camera) {
 
         } else if (id == R.id.nav_billInfo) {
-            BillPwdDialog billPwdDialog = new BillPwdDialog(this);
-            billPwdDialog.show(getFragmentManager(), "dialogBill");
+            if (SPModel.getSettingBillPwd()) {
+                CheckBillPwdDialog billPwdDialog = new CheckBillPwdDialog(this, SPModel.getPersonalBillPwd());
+                billPwdDialog.show(getFragmentManager(), "dialogBill");
+            } else
+                openActivity(BillInfoActivity.class);
         } else if (id == R.id.nav_theme) {
 
         } else if (id == R.id.nav_about) {
@@ -129,7 +133,12 @@ public class MainActivity extends BaseActivity<MainPageViewModel, ActivityMainBi
     }
 
     @Override
-    public void onBillPwdSuccess() {
+    public void onBillPwdCheckSuccess() {
         openActivity(BillInfoActivity.class);
+    }
+
+    @Override
+    public void onBillPwdCheckFailed() {
+
     }
 }

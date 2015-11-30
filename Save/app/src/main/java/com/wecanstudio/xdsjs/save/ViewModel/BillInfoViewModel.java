@@ -8,7 +8,7 @@ import android.util.DisplayMetrics;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
-import com.wecanstudio.xdsjs.save.Model.Bill;
+import com.wecanstudio.xdsjs.save.Model.bean.Bill;
 import com.wecanstudio.xdsjs.save.Model.config.Global;
 import com.wecanstudio.xdsjs.save.Model.db.BillTableDao;
 import com.wecanstudio.xdsjs.save.Utils.TimeUtils;

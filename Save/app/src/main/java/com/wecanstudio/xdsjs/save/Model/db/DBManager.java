@@ -6,8 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 
-import com.wecanstudio.xdsjs.save.Model.Bill;
-import com.wecanstudio.xdsjs.save.Model.BillType;
+import com.wecanstudio.xdsjs.save.Model.bean.Bill;
+import com.wecanstudio.xdsjs.save.Model.bean.BillType;
 import com.wecanstudio.xdsjs.save.Model.config.Global;
 import com.wecanstudio.xdsjs.save.Utils.TimeUtils;
 

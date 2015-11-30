@@ -6,7 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wecanstudio.xdsjs.save.Model.Bill;
+import com.wecanstudio.xdsjs.save.Model.bean.Bill;
 import com.wecanstudio.xdsjs.save.Utils.TimeUtils;
 import com.wecanstudio.xdsjs.save.databinding.RecyclerTimelineItemBinding;
 

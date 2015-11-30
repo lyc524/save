@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="android.view.View" />
 
         <variable
             name="settingViewModel"
@@ -70,10 +73,14 @@
                             android:textSize="@dimen/normal_text_size" />
 
                         <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/pwdCheck"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true" />
+                            android:layout_alignParentRight="true"
+                            bind:OnCheckedChangeListener="@{settingViewModel.onSetPwdChecked}"
+                            bind:checked="@{settingViewModel.setPwdCheck}" />
                     </RelativeLayout>
+
                 </com.balysv.materialripple.MaterialRippleLayout>
 
                 <ImageView
@@ -90,18 +97,21 @@
                     android:layout_marginRight="15dp">
 
                     <RelativeLayout
+                        android:id="@+id/rlChangePwd"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/setting_bar_height"
                         android:gravity="center_vertical"
                         android:paddingLeft="10dp"
-                        android:paddingRight="10dp">
+                        android:paddingRight="10dp"
+                        bind:onClickListener="@{settingViewModel.onChangePwdListener}">
 
                         <TextView
+                            android:id="@+id/tvChangePwd"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
                             android:text="修改密码"
-                            android:textColor="@color/gray"
+                            android:textColor="@{settingViewModel.setPwdCheck ? (int)@color/black: (int)@color/gray}"
                             android:textSize="@dimen/normal_text_size" />
                     </RelativeLayout>
                 </com.balysv.materialripple.MaterialRippleLayout>

@@ -1,4 +1,4 @@
-package com.wecanstudio.xdsjs.save.Model;
+package com.wecanstudio.xdsjs.save.Model.bean;
 
 import java.util.List;
 

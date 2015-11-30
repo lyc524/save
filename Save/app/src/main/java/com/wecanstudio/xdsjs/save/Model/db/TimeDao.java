@@ -2,7 +2,7 @@ package com.wecanstudio.xdsjs.save.Model.db;
 
 import android.content.Context;
 
-import com.wecanstudio.xdsjs.save.Model.BillType;
+import com.wecanstudio.xdsjs.save.Model.bean.BillType;
 
 import java.util.List;
 
